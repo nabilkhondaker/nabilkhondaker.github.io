@@ -42,9 +42,9 @@ function initToolbox() {
         const card = document.createElement("div");
         card.className = "tool-card-ui card";
         card.innerHTML = `
-            <div class="card-content">
+            <div class="card-content tool-card-inner">
                 <div class="tool-icon"><i class="${tool.icon}"></i></div>
-                <h4>${tool.title}</h4>
+                <h4 class="tool-card-title">${tool.title}</h4>
                 <p class="tool-desc">${tool.desc}</p>
             </div>
         `;
