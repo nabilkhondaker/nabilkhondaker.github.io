@@ -1197,42 +1197,60 @@
 
         <!-- SETUP SCREEN -->
         <div id="trivia-setup" class="trivia-screen">
-          <h3 class="overlay-section-title">engineering trivia</h3>
-          <p class="trivia-intro">a quick quiz on mechanical engineering, numerics, robotics, and the code that ties it together. pick a level and how many questions you want.</p>
+          <div class="trivia-setup-header">
+            <h3 class="overlay-section-title">engineering trivia</h3>
+            <p class="trivia-intro">topic · difficulty · count — then go.</p>
+          </div>
 
-          <div class="trivia-setup-card">
-            <div class="trivia-setup-section">
-              <h4>difficulty</h4>
-              <div class="trivia-level-row" id="trivia-level-row">
-                <button class="trivia-level-btn active" data-level="foundational">
-                  <span class="level-icon">◇</span>
-                  <span class="level-name">foundational</span>
-                  <span class="level-desc">core concepts</span>
-                </button>
-                <button class="trivia-level-btn" data-level="intermediate">
-                  <span class="level-icon">◆</span>
-                  <span class="level-name">intermediate</span>
-                  <span class="level-desc">applied theory</span>
-                </button>
-                <button class="trivia-level-btn" data-level="advanced">
-                  <span class="level-icon">◈</span>
-                  <span class="level-name">advanced</span>
-                  <span class="level-desc">deep cuts</span>
-                </button>
+          <div class="trivia-setup-card trivia-setup-compact">
+            <!-- TOPIC -->
+            <div class="trivia-setup-section trivia-sec-topic">
+              <div class="trivia-sec-label">
+                <span class="sec-num">01</span>
+                <h4>topic</h4>
+              </div>
+              <div class="trivia-topic-row" id="trivia-topic-row">
+                <!-- injected by TriviaController -->
               </div>
             </div>
 
-            <div class="trivia-setup-section">
-              <h4>number of questions</h4>
-              <div class="trivia-count-wrap">
-                <input type="range" id="trivia-count-slider" min="5" max="20" value="10" step="1">
-                <div class="trivia-count-display">
-                  <span id="trivia-count-value">10</span>
-                  <span class="trivia-count-label">questions</span>
+            <!-- DIFFICULTY + COUNT side by side -->
+            <div class="trivia-setup-mid">
+              <div class="trivia-setup-section trivia-sec-level">
+                <div class="trivia-sec-label">
+                  <span class="sec-num">02</span>
+                  <h4>difficulty</h4>
+                </div>
+                <div class="trivia-level-row" id="trivia-level-row">
+                  <button class="trivia-level-btn active" data-level="foundational">
+                    <span class="level-icon">◇</span>
+                    <span class="level-name">foundational</span>
+                  </button>
+                  <button class="trivia-level-btn" data-level="intermediate">
+                    <span class="level-icon">◆</span>
+                    <span class="level-name">intermediate</span>
+                  </button>
+                  <button class="trivia-level-btn" data-level="advanced">
+                    <span class="level-icon">◈</span>
+                    <span class="level-name">advanced</span>
+                  </button>
                 </div>
               </div>
-              <div class="trivia-count-ticks">
-                <span>5</span><span>10</span><span>15</span><span>20</span>
+
+              <div class="trivia-setup-section trivia-sec-count">
+                <div class="trivia-sec-label">
+                  <span class="sec-num">03</span>
+                  <h4>questions</h4>
+                </div>
+                <div class="trivia-count-wrap">
+                  <input type="range" id="trivia-count-slider" min="5" max="20" value="10" step="1">
+                  <div class="trivia-count-display">
+                    <span id="trivia-count-value">10</span>
+                  </div>
+                </div>
+                <div class="trivia-count-ticks">
+                  <span>5</span><span>10</span><span>15</span><span>20</span>
+                </div>
               </div>
             </div>
 
@@ -1315,14 +1333,14 @@
           <i class="fa-solid fa-arrow-right"></i> back
         </button>
       </div>
-      <div class="overlay-content">
+      <div class="overlay-content toolbox-overlay-content">
         <h3 class="overlay-section-title">engineering toolbox</h3>
         
-        <div class="card" style="margin-bottom: 2.5rem;" id="toolbox-intro">
+        <div class="card toolbox-intro-card" id="toolbox-intro">
           <div class="card-content">
             <p class="about-text">
-              custom scripts and calculators developed for quick reference during design and prototyping.<br>
-              these tools bridge core numerics with actual mechanical applications, from inverse kinematics to simple FEA parameter checks. 
+              custom scripts and calculators developed for quick reference during design and prototyping.
+              these tools bridge core numerics with actual mechanical applications, from inverse kinematics to simple FEA parameter checks.
             </p>
           </div>
         </div>
