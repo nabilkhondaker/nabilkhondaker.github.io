@@ -1,0 +1,45 @@
+/* High-Performance GPU Canvas Animation */
+.bg-canvas {
+    position: fixed;
+    inset: 0;
+    background: #0d0d0f;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.bg-canvas::before,
+.bg-canvas::after {
+    content: '';
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.22;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.bg-canvas::before {
+    background: var(--accent);
+    top: -10%;
+    left: -10%;
+    animation: floatOrb1 20s infinite alternate ease-in-out;
+}
+
+.bg-canvas::after {
+    background: var(--accent-blue);
+    bottom: -10%;
+    right: -10%;
+    animation: floatOrb2 20s infinite alternate ease-in-out;
+}
+
+@keyframes floatOrb1 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(15%, 10%) scale(1.1); }
+}
+
+@keyframes floatOrb2 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-15%, -10%) scale(1.1); }
+}
