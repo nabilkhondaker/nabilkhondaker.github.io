@@ -1,0 +1,55 @@
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.project-card, .sim-card {
+    background: rgba(20, 20, 22, 0.85);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: var(--transition);
+    position: relative;
+}
+
+.project-card:hover .project-content,
+.sim-card:hover .sim-video-wrapper,
+.sim-card:hover .sim-info {
+    transform: scale(0.95);
+    opacity: 0.15;
+}
+
+.project-content {
+    padding: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.project-content h3 {
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.project-tag {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.project-content p {
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.glass-bubble {
+    /* preserved original glass-bubble styles */
+}
+
+.in-progress-badge {
+    /* preserved */
+}
