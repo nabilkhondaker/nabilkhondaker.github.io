@@ -1,0 +1,64 @@
+.mechanical-gear-assembly {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 2.5rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gear {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    opacity: 0.55;
+}
+
+.gear i {
+    font-size: inherit;
+}
+
+.gear-sun {
+    font-size: 4.5rem;
+    animation: gearRotate 12s linear infinite;
+}
+
+.gear-planet {
+    font-size: 2.2rem;
+}
+
+.planet-1 {
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: gearRotate 8s linear infinite reverse;
+}
+
+.planet-2 {
+    bottom: 18px;
+    left: 12px;
+    animation: gearRotate 9s linear infinite;
+}
+
+.planet-3 {
+    bottom: 18px;
+    right: 12px;
+    animation: gearRotate 7s linear infinite reverse;
+}
+
+@keyframes gearRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.planet-1 {
+    animation: gearOrbit1 8s linear infinite;
+}
+
+@keyframes gearOrbit1 {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to { transform: translateX(-50%) rotate(360deg); }
+}
