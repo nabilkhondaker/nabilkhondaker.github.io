@@ -1,0 +1,72 @@
+.discord-loading {
+    display: none;
+    margin-left: 1rem;
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    align-self: center;
+}
+
+.status-card.loading .discord-loading {
+    display: inline-block;
+}
+
+.status-card.loading .status-info,
+.status-card.loading .discord-icon,
+.status-card.loading .status-avatar {
+    opacity: 0.4;
+    filter: blur(1px);
+    pointer-events: none;
+}
+
+.status-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.status-avatar-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.status-avatar {
+    display: block;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.discord-status-dot {
+    position: absolute;
+    bottom: 0px;
+    right: -4px;   
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 3px solid var(--bg-primary);
+    z-index: 2;
+    box-shadow: 0 0 6px rgba(0,0,0,0.3);
+    transition: background 0.3s;
+}
+
+.status-info h3 {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.status-info p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.discord-icon {
+    margin-left: auto;
+    color: #5865f2;
+    font-size: 1.5rem;
+}
