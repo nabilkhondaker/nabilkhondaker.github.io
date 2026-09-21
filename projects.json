@@ -46,8 +46,8 @@
   },
   {
     "title": "2R planar robot paddle <i class=\"fab fa-python\"></i>",
-    "tag": "physical automated robotic arm using inverse kinematics",
-    "description": "mechatronics 2R planar arm playing a game similar to air hockey or pong, programmed in native python - september 3, 2025",
+    "tag": "physical automated robotic arm using inverse kinematics - september 3, 2025",
+    "description": "mechatronics 2R planar arm playing a game similar to air hockey or pong, programmed in native python",
     "techSpecs": "built a mechatronics model with a trigonometric inverse kinematics (ik) solver that maps 2d coordinates to joint angles in real time.",
     "repo": "https://github.com/nabilkhondaker/TabletopPlanarArm",
     "link": "https://nabilkhondaker.github.io/TabletopPlanarArm/",
