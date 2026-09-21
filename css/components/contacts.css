@@ -1,0 +1,79 @@
+.contact-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .contact-split {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contact-info-side h3 {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 1.3rem;
+}
+
+.contact-info p {
+    margin-bottom: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.contact-info strong {
+    color: var(--text-primary);
+    min-width: 28px;
+}
+
+.copy-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 0.4rem;
+}
+
+.copy-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+    border-color: var(--accent-blue);
+}
+
+.hacker-form .input-wrapper {
+    margin-bottom: 1rem;
+}
+
+.hacker-form .form-input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: rgba(18, 18, 20, 0.85);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hacker-form .form-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(145, 55, 0, 0.2);
+}
+
+.hacker-form textarea.form-input {
+    resize: vertical;
+    min-height: 110px;
+}
