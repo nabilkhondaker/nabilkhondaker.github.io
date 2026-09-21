@@ -1,0 +1,84 @@
+.journal-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.journal-filter-btn {
+    padding: 0.4rem 0.85rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.journal-filter-btn:hover,
+.journal-filter-btn.active {
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    border-color: var(--accent-blue);
+    color: var(--text-primary);
+}
+
+.journal-entry {
+    background: rgba(20, 20, 22, 0.75);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.35rem 1.5rem;
+    margin-bottom: 1.1rem;
+    transition: border-color 0.2s ease;
+}
+
+.journal-entry:hover {
+    border-color: var(--accent-blue);
+}
+
+.journal-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.6rem;
+}
+
+.journal-meta time {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.journal-tag {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 6px;
+    text-transform: lowercase;
+}
+
+.tag-debug { background: rgba(88, 101, 242, 0.2); color: #5865f2; }
+.tag-experiment { background: rgba(0, 201, 167, 0.2); color: #00c9a7; }
+.tag-question { background: rgba(240, 178, 50, 0.2); color: #f0b232; }
+.tag-broke { background: rgba(255, 77, 77, 0.15); color: #ff4d4d; }
+
+.journal-entry h4 {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    margin-bottom: 0.55rem;
+    font-weight: 600;
+}
+
+.journal-entry p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+}
+
+.journal-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 0.4rem;
+}
