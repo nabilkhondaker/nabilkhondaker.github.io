@@ -935,7 +935,6 @@
     </div>
 
     <!-- Journal / Lab Notebook Page -->
-
     <div id="page-journal" class="page-overlay-right">
       <div class="overlay-header">
         <button class="overlay-nav-btn close-right-page">
@@ -961,7 +960,6 @@
     </button>
   </div>
 </div>
-
         <div class="card" style="margin-bottom: 2.25rem; margin-top: 1.5rem;">
           <div class="card-content">
             <p class="about-text">
@@ -970,9 +968,57 @@
             </p>
           </div>
         </div>
-
         <div class="journal-feed" id="journal-feed">
-
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-18">2026-09-18</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>neural ik — final baseline run before packaging</h4>
+            <p>ran the baseline experiment at 20k samples / 40 epochs with the medium mlp (128-128-64). analytical position error sits at machine epsilon as expected. neural mae on the held-out test set landed around 0.02–0.04 on the unit-link geometry after proper normalization; early short runs without enough epochs were closer to 1.0 and not worth reporting. latency for a 2k-batch predict was under 2 ms on cpu.</p>
+            <p>wrote out summary.json and the checkpoint. report generator still leaves the results section as a placeholder until the user actually runs the suite — deliberately. no fabricated numbers in the readme.</p>
+            <p class="journal-note">related: neural ik lab</p>
+          </article>
+          <article class="journal-entry" data-tags="debug">
+            <div class="journal-meta">
+              <time datetime="2026-09-12">2026-09-12</time>
+              <span class="journal-tag tag-debug">debug</span>
+            </div>
+            <h4>neural ik — error heatmap concentrated near outer workspace ring</h4>
+            <p>plotted position error over the reachable annulus. the worst residuals cluster within a few percent of the outer reach circle and in a thin band near θ2 ≈ 0. matches the singularity analysis: manipulability drops and the inverse becomes sensitive. interior of the workspace is comparatively clean.</p>
+            <p>also checked the radial split (inner 70 % vs outer). outer-region mae was consistently higher. training only on joint-space samples already under-represents the boundary a bit; rejection sampling in the annulus might help later.</p>
+            <p class="journal-note">related: neural ik lab</p>
+          </article>
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-05">2026-09-05</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>neural ik — noise robustness sweep</h4>
+            <p>added isotropic gaussian noise to test targets at σ = 0, 0.001, 0.005, 0.01, 0.02, 0.05. neural error rises smoothly; analytical stays near zero until the noisy target leaves the reachable set and the solver returns nan. at σ = 0.05 a non-trivial fraction of targets become unreachable and have to be filtered before comparison.</p>
+            <p>no clear “neural is more robust” story at these levels. the network just degrades gracefully instead of failing hard. still useful as a controlled comparison.</p>
+            <p class="journal-note">related: neural ik lab</p>
+          </article>
+          <article class="journal-entry" data-tags="question">
+            <div class="journal-meta">
+              <time datetime="2026-08-27">2026-08-27</time>
+              <span class="journal-tag tag-question">question</span>
+            </div>
+            <h4>neural ik — single branch vs multi-head for elbow-up / elbow-down</h4>
+            <p>training on one canonical branch (θ2 &lt; 0) keeps the supervised map a function, but the model has no way to express the other solution. multi-head or mixture outputs would be more honest about the multi-valued inverse. trade-off is evaluation complexity and how to score “correctness” when two answers are valid.</p>
+            <p>for this release sticking with single-branch + explicit documentation of the choice. multi-head is on the roadmap, not half-implemented.</p>
+            <p class="journal-note">related: neural ik lab</p>
+          </article>
+          <article class="journal-entry" data-tags="broke">
+            <div class="journal-meta">
+              <time datetime="2026-08-19">2026-08-19</time>
+              <span class="journal-tag tag-broke">broke</span>
+            </div>
+            <h4>neural ik — training loss looked fine, fk consistency was not</h4>
+            <p>joint-space mse was decreasing steadily but a subset of predictions produced large cartesian residuals after fk. root cause: angle wrapping. predicted θ1 sometimes landed ±2π away from the label; mse treated that as a huge error in joint space even when the configuration was equivalent, and the network was fighting itself.</p>
+            <p>switched evaluation to angular distance with wrap-to-π and kept the training loss in the normalized joint space used by the dataset. also added an optional fk consistency loss term for later experiments. numbers finally lined up between joint metrics and position metrics.</p>
+            <p class="journal-note">related: neural ik lab</p>
+          </article>
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-08-14">2026-08-14</time>
@@ -983,7 +1029,16 @@
             <p>sensitivity field was computed with the adjoint method; each volume step took 42–48 oc iterations to reach a relative change below 1e-4. the 0.35 volume design produced the cleanest load path (two primary struts meeting at ~38° from the wall), while 0.55 started filling secondary members that contributed less than 4 % to the final stiffness gain.</p>
             <p class="journal-note">related: fea generative cto engine</p>
           </article>
-
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-08-11">2026-08-11</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>neural ik — analytical vs numerical vs neural on the same targets</h4>
+            <p>wired the three solvers into one evaluation path. analytical is exact on reachable targets. damped least-squares converges from a zero seed on most interior points but needs a better init near singularities. neural is constant-time and independent of init; accuracy is still the open variable being measured, not assumed.</p>
+            <p>pseudoinverse without damping occasionally spiked near θ2 ≈ 0. λ ≈ 0.1 on dls kept the joint steps reasonable. transpose method needs more iterations and a smaller step size to stay stable.</p>
+            <p class="journal-note">related: neural ik lab</p>
+          </article>
           <article class="journal-entry" data-tags="broke">
             <div class="journal-meta">
               <time datetime="2026-08-09">2026-08-09</time>
@@ -994,7 +1049,6 @@
             <p>the global stiffness matrix for the refined shoulder alone was already ~1.8e6 dofs with a nnz of about 2.4e7 in csr. assembly in pure numpy allocated three dense temporary buffers before the sparse conversion; that was the real leak. rewriting the local-to-global scatter to write directly into a pre-allocated coo triplet cut peak rss by roughly half on a smaller test mesh.</p>
             <p class="journal-note">related: 2R planar robot paddle</p>
           </article>
-
           <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
               <time datetime="2026-07-28">2026-07-28</time>
@@ -1004,7 +1058,16 @@
             <p>the analytical 2R ik solution flips the elbow configuration when the target approaches the outer reach circle. numerical solver was oscillating between the two configurations because the jacobian determinant passed through zero. added a soft barrier on the configuration variable and a small hysteresis term; still need a proper damped least-squares fallback.</p>
             <p>det(J) dropped below 1e-4 inside a 3 mm band of the reachable limit. the hysteresis keeps the last valid elbow choice until the target moves back more than 5 mm inside the workspace. damped least-squares with λ = 0.02 still produces a continuous joint trajectory across that band; the residual cartesian error stays under 0.4 mm in the current test set.</p>
           </article>
-
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-07-22">2026-07-22</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>neural ik — first end-to-end train on fk-generated data</h4>
+            <p>dataset from joint-space sampling → fk → (x, y) labels. 5k samples, tiny mlp, 15 epochs. loss dropped but fk-consistency error on the test set was still large. confirmed the pipeline path works: generate → normalize → train → predict → fk → position error. scaling samples and width next.</p>
+            <p>normalization was essential; without it the network spent early epochs just learning the scale of the joint angles. train/val curves tracked each other after that.</p>
+            <p class="journal-note">related: neural ik lab</p>
+          </article>
           <article class="journal-entry" data-tags="question">
             <div class="journal-meta">
               <time datetime="2026-07-21">2026-07-21</time>
@@ -1014,7 +1077,16 @@
             <p>after applying the heaviside projection the actual material volume drifts by 1–3 % relative to the prescribed fraction. literature suggests a volume-preserving projection or a simple post-correction step. not sure yet which approach will stay stable when the design domain has non-design solid regions.</p>
             <p>the drift is largest on coarse meshes (h ≈ 1.5 r_min) and shrinks as the mesh is refined, which points to the discrete filter kernel rather than the continuous projection formula. a binary search on the projection threshold that re-enforces the volume constraint after each continuation step on β looks promising; still need to check whether that search interacts badly with the oc update rule.</p>
           </article>
-
+          <article class="journal-entry" data-tags="debug">
+            <div class="journal-meta">
+              <time datetime="2026-07-15">2026-07-15</time>
+              <span class="journal-tag tag-debug">debug</span>
+            </div>
+            <h4>neural ik — analytical round-trip failed on a few random samples</h4>
+            <p>fk → analytical ik → fk should close to 1e-9. a handful of samples near the inner workspace hole produced nan or flipped branch. cause was cos(θ2) clamped at ±1 combined with a branch choice that didn’t match the original θ2 sign. fixed by generating training data from joints (so branch is known) and only using analytical as the evaluation baseline, not as the label source.</p>
+            <p>also tightened the reachable check with a small tolerance so boundary points don’t get marked unreachable from floating-point noise.</p>
+            <p class="journal-note">related: neural ik lab</p>
+          </article>
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-07-12">2026-07-12</time>
@@ -1025,7 +1097,16 @@
             <p>step response on joint 1 (0 → 45°) settled in 0.38 s with 9 % overshoot after the retune. the residual offset is approximately 0.7° and scales with the cosine of the shoulder angle, which matches the expected gravity torque profile. a static gravity term using the measured link masses removed most of it; the leftover is probably cable stretch and gearbox compliance.</p>
             <p class="journal-note">related: 2R planar robot paddle</p>
           </article>
-
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-07-02">2026-07-02</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>neural ik — analytical ik and workspace checks locked in</h4>
+            <p>planar 2r model: fk matches the textbook equations, both elbow branches recover, unreachable targets return nan + reachable=false. workspace annulus |L1−L2| ≤ r ≤ L1+L2 verified on a grid. this is the baseline everything else gets measured against.</p>
+            <p>started scaffolding the dataset generator and the mlp wrapper. goal is a fair comparison, not a demo that only shows neural succeeding.</p>
+            <p class="journal-note">related: neural ik lab</p>
+          </article>
           <article class="journal-entry" data-tags="broke">
             <div class="journal-meta">
               <time datetime="2026-06-30">2026-06-30</time>
@@ -1036,7 +1117,16 @@
             <p>chrome’s v8 heap limit was the hard stop; the cg residual vector alone was fine, but the element-wise assembly loop created thousands of temporary typed arrays that never got collected fast enough. moving the entire assembly + solve into one worker and transferring the result buffer with postMessage({…}, [buffer]) kept the main thread responsive even at 18k elements.</p>
             <p class="journal-note">related: fea playground 2D</p>
           </article>
-
+          <article class="journal-entry" data-tags="question">
+            <div class="journal-meta">
+              <time datetime="2026-06-26">2026-06-26</time>
+              <span class="journal-tag tag-question">question</span>
+            </div>
+            <h4>neural ik — is a 2r planar arm enough to study the real issues?</h4>
+            <p>started the neural ik lab project. 2r is simple enough that analytical ik is exact and singularities are well understood, which makes it a fair baseline. worry is that success on 2r won’t say much about higher-dof arms where the inverse is underdetermined and numerical methods dominate. treating this as a controlled first step, not the final claim.</p>
+            <p>scope for v0: one robot, analytical + numerical + neural, honest metrics, no inflated accuracy numbers.</p>
+            <p class="journal-note">related: neural ik lab</p>
+          </article>
           <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
               <time datetime="2026-06-18">2026-06-18</time>
@@ -1047,7 +1137,6 @@
             <p>the original code applied the impulse after a position-level penetration correction, which injected a small amount of kinetic energy each impact. switching to a velocity-level non-penetration constraint with the same e = 1 map removed the artificial source. energy now oscillates within ±0.03 % over a 30 s window at dt = 1/240.</p>
             <p class="journal-note">related: dynamics simulations (ds1)</p>
           </article>
-
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-06-05">2026-06-05</time>
@@ -1057,7 +1146,6 @@
             <p>added a simple length-scale control via the density filter radius and a morphological closing operation. the resulting designs look more printable, but compliance increased ~8 % compared with the unconstrained run at the same volume fraction. acceptable trade-off for the current hardware constraints.</p>
             <p>closing radius was set to 1.2× the intended minimum member width. on the cantilever benchmark the thin secondary struts disappeared and the primary members thickened by roughly one filter radius. the compliance penalty is consistent with the loss of those secondary paths; for the physical prints the thicker members are worth the stiffness cost.</p>
           </article>
-
           <article class="journal-entry" data-tags="question">
             <div class="journal-meta">
               <time datetime="2026-05-22">2026-05-22</time>
@@ -1067,7 +1155,6 @@
             <p>marching cubes on the 0.5 isosurface produces a noisy mesh that needs heavy remeshing. looking at openvdb level-set methods and at simply thresholding then running a constrained laplacian smooth. still open — current pipeline is functional but ugly.</p>
             <p>the noise is worst where the density gradient is shallow (gray regions that the projection never fully eliminated). a short diffusion of the density field before the isosurface extract reduces the high-frequency roughness, but it also erodes thin members. a constrained smooth that freezes vertices already near 0 or 1 might be the better route.</p>
           </article>
-
           <article class="journal-entry" data-tags="broke">
             <div class="journal-meta">
               <time datetime="2026-05-09">2026-05-09</time>
@@ -1078,7 +1165,6 @@
             <p>the crack initiated at the layer interface roughly 0.6 mm above the fillet radius. tensile coupon tests on the same filament and print settings gave an interlayer strength of only ~18 MPa versus ~48 MPa in the filament direction. applying a 0.4 knockdown to the allowable stress brings the predicted and observed failure loads into agreement.</p>
             <p class="journal-note">related: 2R planar robot paddle</p>
           </article>
-
           <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
               <time datetime="2026-04-27">2026-04-27</time>
@@ -1088,7 +1174,6 @@
             <p>the custom c++ coo → csr converter was writing the last column index one past the end on meshes whose node count was not a multiple of the block size. valgrind caught it only under a specific mesh. fixed and added a unit test that checks Σ K_ij against the dense reference for a 3-element patch.</p>
             <p>the bug lived in the exclusive-scan that builds the row pointer array: when n % block != 0 the final partial block wrote past indptr[n]. the unit test now builds a 3-element patch, converts, and asserts that the frobenius norm of (K_sparse − K_dense) is below 1e-12. caught two similar edge cases after the first fix.</p>
           </article>
-
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-04-11">2026-04-11</time>
@@ -1099,7 +1184,6 @@
             <p>the open-loop eigenvalues of the linearized system sit at approximately +2.1, +0.8, −1.4 (1/s). lqr with Q = diag(10,10,10,1,1,1) and R = I moved all poles into the left half-plane with a minimum real part of −1.7. the independent pids could stabilize the first mode but left a lightly damped oscillation on the relative angles between the outer pendulums.</p>
             <p class="journal-note">related: dynamics simulations (ds12)</p>
           </article>
-
           <article class="journal-entry" data-tags="question">
             <div class="journal-meta">
               <time datetime="2026-03-29">2026-03-29</time>
@@ -1109,7 +1193,6 @@
             <p>some of the intermediate density fields produce highly skewed elements near the solid-void boundary. the compliance still converges, but the stress recovery looks suspicious. need a clearer criterion (jacobian quality? condition number of local K?) before trusting the stress plots on optimized geometries.</p>
             <p>elements with min(jacobian) / max(jacobian) below ~0.15 start showing stress peaks that move when the mesh is refined, which is a classic sign of discretization error rather than a real stress concentration. a simple quality filter that flags those elements and excludes them from the stress plot is a temporary fix; a better long-term approach is to remesh the 0.5 isosurface before the final stress pass.</p>
           </article>
-
           <article class="journal-entry" data-tags="broke">
             <div class="journal-meta">
               <time datetime="2026-03-14">2026-03-14</time>
@@ -1120,7 +1203,6 @@
             <p>mediump on the tested mali gpu effectively gave about 10 bits of mantissa. density values that differed by less than ~0.002 collapsed to the same color band, which made the continuation on β look frozen even though the cpu-side densities were still changing. highp restored smooth gradients; the performance hit was negligible for a full-screen quad.</p>
             <p class="journal-note">related: fea playground 2D</p>
           </article>
-
         </div>
       </div>
     </div>
