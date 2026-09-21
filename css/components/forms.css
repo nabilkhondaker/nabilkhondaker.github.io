@@ -1,0 +1,114 @@
+.form-input {
+    background-color: rgba(18, 18, 20, 0.85);
+    border: 1px solid var(--border, #333);
+    color: var(--text-primary, #fff);
+    border-radius: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    padding: 0.7rem 0.9rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    width: 100%;
+}
+
+.form-input:focus {
+    border-color: var(--accent, #913700);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(145, 55, 0, 0.2);
+}
+
+input[type="number"].form-input {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+input[type="number"].form-input::-webkit-inner-spin-button,
+input[type="number"].form-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+select.form-input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23a1a1aa' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    background-size: 1.1rem;
+    padding-right: 2.6rem;
+    cursor: pointer;
+}
+
+select.form-input option {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 0.5rem;
+}
+
+.input-group {
+    margin-bottom: 0.75rem;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.4rem;
+}
+
+.calc-results {
+    letter-spacing: 0.4px;
+    word-spacing: 0.5px;
+    border-radius: 12px !important;
+    padding: 1rem 1.15rem;
+    margin-top: 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+}
+
+.calc-results p,
+.calc-results span,
+.calc-results h3 {
+    letter-spacing: 0.5px;
+}
+
+.aesthetic-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.aesthetic-table th,
+.aesthetic-table td {
+    padding: 0.5rem 0.6rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.aesthetic-table th {
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: lowercase;
+}
+
+.mini-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.75rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mini-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent-blue);
+    color: #fff;
+}
