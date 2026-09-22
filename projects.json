@@ -34,7 +34,7 @@
   },
   {
   "title": "neural ik lab <i class='fab fa-python'></i>",
-  "tag": "neural inverse kinematics research lab - september 21, 2026",
+  "tag": "neural inverse kinematics research lab built upon ai - september 21, 2026",
   "description": "a research-grade comparison of neural, analytical, and numerical inverse kinematics for a 2R planar manipulator",
   "techSpecs": "built a full python toolkit around a 2R arm: analytical geometric ik, jacobian-based numerical solvers (transpose, pseudoinverse, damped least-squares), and a configurable mlp that learns the inverse map from forward-kinematics data. includes dataset generation, training/eval pipelines, singularity & noise experiments, visualizations, cli, and pytest coverage.",
   "repo": "https://github.com/nabilkhondaker/neural-ik-lab",
@@ -43,6 +43,18 @@
   "why": "i wanted a clean, controlled setup to actually measure whether a neural net can approximate inverse kinematics—and under what conditions it fails—instead of treating learned ik as automatically better. comparing it head-to-head with classical analytical and numerical methods on the same robot felt like the right way to study the trade-offs.",
   "learned": "how multi-valued ik branches force careful dataset design, how error concentrates near singularities and workspace boundaries, and how to structure a modular robotics + ml codebase so experiments stay reproducible. also got more practice turning mathematical kinematics into solid numerical implementations and evaluation metrics.",
   "challenges": "handling the elbow-up / elbow-down ambiguity without cheating the comparison, keeping numerical solvers stable near singularities, and making sure every reported metric came from real runs rather than placeholders. balancing research depth with clean software engineering (configs, cli, tests, docs) took more iteration than expected."
+  },
+  {
+  "title": "ai machine failure investigator <i class='fab fa-python'></i>",
+  "tag": "synthetic multi-sensor fault diagnosis lab - september 22, 2026",
+  "description": "end-to-end research pipeline for investigating rotating-machine faults from vibration, temperature, current, torque, and speed — synthetic simulator, features, anomaly detection, classification, severity, and evidence reports",
+  "techSpecs": "built a configurable synthetic rotating-machine simulator that injects bearing, unbalance, misalignment, and thermal faults under controlled rpm/load/noise. extracted time- and frequency-domain features (rms, crest factor, order harmonics, hf energy), then layered isolation forest / mahalanobis / autoencoder anomaly detection, random-forest + mlp classification, severity regression, and an evidence engine that ranks hypotheses with supporting/opposing flags and can abstain.",
+  "repo": "https://github.com/nabilkhondaker/ai-machine-failure-investigator",
+  "link": "",
+  "inProgress": false,
+  "why": "i wanted a controlled lab where fault type, severity, and operating condition are known so i could measure whether classical signal features + modern detectors actually separate failure modes — and when they should refuse to guess — instead of treating diagnosis as a pure classification leaderboard.",
+  "learned": "how much order-related and spectral features matter over pure time-domain stats, why anomaly detection should stay separate from supervised class assignment, and how to structure an investigation layer that reports competing hypotheses and evidence instead of a single label. also got practice keeping synthetic data generation, feature pipelines, and evaluation fully reproducible.",
+  "challenges": "overlapping signatures (bearing vs unbalance at similar rpm), leakage when windows from the same trajectory landed in both train and test, and deciding when the investigator should abstain instead of forcing a low-confidence class. severity estimation on continuous degradation trajectories needed careful clipping and calibration so reports stayed honest."
   },
   {
     "title": "2R planar robot paddle <i class=\"fab fa-python\"></i>",
