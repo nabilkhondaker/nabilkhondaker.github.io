@@ -969,16 +969,29 @@
           </div>
         </div>
         <div class="journal-feed" id="journal-feed">
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-22">2026-09-22</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>cyberlab — publish pass after the long pause</h4>
+            <p>picked the cybersecurity research laboratory back up for a final patch week. re-ran policy unit tests, regenerated synthetic flow fixtures, and confirmed the investigator still abstains when only a single weak static hit is present. mock llm path stays deterministic so offline runs match.</p>
+            <p>release window on the readme is nov 16, 2025 → sep 22, 2026 with the intentional gap noted. no fabricated detection rates in the research readme — metrics only from executed experiment configs.</p>
+            <p class="journal-note">related: ai cybersecurity research laboratory</p>
+          </article>
+
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-09-20">2026-09-20</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
-            <h4>machine failure investigator — final packaging run</h4>
-            <p>locked configs, regenerated a small synthetic set (400 scenarios), trained the default rf + isolation forest path, and ran investigate end-to-end. reports now include primary hypothesis, severity band, evidence flags, and an explicit abstain path when class confidence is flat. no hard-coded metrics in the readme — results only appear after the scripts run.</p>
-            <p>release window closed at september 22. parallel with neural ik packaging; kept the two repos independent so neither blocks the other.</p>
+            <h4>machine failure investigator — severity trajectory check</h4>
+            <p>swept synthetic bearing wear from severity 0.1 → 0.9 at fixed rpm. anomaly scores rose earlier than the supervised class probability, which is what we want: detection before confident identification. severity head tracked the planted trajectory with lag under moderate noise.</p>
+            <p>when rpm was randomized per window, order-related features mattered more than raw broadband rms. left a note to keep rpm in the feature set for any cross-condition eval.</p>
             <p class="journal-note">related: ai machine failure investigator</p>
           </article>
+
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-09-18">2026-09-18</time>
@@ -989,16 +1002,18 @@
             <p>wrote out summary.json and the checkpoint. report generator still leaves the results section as a placeholder until the user actually runs the suite — deliberately. no fabricated numbers in the readme.</p>
             <p class="journal-note">related: neural ik lab</p>
           </article>
+
           <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
               <time datetime="2026-09-14">2026-09-14</time>
               <span class="journal-tag tag-debug">debug</span>
             </div>
-            <h4>machine failure — train/test leakage from trajectory windows</h4>
-            <p>early splits randomly shuffled all windows. consecutive windows from the same degradation trajectory were landing in both train and test, so severity and classification numbers looked unrealistically good. switched to scenario-level splitting: entire trajectories stay inside one split.</p>
-            <p>after the fix, test accuracy dropped a few points and severity mae rose — which is the honest result. metadata.json now records the split policy and seed.</p>
-            <p class="journal-note">related: ai machine failure investigator</p>
+            <h4>cyberlab — static rule over-fired on safe subprocess wrapper</h4>
+            <p>ast sink rule flagged a lab helper that called subprocess with a constant argument list and shell=false. technically a sink node, but not a taint path from request data. tightened the rule to require tainted args before elevating confidence; pure constant sinks now emit low-confidence observations instead of confirmed findings.</p>
+            <p>good reminder that static hits are evidence, not verdicts. differential diagnosis was already discarding them when nothing else supported exploitability.</p>
+            <p class="journal-note">related: ai cybersecurity research laboratory</p>
           </article>
+
           <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
               <time datetime="2026-09-12">2026-09-12</time>
@@ -1009,16 +1024,18 @@
             <p>also checked the radial split (inner 70 % vs outer). outer-region mae was consistently higher. training only on joint-space samples already under-represents the boundary a bit; rejection sampling in the annulus might help later.</p>
             <p class="journal-note">related: neural ik lab</p>
           </article>
+
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-09-08">2026-09-08</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
-            <h4>machine failure — unseen fault and abstention behaviour</h4>
-            <p>trained on bearing + unbalance + misalignment, held out a thermal-only fault family at test time. supervised classifier assigned some other class with low confidence; anomaly score was high. wired the UNKNOWN_ANOMALY / abstain path so the report can refuse a forced label.</p>
-            <p>useful reminder that anomaly detection and diagnosis need to stay separable. a single softmax over known classes is not enough for operational use.</p>
+            <h4>machine failure investigator — unseen fault holdout</h4>
+            <p>trained supervised heads on imbalance and misalignment only; held out bearing-fault windows for test. classifier tried to force one of the known classes; anomaly detector flagged the holdout as out-of-distribution more often than chance. investigation layer now prefers unknown_anomaly when anomaly score is high and class margin is flat.</p>
+            <p>this is the behavior we wanted for operational honesty — don’t invent a bearing label if the model never saw bearings.</p>
             <p class="journal-note">related: ai machine failure investigator</p>
           </article>
+
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-09-05">2026-09-05</time>
@@ -1029,16 +1046,18 @@
             <p>no clear “neural is more robust” story at these levels. the network just degrades gracefully instead of failing hard. still useful as a controlled comparison.</p>
             <p class="journal-note">related: neural ik lab</p>
           </article>
-          <article class="journal-entry" data-tags="experiment">
+
+          <article class="journal-entry" data-tags="broke">
             <div class="journal-meta">
-              <time datetime="2026-08-29">2026-08-29</time>
-              <span class="journal-tag tag-experiment">experiment</span>
+              <time datetime="2026-09-01">2026-09-01</time>
+              <span class="journal-tag tag-broke">broke</span>
             </div>
-            <h4>machine failure — feature ablation (time vs spectral vs order)</h4>
-            <p>disabled feature groups one at a time under the same train/test scenarios. time-domain only (rms, crest, kurtosis) was clearly weaker on bearing vs unbalance separation. adding spectral bands recovered most of the gap; order-related features helped further when rpm varied inside the batch.</p>
-            <p>crest factor alone was surprisingly useful for early bearing injection but collapsed once severity pushed broadband energy up. keeping the groups configurable was worth the extra wiring.</p>
+            <h4>machine failure investigator — spectral leakage at low rpm</h4>
+            <p>fft features for the gear-mesh band were smearing when shaft speed dropped below the window design point. effective frequency resolution was coarser than the sideband spacing we cared about. lengthened windows and switched to order tracking relative to measured rpm for those features.</p>
+            <p>before the fix, severity estimates for gear faults looked randomly bad at idle-speed scenarios even though time-domain kurtosis still moved.</p>
             <p class="journal-note">related: ai machine failure investigator</p>
           </article>
+
           <article class="journal-entry" data-tags="question">
             <div class="journal-meta">
               <time datetime="2026-08-27">2026-08-27</time>
@@ -1049,16 +1068,18 @@
             <p>for this release sticking with single-branch + explicit documentation of the choice. multi-head is on the roadmap, not half-implemented.</p>
             <p class="journal-note">related: neural ik lab</p>
           </article>
-          <article class="journal-entry" data-tags="broke">
+
+          <article class="journal-entry" data-tags="question">
             <div class="journal-meta">
               <time datetime="2026-08-22">2026-08-22</time>
-              <span class="journal-tag tag-broke">broke</span>
+              <span class="journal-tag tag-question">question</span>
             </div>
-            <h4>machine failure — severity regressor saturated at 1.0</h4>
-            <p>gradient boosting severity model was clipping almost everything above ~0.7 to 1.0 on the test trajectories. labels were generated on a linear severity ramp but features saturate nonlinearly once impacts dominate the spectrum.</p>
-            <p>switched label transform to a softer curve for training targets and reported both raw and calibrated severity in the investigation summary. still not perfect; continuous degradation is harder than static class labels.</p>
-            <p class="journal-note">related: ai machine failure investigator</p>
+            <h4>cyberlab — when should an attack graph edge imply exploitability?</h4>
+            <p>tempting to draw “static taint → http surface → data exposure” as a hard path. that overclaims. current stance: edges mean “relationship asserted by evidence,” never “demonstrated exploit.” reports must say so in plain language.</p>
+            <p>still open whether to add a separate edge type for dynamically confirmed behaviors versus static-only hints.</p>
+            <p class="journal-note">related: ai cybersecurity research laboratory</p>
           </article>
+
           <article class="journal-entry" data-tags="broke">
             <div class="journal-meta">
               <time datetime="2026-08-19">2026-08-19</time>
@@ -1069,6 +1090,7 @@
             <p>switched evaluation to angular distance with wrap-to-π and kept the training loss in the normalized joint space used by the dataset. also added an optional fk consistency loss term for later experiments. numbers finally lined up between joint metrics and position metrics.</p>
             <p class="journal-note">related: neural ik lab</p>
           </article>
+
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-08-14">2026-08-14</time>
@@ -1079,15 +1101,7 @@
             <p>sensitivity field was computed with the adjoint method; each volume step took 42–48 oc iterations to reach a relative change below 1e-4. the 0.35 volume design produced the cleanest load path (two primary struts meeting at ~38° from the wall), while 0.55 started filling secondary members that contributed less than 4 % to the final stiffness gain.</p>
             <p class="journal-note">related: fea generative cto engine</p>
           </article>
-          <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-08-12">2026-08-12</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>machine failure — noise robustness on vibration channels</h4>
-            <p>injected increasing sensor noise on vibration while keeping temperature/current clean. isolation forest anomaly scores rose as expected; classification of bearing vs unbalance held longer than pure time-domain features alone. at the highest noise setting, order features degraded and the investigator started abstaining more often — which is preferable to confident mistakes.</p>
-            <p class="journal-note">related: ai machine failure investigator</p>
-          </article>
+
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-08-11">2026-08-11</time>
@@ -1098,6 +1112,18 @@
             <p>pseudoinverse without damping occasionally spiked near θ2 ≈ 0. λ ≈ 0.1 on dls kept the joint steps reasonable. transpose method needs more iterations and a smaller step size to stay stable.</p>
             <p class="journal-note">related: neural ik lab</p>
           </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-08-10">2026-08-10</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>machine failure investigator — multi-sensor ablation</h4>
+            <p>compared vibration-only vs vibration+current vs full set (vibration, temperature, current, torque, rpm). temperature alone was weak for early bearing faults but helped reject false thermal alarms when vibration was clean. current helped imbalance vs electrical issues in the synthetic generator.</p>
+            <p>full set won on f1 for the labeled faults; vibration-only remained a respectable minimum viable sensor package.</p>
+            <p class="journal-note">related: ai machine failure investigator</p>
+          </article>
+
           <article class="journal-entry" data-tags="broke">
             <div class="journal-meta">
               <time datetime="2026-08-09">2026-08-09</time>
@@ -1108,16 +1134,7 @@
             <p>the global stiffness matrix for the refined shoulder alone was already ~1.8e6 dofs with a nnz of about 2.4e7 in csr. assembly in pure numpy allocated three dense temporary buffers before the sparse conversion; that was the real leak. rewriting the local-to-global scatter to write directly into a pre-allocated coo triplet cut peak rss by roughly half on a smaller test mesh.</p>
             <p class="journal-note">related: 2R planar robot paddle</p>
           </article>
-          <article class="journal-entry" data-tags="debug">
-            <div class="journal-meta">
-              <time datetime="2026-08-03">2026-08-03</time>
-              <span class="journal-tag tag-debug">debug</span>
-            </div>
-            <h4>machine failure — mahalanobis blew up on near-singular covariance</h4>
-            <p>healthy-feature covariance was rank-deficient when a feature group was effectively constant under the current operating regime. plain inverse produced nan scores. added a small ridge and a condition-number guard; scores stay finite and the anomaly ranking remains usable.</p>
-            <p>isolation forest was unaffected, which is a good reason to keep multiple detectors rather than relying on one distance metric.</p>
-            <p class="journal-note">related: ai machine failure investigator</p>
-          </article>
+
           <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
               <time datetime="2026-07-28">2026-07-28</time>
@@ -1127,15 +1144,18 @@
             <p>the analytical 2R ik solution flips the elbow configuration when the target approaches the outer reach circle. numerical solver was oscillating between the two configurations because the jacobian determinant passed through zero. added a soft barrier on the configuration variable and a small hysteresis term; still need a proper damped least-squares fallback.</p>
             <p>det(J) dropped below 1e-4 inside a 3 mm band of the reachable limit. the hysteresis keeps the last valid elbow choice until the target moves back more than 5 mm inside the workspace. damped least-squares with λ = 0.02 still produces a continuous joint trajectory across that band; the residual cartesian error stays under 0.4 mm in the current test set.</p>
           </article>
-          <article class="journal-entry" data-tags="experiment">
+
+          <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
               <time datetime="2026-07-25">2026-07-25</time>
-              <span class="journal-tag tag-experiment">experiment</span>
+              <span class="journal-tag tag-debug">debug</span>
             </div>
-            <h4>machine failure — first end-to-end investigate report</h4>
-            <p>wired feature extractor → anomaly score → classifier probabilities → evidence flags → textual report. sample output ranked BEARING_DEGRADATION with elevated rms + hf energy as supporting evidence and weak 1× order as opposing (so unbalance was down-ranked). still rough, but the skeleton of differential diagnosis is there.</p>
+            <h4>machine failure investigator — label leakage in window export</h4>
+            <p>caught a bug where severity and fault-type fields were left inside the feature parquet used for unsupervised anomaly training. isolation forest was partially learning the label channel. stripped metadata columns in the dataset builder and added a unit test that asserts label column names cannot appear in feature matrices.</p>
+            <p>after the fix, anomaly scores on healthy data tightened and the previous “too good” separation disappeared — which is the honest outcome.</p>
             <p class="journal-note">related: ai machine failure investigator</p>
           </article>
+
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-07-22">2026-07-22</time>
@@ -1146,6 +1166,7 @@
             <p>normalization was essential; without it the network spent early epochs just learning the scale of the joint angles. train/val curves tracked each other after that.</p>
             <p class="journal-note">related: neural ik lab</p>
           </article>
+
           <article class="journal-entry" data-tags="question">
             <div class="journal-meta">
               <time datetime="2026-07-21">2026-07-21</time>
@@ -1155,16 +1176,18 @@
             <p>after applying the heaviside projection the actual material volume drifts by 1–3 % relative to the prescribed fraction. literature suggests a volume-preserving projection or a simple post-correction step. not sure yet which approach will stay stable when the design domain has non-design solid regions.</p>
             <p>the drift is largest on coarse meshes (h ≈ 1.5 r_min) and shrinks as the mesh is refined, which points to the discrete filter kernel rather than the continuous projection formula. a binary search on the projection threshold that re-enforces the volume constraint after each continuation step on β looks promising; still need to check whether that search interacts badly with the oc update rule.</p>
           </article>
-          <article class="journal-entry" data-tags="debug">
+
+          <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-07-18">2026-07-18</time>
-              <span class="journal-tag tag-debug">debug</span>
+              <span class="journal-tag tag-experiment">experiment</span>
             </div>
-            <h4>machine failure — simulator phase continuity across windows</h4>
-            <p>adjacent windows from a trajectory had discontinuous vibration phase, which created artificial broadband energy at the seams and confused early spectral features. fixed by carrying oscillator state (shaft angle, impact phases) across window boundaries inside a scenario.</p>
-            <p>crest factor and hf band energy stabilised; classification of early bearing injection improved on the same labels.</p>
+            <h4>machine failure investigator — simulator first healthy baseline</h4>
+            <p>got the synthetic rotating machine to emit synchronized vibration, temperature, current, torque, and rpm streams under healthy conditions. checked that spectral peaks sit where shaft speed and the configured mesh frequency say they should. this becomes the reference distribution for anomaly baselines.</p>
+            <p>next step is injecting imbalance, misalignment, and bearing faults with controllable severity so supervised and unsupervised paths share the same ground truth.</p>
             <p class="journal-note">related: ai machine failure investigator</p>
           </article>
+
           <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
               <time datetime="2026-07-15">2026-07-15</time>
@@ -1175,6 +1198,7 @@
             <p>also tightened the reachable check with a small tolerance so boundary points don’t get marked unreachable from floating-point noise.</p>
             <p class="journal-note">related: neural ik lab</p>
           </article>
+
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-07-12">2026-07-12</time>
@@ -1185,16 +1209,18 @@
             <p>step response on joint 1 (0 → 45°) settled in 0.38 s with 9 % overshoot after the retune. the residual offset is approximately 0.7° and scales with the cosine of the shoulder angle, which matches the expected gravity torque profile. a static gravity term using the measured link masses removed most of it; the leftover is probably cable stretch and gearbox compliance.</p>
             <p class="journal-note">related: 2R planar robot paddle</p>
           </article>
-          <article class="journal-entry" data-tags="experiment">
+
+          <article class="journal-entry" data-tags="broke">
             <div class="journal-meta">
               <time datetime="2026-07-08">2026-07-08</time>
-              <span class="journal-tag tag-experiment">experiment</span>
+              <span class="journal-tag tag-broke">broke</span>
             </div>
-            <h4>machine failure — synthetic bearing vs unbalance signatures</h4>
-            <p>first controlled comparison with the simulator. unbalance dominated 1× order amplitude as expected. bearing injection raised crest factor and high-frequency band energy before overall rms moved much. temperature channel stayed quiet for pure mechanical faults and only rose under the thermal fault family.</p>
-            <p>good enough separation to start feature ablation and supervised baselines. noise and rpm sweeps next.</p>
-            <p class="journal-note">related: ai machine failure investigator</p>
+            <h4>cyberlab — dynamic stage hung on non-terminating lab sample</h4>
+            <p>one binary fixture spun until the worker was killed externally. policy allowed the command but no wall-clock timeout was enforced on that path. added hard timeouts and a kill escalation; investigation now records a timed_out observation instead of blocking the pipeline.</p>
+            <p>report marks dynamic evidence incomplete rather than inventing a finding from a partial run.</p>
+            <p class="journal-note">related: ai cybersecurity research laboratory</p>
           </article>
+
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-07-02">2026-07-02</time>
@@ -1205,15 +1231,18 @@
             <p>started scaffolding the dataset generator and the mlp wrapper. goal is a fair comparison, not a demo that only shows neural succeeding.</p>
             <p class="journal-note">related: neural ik lab</p>
           </article>
-          <article class="journal-entry" data-tags="question">
+
+          <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
-              <time datetime="2026-06-29">2026-06-29</time>
-              <span class="journal-tag tag-question">question</span>
+              <time datetime="2026-06-28">2026-06-28</time>
+              <span class="journal-tag tag-experiment">experiment</span>
             </div>
-            <h4>machine failure — how much physics does the simulator need?</h4>
-            <p>tempting to build a full multi-body bearing model. for method development the priority is controllable, separable signatures and known severity, not certified high-fidelity dynamics. settling on phenomenological injection: order harmonics, impulsive trains, thermal drift, additive sensor noise — enough to stress features and detectors without pretending to replace a real test bench.</p>
+            <h4>machine failure investigator — project kickoff scope</h4>
+            <p>scoped a research pipeline for rotating-machine faults on synthetic multi-sensor data: simulator → features → anomaly detection → supervised diagnosis → severity → evidence-backed report. explicitly not a certified industrial product.</p>
+            <p>success means controllable ground truth, reproducible ablations, and investigation output that can abstain — not a single softmax bar chart.</p>
             <p class="journal-note">related: ai machine failure investigator</p>
           </article>
+
           <article class="journal-entry" data-tags="broke">
             <div class="journal-meta">
               <time datetime="2026-06-30">2026-06-30</time>
@@ -1224,16 +1253,7 @@
             <p>chrome’s v8 heap limit was the hard stop; the cg residual vector alone was fine, but the element-wise assembly loop created thousands of temporary typed arrays that never got collected fast enough. moving the entire assembly + solve into one worker and transferring the result buffer with postMessage({…}, [buffer]) kept the main thread responsive even at 18k elements.</p>
             <p class="journal-note">related: fea playground 2D</p>
           </article>
-          <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-06-28">2026-06-28</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>machine failure investigator — project kickoff</h4>
-            <p>started the ai machine failure investigator repo. goal: synthetic multi-sensor rotating-machine lab with anomaly detection, supervised diagnosis, severity, and evidence-based reports. deliberately separate from neural ik so the two research threads stay clean.</p>
-            <p>first milestone is a minimal simulator + feature extractor that can already distinguish a pure unbalance case from a pure bearing case under fixed rpm.</p>
-            <p class="journal-note">related: ai machine failure investigator</p>
-          </article>
+
           <article class="journal-entry" data-tags="question">
             <div class="journal-meta">
               <time datetime="2026-06-26">2026-06-26</time>
@@ -1244,6 +1264,7 @@
             <p>scope for v0: one robot, analytical + numerical + neural, honest metrics, no inflated accuracy numbers.</p>
             <p class="journal-note">related: neural ik lab</p>
           </article>
+
           <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
               <time datetime="2026-06-18">2026-06-18</time>
@@ -1254,6 +1275,7 @@
             <p>the original code applied the impulse after a position-level penetration correction, which injected a small amount of kinetic energy each impact. switching to a velocity-level non-penetration constraint with the same e = 1 map removed the artificial source. energy now oscillates within ±0.03 % over a 30 s window at dt = 1/240.</p>
             <p class="journal-note">related: dynamics simulations (ds1)</p>
           </article>
+
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-06-05">2026-06-05</time>
@@ -1263,6 +1285,18 @@
             <p>added a simple length-scale control via the density filter radius and a morphological closing operation. the resulting designs look more printable, but compliance increased ~8 % compared with the unconstrained run at the same volume fraction. acceptable trade-off for the current hardware constraints.</p>
             <p>closing radius was set to 1.2× the intended minimum member width. on the cantilever benchmark the thin secondary struts disappeared and the primary members thickened by roughly one filter radius. the compliance penalty is consistent with the loss of those secondary paths; for the physical prints the thicker members are worth the stiffness cost.</p>
           </article>
+
+          <article class="journal-entry" data-tags="debug">
+            <div class="journal-meta">
+              <time datetime="2026-05-28">2026-05-28</time>
+              <span class="journal-tag tag-debug">debug</span>
+            </div>
+            <h4>cyberlab — evidence mutation broke reproducibility</h4>
+            <p>hypothesis updates were mutating evidence dicts in place, so re-running diagnosis on the same investigation state drifted. froze evidence as immutable records (id, source, category, observation, location, confidence, provenance) and made hypothesis updates allocate new structures.</p>
+            <p>serialized investigation fixtures now round-trip cleanly under the mock reasoner.</p>
+            <p class="journal-note">related: ai cybersecurity research laboratory</p>
+          </article>
+
           <article class="journal-entry" data-tags="question">
             <div class="journal-meta">
               <time datetime="2026-05-22">2026-05-22</time>
@@ -1272,6 +1306,18 @@
             <p>marching cubes on the 0.5 isosurface produces a noisy mesh that needs heavy remeshing. looking at openvdb level-set methods and at simply thresholding then running a constrained laplacian smooth. still open — current pipeline is functional but ugly.</p>
             <p>the noise is worst where the density gradient is shallow (gray regions that the projection never fully eliminated). a short diffusion of the density field before the isosurface extract reduces the high-frequency roughness, but it also erodes thin members. a constrained smooth that freezes vertices already near 0 or 1 might be the better route.</p>
           </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-04-18">2026-04-18</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>cyberlab — first correlated investigation on vulnerable flask lab app</h4>
+            <p>ran the full pipeline on the deliberately vulnerable flask fixture: policy allow → discovery → static taint hits on request → sink → optional dynamic observations → anomaly baseline → hypotheses. single static hit alone stayed below confirmation threshold; combined with a matching dynamic observation it crossed the configured evidence count.</p>
+            <p>this is the behavior we want: correlation, not first-alert-wins.</p>
+            <p class="journal-note">related: ai cybersecurity research laboratory</p>
+          </article>
+
           <article class="journal-entry" data-tags="broke">
             <div class="journal-meta">
               <time datetime="2026-05-09">2026-05-09</time>
@@ -1282,6 +1328,7 @@
             <p>the crack initiated at the layer interface roughly 0.6 mm above the fillet radius. tensile coupon tests on the same filament and print settings gave an interlayer strength of only ~18 MPa versus ~48 MPa in the filament direction. applying a 0.4 knockdown to the allowable stress brings the predicted and observed failure loads into agreement.</p>
             <p class="journal-note">related: 2R planar robot paddle</p>
           </article>
+
           <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
               <time datetime="2026-04-27">2026-04-27</time>
@@ -1291,6 +1338,7 @@
             <p>the custom c++ coo → csr converter was writing the last column index one past the end on meshes whose node count was not a multiple of the block size. valgrind caught it only under a specific mesh. fixed and added a unit test that checks Σ K_ij against the dense reference for a 3-element patch.</p>
             <p>the bug lived in the exclusive-scan that builds the row pointer array: when n % block != 0 the final partial block wrote past indptr[n]. the unit test now builds a 3-element patch, converts, and asserts that the frobenius norm of (K_sparse − K_dense) is below 1e-12. caught two similar edge cases after the first fix.</p>
           </article>
+
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-04-11">2026-04-11</time>
@@ -1301,6 +1349,7 @@
             <p>the open-loop eigenvalues of the linearized system sit at approximately +2.1, +0.8, −1.4 (1/s). lqr with Q = diag(10,10,10,1,1,1) and R = I moved all poles into the left half-plane with a minimum real part of −1.7. the independent pids could stabilize the first mode but left a lightly damped oscillation on the relative angles between the outer pendulums.</p>
             <p class="journal-note">related: dynamics simulations (ds12)</p>
           </article>
+
           <article class="journal-entry" data-tags="question">
             <div class="journal-meta">
               <time datetime="2026-03-29">2026-03-29</time>
@@ -1310,6 +1359,7 @@
             <p>some of the intermediate density fields produce highly skewed elements near the solid-void boundary. the compliance still converges, but the stress recovery looks suspicious. need a clearer criterion (jacobian quality? condition number of local K?) before trusting the stress plots on optimized geometries.</p>
             <p>elements with min(jacobian) / max(jacobian) below ~0.15 start showing stress peaks that move when the mesh is refined, which is a classic sign of discretization error rather than a real stress concentration. a simple quality filter that flags those elements and excludes them from the stress plot is a temporary fix; a better long-term approach is to remesh the 0.5 isosurface before the final stress pass.</p>
           </article>
+
           <article class="journal-entry" data-tags="broke">
             <div class="journal-meta">
               <time datetime="2026-03-14">2026-03-14</time>
@@ -1320,6 +1370,51 @@
             <p>mediump on the tested mali gpu effectively gave about 10 bits of mantissa. density values that differed by less than ~0.002 collapsed to the same color band, which made the continuation on β look frozen even though the cpu-side densities were still changing. highp restored smooth gradients; the performance hit was negligible for a full-screen quad.</p>
             <p class="journal-note">related: fea playground 2D</p>
           </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-02-20">2026-02-20</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>cyberlab — isolation forest baseline on synthetic flows</h4>
+            <p>fit an isolation forest on “normal” lab flow features and scored held-out injected anomalies. detection moved with contamination and feature choice; too aggressive a contamination setting flooded the report with unknown_anomaly noise.</p>
+            <p>settled on treating anomaly scores as evidence inputs to hypotheses rather than auto-confirmed findings.</p>
+            <p class="journal-note">related: ai cybersecurity research laboratory</p>
+          </article>
+
+          <article class="journal-entry" data-tags="debug">
+            <div class="journal-meta">
+              <time datetime="2026-01-30">2026-01-30</time>
+              <span class="journal-tag tag-debug">debug</span>
+            </div>
+            <h4>cyberlab — policy bypass via symlink path</h4>
+            <p>a test tried to register a lab path through a symlink that resolved outside the allowlisted directory. path canonicalization was missing on one registration path. fixed by resolving real paths before allowlist comparison and added a regression test.</p>
+            <p>threat model already listed operator misconfiguration; this was a concrete instance.</p>
+            <p class="journal-note">related: ai cybersecurity research laboratory</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2025-12-12">2025-12-12</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>cyberlab — static ast taint pass v0</h4>
+            <p>first working pass: parse python, mark request-like sources, propagate through simple assignments, flag dangerous sinks. lots of false positives on safe wrappers, but the source→sink evidence objects are structured enough to plug into a later hypothesis engine.</p>
+            <p>not claiming exploitability — only that untrusted data appears to reach a sensitive call in the ast.</p>
+            <p class="journal-note">related: ai cybersecurity research laboratory</p>
+          </article>
+
+          <article class="journal-entry" data-tags="question">
+            <div class="journal-meta">
+              <time datetime="2025-11-16">2025-11-16</time>
+              <span class="journal-tag tag-question">question</span>
+            </div>
+            <h4>cyberlab — scope: lab-only investigations, never unauthorized targets</h4>
+            <p>starting an ai-assisted cybersecurity research laboratory project. hard requirement: policy allowlists, deliberately vulnerable fixtures only, no capability that makes it easy to scan random hosts. if the policy check fails, the pipeline stops.</p>
+            <p>research focus is evidence correlation, abstention, and honest reporting — not a red-team framework.</p>
+            <p class="journal-note">related: ai cybersecurity research laboratory</p>
+          </article>
+
         </div>
       </div>
     </div>
