@@ -57,6 +57,18 @@
   "challenges": "overlapping signatures (bearing vs unbalance at similar rpm), leakage when windows from the same trajectory landed in both train and test, and deciding when the investigator should abstain instead of forcing a low-confidence class. severity estimation on continuous degradation trajectories needed careful clipping and calibration so reports stayed honest."
   },
   {
+  "title": "ai cybersecurity research laboratory <i class='fas fa-shield-halved'></i> <i class='fab fa-python'></i> <i class='fas fa-brain'></i>",
+  "tag": "authorized lab investigation platform for deliberately vulnerable targets - september 22, 2026",
+  "description": "a defensive research platform that runs policy-gated investigations on lab-only targets: static ast analysis, sandboxed dynamic observation, network flow metadata, anomaly detection, evidence with provenance, hypothesis ranking, and attack graphs",
+  "techSpecs": "python package (cyberlab) with host/command policy enforcement, python ast taint-style static analysis, bounded dynamic observation, isolation forest and z-score baselines, immutable evidence objects, differential diagnosis / mock llm reasoning, networkx attack graphs, and structured json/markdown reports. default llm path is deterministic mock so runs stay reproducible offline.",
+  "repo": "https://github.com/nabilkhondaker/ai-cybersecurity-research-laboratory",
+  "link": "",
+  "inProgress": false,
+  "why": "i wanted a controlled place to study how far evidence correlation, abstention, and multi-stage analysis can go before claiming a finding — without ever pointing tools at unauthorized systems. deliberately vulnerable flask apps, small binaries, and synthetic flows keep the work reproducible and inside a clear target policy.",
+  "learned": "how quickly static rules alone over-fire without dynamic or network context, why immutable evidence with provenance matters when hypotheses change, and how abstention (refusing low-confidence claims) is often more honest than forcing a vulnerability class. also got practice structuring a security research codebase around policy as a hard boundary, not a soft guideline.",
+  "challenges": "keeping false positives under control when correlating weak static signals, making attack graphs useful without implying exploitability, and designing confidence thresholds so the system abstains instead of hallucinating findings. the long pause mid-project meant re-validating fixtures and policy tests before the final publish pass."
+  },
+  {
     "title": "2R planar robot paddle <i class=\"fab fa-python\"></i>",
     "tag": "physical automated robotic arm using inverse kinematics - september 3, 2025",
     "description": "mechatronics 2R planar arm playing a game similar to air hockey or pong, programmed in native python",
