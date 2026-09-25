@@ -33,6 +33,17 @@
     "challenges": "getting the stiffness matrix assembly and solver stable across different mesh densities was harder than expected. floating-point precision and making sure results matched analytical benchmarks (i checked against known cases and commercial software) took a lot of careful debugging. keeping the ui responsive while still solving the system on every parameter change was another constant balancing act."
   },
   {
+    "title": "2R planar robot paddle <i class=\"fab fa-python\"></i>",
+    "tag": "physical automated robotic arm using inverse kinematics - september 3, 2025",
+    "description": "mechatronics 2R planar arm playing a game similar to air hockey or pong, programmed in native python",
+    "techSpecs": "built a mechatronics model with a trigonometric inverse kinematics (ik) solver that maps 2d coordinates to joint angles in real time.",
+    "repo": "https://github.com/nabilkhondaker/TabletopPlanarArm",
+    "link": "https://nabilkhondaker.github.io/TabletopPlanarArm/",
+    "why": "it was the first real hands-on mechatronics project that let me take pure textbook control theory and actually make something move and interact with the physical world. i wanted to prove i could close the loop from camera pixels → kinematics → motor torque on real hardware instead of just simulating everything.",
+    "learned": "i learned how messy the gap is between ideal inverse dynamics and real motors. camera latency, non-uniform friction on the board, and the fact that simplified constant-inertia models sometimes outperformed the “full” textbook version on our small arm were big eye-openers. also got solid practice with opencv color tracking, forward kinematics for overlay visualization, and tuning pid gains until the arm stopped oscillating or going rigid.",
+    "challenges": "the biggest ones were hardware-related: the cheap overhead camera introduced noticeable lag, so the predicted trajectory was always slightly behind reality. the ball would sometimes lose energy on wall bounces or get stuck in the middle despite the table tilt. gain tuning was also brutal—too much proportional gain and it overshot wildly, too much derivative and it became too stiff to hit fast balls. coordinating with the group on mechanical design while owning most of the software was another balancing act."
+  },
+  {
   "title": "neural ik lab <i class='fab fa-python'></i>",
   "tag": "neural inverse kinematics research lab built upon ai - september 21, 2026",
   "description": "a research-grade comparison of neural, analytical, and numerical inverse kinematics for a 2R planar manipulator",
@@ -69,17 +80,6 @@
   "challenges": "keeping false positives under control when correlating weak static signals, making attack graphs useful without implying exploitability, and designing confidence thresholds so the system abstains instead of hallucinating findings. the long pause mid-project meant re-validating fixtures and policy tests before the final publish pass."
   },
   {
-    "title": "2R planar robot paddle <i class=\"fab fa-python\"></i>",
-    "tag": "physical automated robotic arm using inverse kinematics - september 3, 2025",
-    "description": "mechatronics 2R planar arm playing a game similar to air hockey or pong, programmed in native python",
-    "techSpecs": "built a mechatronics model with a trigonometric inverse kinematics (ik) solver that maps 2d coordinates to joint angles in real time.",
-    "repo": "https://github.com/nabilkhondaker/TabletopPlanarArm",
-    "link": "https://nabilkhondaker.github.io/TabletopPlanarArm/",
-    "why": "it was the first real hands-on mechatronics project that let me take pure textbook control theory and actually make something move and interact with the physical world. i wanted to prove i could close the loop from camera pixels → kinematics → motor torque on real hardware instead of just simulating everything.",
-    "learned": "i learned how messy the gap is between ideal inverse dynamics and real motors. camera latency, non-uniform friction on the board, and the fact that simplified constant-inertia models sometimes outperformed the “full” textbook version on our small arm were big eye-openers. also got solid practice with opencv color tracking, forward kinematics for overlay visualization, and tuning pid gains until the arm stopped oscillating or going rigid.",
-    "challenges": "the biggest ones were hardware-related: the cheap overhead camera introduced noticeable lag, so the predicted trajectory was always slightly behind reality. the ball would sometimes lose energy on wall bounces or get stuck in the middle despite the table tilt. gain tuning was also brutal—too much proportional gain and it overshot wildly, too much derivative and it became too stiff to hit fast balls. coordinating with the group on mechanical design while owning most of the software was another balancing act."
-  },
-  {
     "title": "mechgenpro engine <i class=\"fas fa-cogs\"></i>",
     "tag": "procedural kinematics engine that generates, simulates, and optimizes linkages - july 7, 2026",
     "description": "built a real-time procedural kinematics engine from scratch in lua + löve2d to figure out how planar mechanism synthesis and grashof classification actually work",
@@ -88,6 +88,18 @@
     "why": "i wanted a fast, visual playground for mechanism design where i could generate valid linkages on the fly, watch their coupler curves, and optimize them — something more interactive than static textbook diagrams or heavy cad tools. it also let me explore procedural generation applied to mechanical systems.",
     "learned": "i got much more comfortable with the grashof criteria, transmission angles, four-bar position analysis, and numerical methods for solving linkage kinematics. building the generator + validator + optimizer loop taught me a lot about constraint handling and multi-objective design in mechanism synthesis. working in lua/löve2d was also a fun change of pace from the c++/python stack.",
     "challenges": "generating only valid, non-locking mechanisms while still exploring a useful design space required careful rule design. keeping the real-time animation smooth while doing continuous kinematic solves and optimization, and making the inspector ui feel responsive for live parameter tweaking, both needed iteration. avoiding singularities and making the optimizer produce mechanisms that actually move nicely (good transmission angles, smooth paths) was harder than the pure math suggested."
+  },
+  {
+  "title": "climate infrastructure resilience sim <i class='devicon-cplusplus-plain'></i>",
+  "tag": "coupled infrastructure stress under extreme heat - september 25, 2026",
+  "description": "a c++20 framework that links synthetic weather, building thermal demand, simplified electrical networks, transformer aging, and cascading failures to compare resilience under heat-wave scenarios",
+  "techSpecs": "modular c++20 codebase with cmake, eigen, and yaml/json configs. models single-zone rc building thermal dynamics, susceptance-based dc power flow, transformer thermal lag and arrhenius-style aging, stochastic component failure, cascade logging, and resilience curve metrics (min performance, recovery time, auc loss). cli for scenario runs and comparisons on fully synthetic networks.",
+  "repo": "https://github.com/nabilkhondaker/climate-infrastructure-resilience-simulator",
+  "link": "",
+  "inProgress": false,
+  "why": "i wanted a computational sandbox to study how heat propagates through coupled infrastructure — cooling demand → electrical loading → transformer stress → failure risk → load redistribution — without pretending to be a climate forecast or a certified utility tool. synthetic networks keep the experiments controllable and honest about scope.",
+  "learned": "how tightly thermal and electrical assumptions have to stay consistent for cascade stories to mean anything, why resilience metrics need a clear performance definition before you talk about recovery, and how much documentation simplified engineering models need so they are not mistaken for operational analysis.",
+  "challenges": "keeping the dc power-flow and thermal coupling numerically stable under extreme demand spikes, defining failure thresholds that produce interesting cascades without instant total collapse, and resisting scope creep into full ac power flow or real utility GIS data. the intermittent timeline also meant re-validating scenario configs after long pauses."
   },
   {
     "title": "vehicle dynamics sim <i class='devicon-cplusplus-plain'></i>",
