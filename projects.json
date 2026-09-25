@@ -47,7 +47,7 @@
   "title": "neural ik lab <i class='fab fa-python'></i>",
   "tag": "neural inverse kinematics research lab built upon ai - september 21, 2026",
   "description": "a research-grade comparison of neural, analytical, and numerical inverse kinematics for a 2R planar manipulator",
-  "techSpecs": "built a full python toolkit around a 2R arm: analytical geometric ik, jacobian-based numerical solvers (transpose, pseudoinverse, damped least-squares), and a configurable mlp that learns the inverse map from forward-kinematics data. includes dataset generation, training/eval pipelines, singularity & noise experiments, visualizations, cli, and pytest coverage.",
+  "techSpecs": "built a full python toolkit around a 2R arm: analytical geometric ik, jacobian-based numerical solvers (transpose, pseudoinverse, damped least-squares), and a configurable mlp that learns the inverse map from forward-kinematics data.",
   "repo": "https://github.com/nabilkhondaker/neural-ik-lab",
   "link": "",
   "inProgress": false,
@@ -56,10 +56,10 @@
   "challenges": "handling the elbow-up / elbow-down ambiguity without cheating the comparison, keeping numerical solvers stable near singularities, and making sure every reported metric came from real runs rather than placeholders. balancing research depth with clean software engineering (configs, cli, tests, docs) took more iteration than expected."
   },
   {
-  "title": "ai machine failure investigator <i class='fab fa-python'></i>",
+  "title": "ai machine failure analyst <i class='fab fa-python'></i>",
   "tag": "synthetic multi-sensor fault diagnosis lab - september 22, 2026",
   "description": "end-to-end research pipeline for investigating rotating-machine faults from vibration, temperature, current, torque, and speed — synthetic simulator, features, anomaly detection, classification, severity, and evidence reports",
-  "techSpecs": "built a configurable synthetic rotating-machine simulator that injects bearing, unbalance, misalignment, and thermal faults under controlled rpm/load/noise. extracted time- and frequency-domain features (rms, crest factor, order harmonics, hf energy), then layered isolation forest / mahalanobis / autoencoder anomaly detection, random-forest + mlp classification, severity regression, and an evidence engine that ranks hypotheses with supporting/opposing flags and can abstain.",
+  "techSpecs": "built a configurable rotating-machine simulator injecting bearing, unbalance, misalignment, and thermal faults under controlled RPM, load, and noise. extracted time/frequency features for a multi-stage pipeline: Isolation Forest, Mahalanobis, and Autoencoder anomaly detection, RF and MLP classification, and severity regression. integrated an evidence engine that ranks hypotheses with supporting/opposing flags and can abstain.",
   "repo": "https://github.com/nabilkhondaker/ai-machine-failure-investigator",
   "link": "",
   "inProgress": false,
@@ -68,7 +68,7 @@
   "challenges": "overlapping signatures (bearing vs unbalance at similar rpm), leakage when windows from the same trajectory landed in both train and test, and deciding when the investigator should abstain instead of forcing a low-confidence class. severity estimation on continuous degradation trajectories needed careful clipping and calibration so reports stayed honest."
   },
   {
-  "title": "ai cybersecurity research laboratory <i class='fas fa-shield-halved'></i> <i class='fab fa-python'></i> <i class='fas fa-brain'></i>",
+  "title": "ai cybersecurity research lab <i class='fab fa-python'></i>",
   "tag": "authorized lab investigation platform for deliberately vulnerable targets - september 22, 2026",
   "description": "a defensive research platform that runs policy-gated investigations on lab-only targets: static ast analysis, sandboxed dynamic observation, network flow metadata, anomaly detection, evidence with provenance, hypothesis ranking, and attack graphs",
   "techSpecs": "python package (cyberlab) with host/command policy enforcement, python ast taint-style static analysis, bounded dynamic observation, isolation forest and z-score baselines, immutable evidence objects, differential diagnosis / mock llm reasoning, networkx attack graphs, and structured json/markdown reports. default llm path is deterministic mock so runs stay reproducible offline.",
@@ -90,7 +90,7 @@
     "challenges": "generating only valid, non-locking mechanisms while still exploring a useful design space required careful rule design. keeping the real-time animation smooth while doing continuous kinematic solves and optimization, and making the inspector ui feel responsive for live parameter tweaking, both needed iteration. avoiding singularities and making the optimizer produce mechanisms that actually move nicely (good transmission angles, smooth paths) was harder than the pure math suggested."
   },
   {
-  "title": "climate infrastructure resilience sim <i class='devicon-cplusplus-plain'></i>",
+  "title": "climate infrastructure sim <i class='devicon-cplusplus-plain'></i>",
   "tag": "coupled infrastructure stress under extreme heat - september 25, 2026",
   "description": "a c++20 framework that links synthetic weather, building thermal demand, simplified electrical networks, transformer aging, and cascading failures to compare resilience under heat-wave scenarios",
   "techSpecs": "modular c++20 codebase with cmake, eigen, and yaml/json configs. models single-zone rc building thermal dynamics, susceptance-based dc power flow, transformer thermal lag and arrhenius-style aging, stochastic component failure, cascade logging, and resilience curve metrics (min performance, recovery time, auc loss). cli for scenario runs and comparisons on fully synthetic networks.",
@@ -142,7 +142,7 @@
     "challenges": "getting realistic weather data integration reliable (api rate limits, fallbacks to historical data) and making the load-balancing logic sensible under rapidly changing irradiance took time. keeping the simulation numerically stable over long time horizons while still being fast enough for interactive dashboard use was another balancing act."
   },
   {
-    "title": "robosim 3d arm simulator <i class=\"fas fa-robot\"></i>",
+    "title": "robosim 3d <i class='fab fa-html5'></i> <i class='fab fa-css3-alt'></i> <i class='fab fa-js'></i>",
     "tag": "real-time inverse kinematics robotic arm simulation built with three.js - march 17, 2025",
     "description": "built a 3d robotic arm simulator from scratch in vanilla js + three.js to figure out how real-time inverse kinematics and multi-joint matrix transforms actually work",
     "techSpecs": "implemented a real-time ik solver that maps 3d target coordinates to joint angles, plus path caching, velocity telemetry, and hierarchical gripper transforms.",
