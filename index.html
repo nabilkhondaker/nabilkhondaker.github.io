@@ -994,6 +994,17 @@
 
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
+              <time datetime="2026-09-19">2026-09-19</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>climate resilience sim — package and scenario compare</h4>
+            <p>finalized cli compare across baseline / heat_wave / extreme_heat on the synthetic feeder. metrics exported: min performance, recovery time, auc loss. extreme_heat produced deeper min performance and longer recovery than heat_wave on the same network seed; intervention run with upgraded transformer thermal limits cut auc loss meaningfully without eliminating the cascade tail entirely.</p>
+            <p>readme release window set to aug 18, 2025 → sep 19, 2026. models stay labeled as simplified research tooling, not certified analysis.</p>
+            <p class="journal-note">related: climate infrastructure resilience simulator</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
               <time datetime="2026-09-18">2026-09-18</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
@@ -1001,6 +1012,17 @@
             <p>ran the baseline experiment at 20k samples / 40 epochs with the medium mlp (128-128-64). analytical position error sits at machine epsilon as expected. neural mae on the held-out test set landed around 0.02–0.04 on the unit-link geometry after proper normalization; early short runs without enough epochs were closer to 1.0 and not worth reporting. latency for a 2k-batch predict was under 2 ms on cpu.</p>
             <p>wrote out summary.json and the checkpoint. report generator still leaves the results section as a placeholder until the user actually runs the suite — deliberately. no fabricated numbers in the readme.</p>
             <p class="journal-note">related: neural ik lab</p>
+          </article>
+
+          <article class="journal-entry" data-tags="debug">
+            <div class="journal-meta">
+              <time datetime="2026-09-16">2026-09-16</time>
+              <span class="journal-tag tag-debug">debug</span>
+            </div>
+            <h4>climate resilience sim — cascade double-count on simultaneous failures</h4>
+            <p>when two transformers failed in the same timestep, load redistribution ran twice and the second pass used partially updated topology, inflating branch flows. serialized failure handling inside the step: apply all failure flags, then solve power flow once, then update thermals.</p>
+            <p>ensemble variance dropped and event logs became readable again.</p>
+            <p class="journal-note">related: climate infrastructure resilience simulator</p>
           </article>
 
           <article class="journal-entry" data-tags="debug">
@@ -1027,6 +1049,17 @@
 
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
+              <time datetime="2026-09-10">2026-09-10</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>climate resilience sim — intervention: efficiency vs transformer upgrade</h4>
+            <p>same extreme_heat seed. case a: improved building cop (less electrical demand per unit cooling). case b: higher transformer thermal rating / slower aging. cop improvement reduced peak loading globally; transformer upgrade mainly protected the weakbank corridor and shortened recovery when cascades still started.</p>
+            <p>neither intervention zeroed auc loss. combined case was best but still showed a residual dip — honest result for a stressed synthetic feeder.</p>
+            <p class="journal-note">related: climate infrastructure resilience simulator</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
               <time datetime="2026-09-08">2026-09-08</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
@@ -1045,6 +1078,17 @@
             <p>added isotropic gaussian noise to test targets at σ = 0, 0.001, 0.005, 0.01, 0.02, 0.05. neural error rises smoothly; analytical stays near zero until the noisy target leaves the reachable set and the solver returns nan. at σ = 0.05 a non-trivial fraction of targets become unreachable and have to be filtered before comparison.</p>
             <p>no clear “neural is more robust” story at these levels. the network just degrades gracefully instead of failing hard. still useful as a controlled comparison.</p>
             <p class="journal-note">related: neural ik lab</p>
+          </article>
+
+          <article class="journal-entry" data-tags="broke">
+            <div class="journal-meta">
+              <time datetime="2026-09-03">2026-09-03</time>
+              <span class="journal-tag tag-broke">broke</span>
+            </div>
+            <h4>climate resilience sim — euler step too coarse in peak heat</h4>
+            <p>with Δt = 1 h indoor temperature overshot setpoints and hvac power oscillated against the control deadband. halved the thermal step during extreme_heat experiments; electrical solve still hourly. energy totals stabilized and transformer loading traces stopped showing sawtooth artifacts from the control chatter.</p>
+            <p>lesson: coupling two timescales means the faster thermal loop needs the tighter step even if power flow is slow.</p>
+            <p class="journal-note">related: climate infrastructure resilience simulator</p>
           </article>
 
           <article class="journal-entry" data-tags="broke">
@@ -1071,6 +1115,17 @@
 
           <article class="journal-entry" data-tags="question">
             <div class="journal-meta">
+              <time datetime="2026-08-24">2026-08-24</time>
+              <span class="journal-tag tag-question">question</span>
+            </div>
+            <h4>climate resilience sim — what performance signal defines “service”?</h4>
+            <p>early curves used fraction of transformers in service. that ignored customers still served on overloaded paths. switched primary performance to served load fraction (demand met without violating solved branch limits). min performance numbers got less dramatic but more meaningful.</p>
+            <p>docs now state the performance definition next to every metric table so comparisons stay honest.</p>
+            <p class="journal-note">related: climate infrastructure resilience simulator</p>
+          </article>
+
+          <article class="journal-entry" data-tags="question">
+            <div class="journal-meta">
               <time datetime="2026-08-22">2026-08-22</time>
               <span class="journal-tag tag-question">question</span>
             </div>
@@ -1089,6 +1144,17 @@
             <p>joint-space mse was decreasing steadily but a subset of predictions produced large cartesian residuals after fk. root cause: angle wrapping. predicted θ1 sometimes landed ±2π away from the label; mse treated that as a huge error in joint space even when the configuration was equivalent, and the network was fighting itself.</p>
             <p>switched evaluation to angular distance with wrap-to-π and kept the training loss in the normalized joint space used by the dataset. also added an optional fk consistency loss term for later experiments. numbers finally lined up between joint metrics and position metrics.</p>
             <p class="journal-note">related: neural ik lab</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-08-16">2026-08-16</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>climate resilience sim — transformer aging under multi-day heat</h4>
+            <p>ran five-day heat_wave with arrhenius acceleration on. health index decline was negligible on baseline weather but visible on extreme_heat for the two highest-loaded transformers. stochastic failures still rare at these durations — aging is the slow fuse, overload trips are the fast one.</p>
+            <p>useful split to keep in the narrative: acute cascade risk vs cumulative life consumption.</p>
+            <p class="journal-note">related: climate infrastructure resilience simulator</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1210,6 +1276,17 @@
             <p class="journal-note">related: 2R planar robot paddle</p>
           </article>
 
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-07-09">2026-07-09</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>climate resilience sim — first coupled heat_wave run</h4>
+            <p>synthetic weather anomaly → building rc thermal → hvac electrical demand → dc power flow → transformer thermal lag. end-to-end numbers looked plausible: peak demand up sharply in afternoon hours, two corridors near continuous rating. no cascade yet until failure probabilities were stressed further.</p>
+            <p>this is the skeleton the rest of the experiment suite hangs on.</p>
+            <p class="journal-note">related: climate infrastructure resilience simulator</p>
+          </article>
+
           <article class="journal-entry" data-tags="broke">
             <div class="journal-meta">
               <time datetime="2026-07-08">2026-07-08</time>
@@ -1276,6 +1353,17 @@
             <p class="journal-note">related: dynamics simulations (ds1)</p>
           </article>
 
+          <article class="journal-entry" data-tags="debug">
+            <div class="journal-meta">
+              <time datetime="2026-06-02">2026-06-02</time>
+              <span class="journal-tag tag-debug">debug</span>
+            </div>
+            <h4>climate resilience sim — singular B matrix on islanded bus</h4>
+            <p>after removing a tie line the remaining island had no angle reference and the dc solve failed. pinned a slack angle in each island and treated islanded load as unserved rather than crashing the step.</p>
+            <p>cascade logs now show intentional service loss instead of linear-algebra exceptions.</p>
+            <p class="journal-note">related: climate infrastructure resilience simulator</p>
+          </article>
+
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-06-05">2026-06-05</time>
@@ -1316,6 +1404,17 @@
             <p>ran the full pipeline on the deliberately vulnerable flask fixture: policy allow → discovery → static taint hits on request → sink → optional dynamic observations → anomaly baseline → hypotheses. single static hit alone stayed below confirmation threshold; combined with a matching dynamic observation it crossed the configured evidence count.</p>
             <p>this is the behavior we want: correlation, not first-alert-wins.</p>
             <p class="journal-note">related: ai cybersecurity research laboratory</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-03-08">2026-03-08</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>climate resilience sim — synthetic network + weather skeleton</h4>
+            <p>cmake app boots, loads yaml scenario, generates diurnal outdoor temperature with optional anomaly offset, integrates a single-zone building, and prints hvac power. no electrical network yet — just proving the environmental → thermal → demand path.</p>
+            <p>unit tests cover energy balance signs and steady-state ua behavior.</p>
+            <p class="journal-note">related: climate infrastructure resilience simulator</p>
           </article>
 
           <article class="journal-entry" data-tags="broke">
@@ -1404,7 +1503,7 @@
             <p class="journal-note">related: ai cybersecurity research laboratory</p>
           </article>
 
-          <article class="journal-entry" data-tags="question">
+          <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2025-11-16">2025-11-16</time>
               <span class="journal-tag tag-question">question</span>
@@ -1413,6 +1512,27 @@
             <p>starting an ai-assisted cybersecurity research laboratory project. hard requirement: policy allowlists, deliberately vulnerable fixtures only, no capability that makes it easy to scan random hosts. if the policy check fails, the pipeline stops.</p>
             <p>research focus is evidence correlation, abstention, and honest reporting — not a red-team framework.</p>
             <p class="journal-note">related: ai cybersecurity research laboratory</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2025-10-05">2025-10-05</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>climate resilience sim — dc power flow on toy feeder</h4>
+            <p>implemented susceptance-based dc power flow with a fixed slack. verified that removing a branch redistributes flows and that overload flags trip on the expected corridors under inflated demand. this is the electrical core before transformer thermals and cascades.</p>
+            <p class="journal-note">related: climate infrastructure resilience simulator</p>
+          </article>
+
+          <article class="journal-entry" data-tags="question">
+            <div class="journal-meta">
+              <time datetime="2025-08-18">2025-08-18</time>
+              <span class="journal-tag tag-question">question</span>
+            </div>
+            <h4>climate resilience sim — project start: coupled stress, synthetic only</h4>
+            <p>kicking off a c++ infrastructure resilience sandbox. goal is to chain heat → cooling demand → electrical loading → transformer aging/failure → cascade metrics on synthetic networks. explicitly not a climate forecast product and not certified utility software.</p>
+            <p>if the models cannot stay simple enough to explain, the project has failed its teaching/research purpose.</p>
+            <p class="journal-note">related: climate infrastructure resilience simulator</p>
           </article>
 
         </div>
