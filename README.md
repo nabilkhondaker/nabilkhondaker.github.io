@@ -1,6 +1,6 @@
 # Nabil Khondaker's Portfolio
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-nabilkd.com-blue?style=for-the-badge)](https://nabilkd.com/)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-nabilkhondaker.github.io-blue?style=for-the-badge)](https://nabilkhondaker.github.io/)
 [![GitHub](https://img.shields.io/badge/GitHub-nabilkhondaker-black?style=for-the-badge&logo=github)](https://github.com/nabilkhondaker)
 
 > A sleek, interactive personal portfolio showcasing my projects in **computational mechanics**, **robotics**, **software engineering**, and more. Built with vanilla HTML, CSS, and JavaScript with a cyber-mechanical aesthetic.
