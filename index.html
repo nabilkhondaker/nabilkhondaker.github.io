@@ -972,13 +972,23 @@
 
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
-              <time datetime="2026-09-19">2026-09-25</time>
+              <time datetime="2026-09-25">2026-09-25</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
-            <h4>climate resilience sim — package and scenario compare</h4>
-            <p>finalized cli compare across baseline / heat_wave / extreme_heat on the synthetic feeder. metrics exported: min performance, recovery time, auc loss. extreme_heat produced deeper min performance and longer recovery than heat_wave on the same network seed; intervention run with upgraded transformer thermal limits cut auc loss meaningfully without eliminating the cascade tail entirely.</p>
-            <p>readme release window set to aug 18, 2025 → sep 25, 2026. models stay labeled as simplified research tooling, not certified analysis.</p>
-            <p class="journal-note">related: climate infrastructure resilience simulator</p>
+            <h4>computational mechanics engine — publish v0.1.0</h4>
+            <p>packaged the c++20 fea pipeline: structured quad4 meshes, linear static cantilever, neo-hookean and simplified j2 modules, newton–raphson infrastructure, mesh quality checks, and markdown reports. release window aug 29 → sep 25, 2026. readme states hard limits — not a commercial fea replacement, no fabricated convergence claims.</p>
+            <p>ctest green on shape-function partition of unity, quadrature polynomial tests, and the cantilever integration path.</p>
+            <p class="journal-note">related: computational mechanics engine</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-23">2026-09-23</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>computational mechanics engine — cantilever vs beam theory notes</h4>
+            <p>linear static tip deflection on a slender mesh approaches euler–bernoulli within a few percent once aspect ratio is fine enough; coarse meshes are stiffer as expected. stress recovery at the root still shows element-level noise — documented rather than smoothed away in the report template.</p>
+            <p class="journal-note">related: computational mechanics engine</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -990,6 +1000,16 @@
             <p>picked the cybersecurity research laboratory back up for a final patch week. re-ran policy unit tests, regenerated synthetic flow fixtures, and confirmed the investigator still abstains when only a single weak static hit is present. mock llm path stays deterministic so offline runs match.</p>
             <p>release window on the readme is nov 16, 2025 → sep 22, 2026 with the intentional gap noted. no fabricated detection rates in the research readme — metrics only from executed experiment configs.</p>
             <p class="journal-note">related: ai cybersecurity research laboratory</p>
+          </article>
+
+          <article class="journal-entry" data-tags="debug">
+            <div class="journal-meta">
+              <time datetime="2026-09-21">2026-09-21</time>
+              <span class="journal-tag tag-debug">debug</span>
+            </div>
+            <h4>computational mechanics engine — shear factor in voigt packing</h4>
+            <p>plane-stress constitutive matrix was under-stiff in shear after a voigt ordering mismatch between b-matrix rows and c-matrix columns. fixed the index map and added a unit pure-shear patch check. tip deflection numbers finally moved in the right direction under transverse load.</p>
+            <p class="journal-note">related: computational mechanics engine</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1005,6 +1025,17 @@
 
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
+              <time datetime="2026-09-19">2026-09-19</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>climate resilience sim — package and scenario compare</h4>
+            <p>finalized cli compare across baseline / heat_wave / extreme_heat on the synthetic feeder. metrics exported: min performance, recovery time, auc loss. extreme_heat produced deeper min performance and longer recovery than heat_wave on the same network seed; intervention run with upgraded transformer thermal limits cut auc loss meaningfully without eliminating the cascade tail entirely.</p>
+            <p>readme release window set to aug 18, 2025 → sep 19, 2026. models stay labeled as simplified research tooling, not certified analysis.</p>
+            <p class="journal-note">related: climate infrastructure resilience simulator</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
               <time datetime="2026-09-18">2026-09-18</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
@@ -1012,6 +1043,16 @@
             <p>ran the baseline experiment at 20k samples / 40 epochs with the medium mlp (128-128-64). analytical position error sits at machine epsilon as expected. neural mae on the held-out test set landed around 0.02–0.04 on the unit-link geometry after proper normalization; early short runs without enough epochs were closer to 1.0 and not worth reporting. latency for a 2k-batch predict was under 2 ms on cpu.</p>
             <p>wrote out summary.json and the checkpoint. report generator still leaves the results section as a placeholder until the user actually runs the suite — deliberately. no fabricated numbers in the readme.</p>
             <p class="journal-note">related: neural ik lab</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-17">2026-09-17</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>computational mechanics engine — j2 return map smoke test</h4>
+            <p>uniaxial strain cycle on a single gauss point: trial stress leaves the yield surface, return map brings it back, isotropic hardening raises the yield stress on reload. not a full structural demo yet — just constitutive integration with a residual check on f(σ, q) ≈ 0 after corrector.</p>
+            <p class="journal-note">related: computational mechanics engine</p>
           </article>
 
           <article class="journal-entry" data-tags="debug">
@@ -1025,6 +1066,16 @@
             <p class="journal-note">related: climate infrastructure resilience simulator</p>
           </article>
 
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-15">2026-09-15</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>computational mechanics engine — neo-hookean residual path</h4>
+            <p>wired strain-energy density → stress measure → element internal force for a simple stretch. newton iterations need a usable tangent; continuum modulus is enough for this smoke path. docs stress finite-strain kinematics vs the small-strain linear solver so the two worlds stay separate in the reader’s head.</p>
+            <p class="journal-note">related: computational mechanics engine</p>
+          </article>
+
           <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
               <time datetime="2026-09-14">2026-09-14</time>
@@ -1034,6 +1085,16 @@
             <p>ast sink rule flagged a lab helper that called subprocess with a constant argument list and shell=false. technically a sink node, but not a taint path from request data. tightened the rule to require tainted args before elevating confidence; pure constant sinks now emit low-confidence observations instead of confirmed findings.</p>
             <p>good reminder that static hits are evidence, not verdicts. differential diagnosis was already discarding them when nothing else supported exploitability.</p>
             <p class="journal-note">related: ai cybersecurity research laboratory</p>
+          </article>
+
+          <article class="journal-entry" data-tags="broke">
+            <div class="journal-meta">
+              <time datetime="2026-09-13">2026-09-13</time>
+              <span class="journal-tag tag-broke">broke</span>
+            </div>
+            <h4>computational mechanics engine — inverted mapping det(J) &lt; 0</h4>
+            <p>a deliberately skewed mesh produced negative jacobians at some gauss points and the stiffness assembly wrote garbage. added mesh-quality preflight: reject or warn on min det(J) ≤ 0 and extreme aspect ratios before solve. unit test ships a crushed quad that must fail the quality gate.</p>
+            <p class="journal-note">related: computational mechanics engine</p>
           </article>
 
           <article class="journal-entry" data-tags="debug">
@@ -1049,6 +1110,16 @@
 
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
+              <time datetime="2026-09-11">2026-09-11</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>computational mechanics engine — first linear static cantilever solve</h4>
+            <p>structured mesh → quad4 assembly → simplicial ldlt → tip displacement. order of magnitude matches beam theory on a slender case. report writer dumps max |u| and a crude von mises preview from gauss-point recovery.</p>
+            <p class="journal-note">related: computational mechanics engine</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
               <time datetime="2026-09-10">2026-09-10</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
@@ -1056,6 +1127,16 @@
             <p>same extreme_heat seed. case a: improved building cop (less electrical demand per unit cooling). case b: higher transformer thermal rating / slower aging. cop improvement reduced peak loading globally; transformer upgrade mainly protected the weakbank corridor and shortened recovery when cascades still started.</p>
             <p>neither intervention zeroed auc loss. combined case was best but still showed a residual dip — honest result for a stressed synthetic feeder.</p>
             <p class="journal-note">related: climate infrastructure resilience simulator</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-09">2026-09-09</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>computational mechanics engine — dof numbering and essential bc reduction</h4>
+            <p>equation numbering skips fixed dofs; reduced K and f build cleanly for a clamped cantilever root. free-free mesh without bc correctly stays singular — caught by a deliberate test that expects solver failure without supports.</p>
+            <p class="journal-note">related: computational mechanics engine</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1069,6 +1150,16 @@
             <p class="journal-note">related: ai machine failure investigator</p>
           </article>
 
+          <article class="journal-entry" data-tags="debug">
+            <div class="journal-meta">
+              <time datetime="2026-09-07">2026-09-07</time>
+              <span class="journal-tag tag-debug">debug</span>
+            </div>
+            <h4>computational mechanics engine — shape-function derivatives in physical space</h4>
+            <p>parent-domain dN/dξ were fine; multiplying by inverse jacobian had a transpose error that broke constant-strain patch checks. fixed the gradient transform; partition-of-unity and linear-field reproduction tests now pass.</p>
+            <p class="journal-note">related: computational mechanics engine</p>
+          </article>
+
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-09-05">2026-09-05</time>
@@ -1078,6 +1169,16 @@
             <p>added isotropic gaussian noise to test targets at σ = 0, 0.001, 0.005, 0.01, 0.02, 0.05. neural error rises smoothly; analytical stays near zero until the noisy target leaves the reachable set and the solver returns nan. at σ = 0.05 a non-trivial fraction of targets become unreachable and have to be filtered before comparison.</p>
             <p>no clear “neural is more robust” story at these levels. the network just degrades gracefully instead of failing hard. still useful as a controlled comparison.</p>
             <p class="journal-note">related: neural ik lab</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-04">2026-09-04</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>computational mechanics engine — structured mesh + gauss quadrature</h4>
+            <p>rectangle and cantilever generators produce node/element arrays with boundary sets. 2×2 gauss–legendre integrates bilinears as expected; unit test integrates a polynomial on the parent element to machine precision.</p>
+            <p class="journal-note">related: computational mechanics engine</p>
           </article>
 
           <article class="journal-entry" data-tags="broke">
@@ -1091,6 +1192,16 @@
             <p class="journal-note">related: climate infrastructure resilience simulator</p>
           </article>
 
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-02">2026-09-02</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>computational mechanics engine — project skeleton and linear elasticity constitutive</h4>
+            <p>cmake app boots, eigen linked, voigt isotropic C(E, ν) for plane stress/strain. no elements yet — constitutive unit tests only. scope locked: educational pipeline visibility over feature breadth.</p>
+            <p class="journal-note">related: computational mechanics engine</p>
+          </article>
+
           <article class="journal-entry" data-tags="broke">
             <div class="journal-meta">
               <time datetime="2026-09-01">2026-09-01</time>
@@ -1100,6 +1211,16 @@
             <p>fft features for the gear-mesh band were smearing when shaft speed dropped below the window design point. effective frequency resolution was coarser than the sideband spacing we cared about. lengthened windows and switched to order tracking relative to measured rpm for those features.</p>
             <p>before the fix, severity estimates for gear faults looked randomly bad at idle-speed scenarios even though time-domain kurtosis still moved.</p>
             <p class="journal-note">related: ai machine failure investigator</p>
+          </article>
+
+          <article class="journal-entry" data-tags="question">
+            <div class="journal-meta">
+              <time datetime="2026-08-29">2026-08-29</time>
+              <span class="journal-tag tag-question">question</span>
+            </div>
+            <h4>computational mechanics engine — start: full chain visible in code</h4>
+            <p>opening a short intensive c++20 fea / continuum-mechanics suite. goal is not to beat commercial codes; goal is assumptions → mesh → constitutive → assembly → solve → recovery → verification in one readable tree. if a module cannot be explained, it should not ship.</p>
+            <p class="journal-note">related: computational mechanics engine</p>
           </article>
 
           <article class="journal-entry" data-tags="question">
@@ -1503,7 +1624,7 @@
             <p class="journal-note">related: ai cybersecurity research laboratory</p>
           </article>
 
-          <article class="journal-entry" data-tags="experiment">
+          <article class="journal-entry" data-tags="question">
             <div class="journal-meta">
               <time datetime="2025-11-16">2025-11-16</time>
               <span class="journal-tag tag-question">question</span>
