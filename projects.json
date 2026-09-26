@@ -44,6 +44,18 @@
     "challenges": "the biggest ones were hardware-related: the cheap overhead camera introduced noticeable lag, so the predicted trajectory was always slightly behind reality. the ball would sometimes lose energy on wall bounces or get stuck in the middle despite the table tilt. gain tuning was also brutal—too much proportional gain and it overshot wildly, too much derivative and it became too stiff to hit fast balls. coordinating with the group on mechanical design while owning most of the software was another balancing act."
   },
   {
+  "title": "computational mechanics engine <i class='devicon-cplusplus-plain'></i>",
+  "tag": "c++20 research fea / continuum-mechanics suite - september 25, 2026",
+  "description": "a modular finite-element and continuum-mechanics framework covering mesh generation, constitutive models, assembly, linear and nonlinear solvers, stress recovery, and verification-oriented engineering reports",
+"techSpecs": "c++20 fea core with eigen: quad4 elements, linear elasticity, neo-hookean, simplified j2 plasticity, newton–raphson, and sparse ldlt solves. structured meshes only — research/education, not commercial fea."
+  "repo": "https://github.com/nabilkhondaker/computational-mechanics-engine",
+  "link": "",
+  "inProgress": false,
+  "why": "i wanted the full mechanics pipeline visible in one codebase — assumptions, kinematics, constitutive response, element technology, assembly, solvers, convergence, and post-processing — instead of treating fea as a black-box button. short intensive build window forced ruthless scope control.",
+  "learned": "how quickly nonlinear residual definitions and consistent tangents have to stay aligned, why mesh quality checks belong next to the solver not in a slideshow, and how much documentation educational constitutive models need so they are not mistaken for production analysis.",
+  "challenges": "keeping neo-hookean and j2 modules honest about their limitations, getting newton–raphson to converge on the plasticity demos without ad-hoc line search hacks, and resisting scope creep into contact/fracture while still leaving stubs that match the architecture docs."
+  },
+  {
   "title": "neural ik lab <i class='fab fa-python'></i>",
   "tag": "neural inverse kinematics research lab built upon ai - september 21, 2026",
   "description": "a research-grade comparison of neural, analytical, and numerical inverse kinematics for a 2R planar manipulator",
