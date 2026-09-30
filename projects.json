@@ -92,6 +92,18 @@
     "challenges": "keeping false positives under control when correlating weak static signals, making attack graphs useful without implying exploitability, and designing confidence thresholds so the system abstains instead of hallucinating findings. the long pause mid-project meant re-validating fixtures and policy tests before the final publish pass."
   },
   {
+  "title": "orderflow continuum lab <i class='devicon-cplusplus-plain'></i>",
+  "tag": "hybrid lob + continuum mechanics for high-frequency order flow - september 30, 2026",
+  "description": "a research engine that couples a lock-free nanosecond limit-order-book to a continuum solver treating liquidity as a deformable medium with pressure and stress fields",
+  "techSpecs": "c++17/20 lock-free lob, order-flow pressure/stress tensors, sph/fem continuum layer, adaptive mesh, latency model, yaml configs, and fidelity metrics vs pure discrete baseline.",
+  "repo": "https://github.com/nabilkhondaker/OrderFlowContinuum",
+  "link": "",
+  "inProgress": false,
+  "why": "classical lob sims capture matching exactly but say little about macroscopic liquidity surfaces; pure continuum models lose discrete priority. i wanted a controlled hybrid to measure whether stress/strain fields on liquidity add anything useful without pretending the continuum layer is the matching engine.",
+  "learned": "how hard it is to keep discrete depth and continuum-reconstructed depth consistent, why determinism and seeded rngs matter when latency noise is in the loop, and how adaptive refinement around imbalance spikes interacts with throughput. also got practice structuring a multi-threaded research sim with clear experiment configs.",
+  "challenges": "lock-free book correctness under concurrent cancel/replace, choosing pressure/stress constitutive forms that do not invent fake dynamics, and keeping the continuum step cheap enough that the discrete lob stays the bottleneck people expect. residual metrics between discrete and continuum depth were the honest scoreboard."
+  },
+  {
     "title": "mechgenpro engine <i class=\"fas fa-cogs\"></i>",
     "tag": "procedural kinematics engine that generates, simulates, and optimizes linkages - july 7, 2026",
     "description": "built a real-time procedural kinematics engine from scratch in lua + löve2d to figure out how planar mechanism synthesis and grashof classification actually work",
