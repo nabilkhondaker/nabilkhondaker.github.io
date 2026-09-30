@@ -80,7 +80,7 @@
     "challenges": "overlapping signatures (bearing vs unbalance at similar rpm), leakage when windows from the same trajectory landed in both train and test, and deciding when the investigator should abstain instead of forcing a low-confidence class. severity estimation on continuous degradation trajectories needed careful clipping and calibration so reports stayed honest."
   },
   {
-    "title": "ai cybersecurity research lab <i class='fab fa-python'></i>",
+    "title": "ai cybersecurity lab <i class='fab fa-python'></i>",
     "tag": "authorized lab investigation platform for deliberately vulnerable targets - september 22, 2026",
     "description": "a defensive research platform that runs policy-gated investigations on lab-only targets: static ast analysis, sandboxed dynamic observation, network flow metadata, anomaly detection, evidence with provenance, hypothesis ranking, and attack graphs",
     "techSpecs": "python cyberlab package: host/command policy gates, ast taint static analysis, sandboxed dynamic observation, isolation forest baselines, immutable evidence, differential diagnosis, networkx attack graphs, and json/markdown reports.",
