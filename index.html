@@ -973,6 +973,56 @@
 
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
+              <time datetime="2026-09-30">2026-09-30</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>orderflow continuum lab — publish v0.1.0</h4>
+            <p>packaged the hybrid discrete lob + continuum pipeline: lock-free book, order-flow pressure/stress projection, sph primary solver, adaptive refinement hooks, latency model, and residual metrics vs pure discrete baseline. release window sep 7 → sep 30, 2026. readme keeps the research question honest — continuum is not assumed superior.</p>
+            <p class="journal-note">related: orderflow continuum lab</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-29">2026-09-29</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>orderflow continuum lab — discrete vs hybrid residual sweep</h4>
+            <p>same event seed, pure lob vs lob+continuum at two coupling intervals. tighter coupling lowered depth residuals but cost throughput; looser coupling drifted during bursty aggression. neither beat discrete matching semantics — as designed. residual curves go in the experiment report, not marketing copy.</p>
+            <p class="journal-note">related: orderflow continuum lab</p>
+          </article>
+
+          <article class="journal-entry" data-tags="debug">
+            <div class="journal-meta">
+              <time datetime="2026-09-28">2026-09-28</time>
+              <span class="journal-tag tag-debug">debug</span>
+            </div>
+            <h4>orderflow continuum lab — concurrent cancel/replace race</h4>
+            <p>stress test with parallel cancel and replace on the same order id occasionally resurrected a stale level size. fixed ownership of the replace path so cancel wins when timestamps tie under the latency model. determinism check now includes that scenario.</p>
+            <p class="journal-note">related: orderflow continuum lab</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-27">2026-09-27</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>orderflow continuum lab — adaptive refine on imbalance spike</h4>
+            <p>synthetic one-sided flow near the touch tripped ‖∇p‖ threshold and refined the liquidity mesh locally. coarsening hysteresis prevented flicker. particle count and residual both logged; refinement helps visualization more than matching accuracy — expected, discrete book stays source of truth.</p>
+            <p class="journal-note">related: orderflow continuum lab</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-26">2026-09-26</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>orderflow continuum lab — latency percentile baselines</h4>
+            <p>injected log-normal network delays with and without co-location profile. matching-engine and queue components held fixed. p50/p95/p99 reported for remote vs co-located agents on the same book seed. useful for later fairness experiments; not a claim about any real venue.</p>
+            <p class="journal-note">related: orderflow continuum lab</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
               <time datetime="2026-09-25">2026-09-25</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
@@ -980,6 +1030,16 @@
             <p>packaged the c++20 fea pipeline: structured quad4 meshes, linear static cantilever, neo-hookean and simplified j2 modules, newton–raphson infrastructure, mesh quality checks, and markdown reports. release window aug 29 → sep 25, 2026. readme states hard limits — not a commercial fea replacement, no fabricated convergence claims.</p>
             <p>ctest green on shape-function partition of unity, quadrature polynomial tests, and the cantilever integration path.</p>
             <p class="journal-note">related: computational mechanics engine</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-24">2026-09-24</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>orderflow continuum lab — pressure field from book + flow stats</h4>
+            <p>first usable p(x,t) = αI + βD + γC map on a price grid. coefficients are knobs, not fitted “physics.” overlay against discrete depth shows pressure spikes where aggression hits thin levels. continuum time step still offline relative to ns event loop.</p>
+            <p class="journal-note">related: orderflow continuum lab</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1077,15 +1137,14 @@
             <p class="journal-note">related: computational mechanics engine</p>
           </article>
 
-          <article class="journal-entry" data-tags="debug">
+          <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-09-14">2026-09-14</time>
-              <span class="journal-tag tag-debug">debug</span>
+              <span class="journal-tag tag-experiment">experiment</span>
             </div>
-            <h4>cyberlab — static rule over-fired on safe subprocess wrapper</h4>
-            <p>ast sink rule flagged a lab helper that called subprocess with a constant argument list and shell=false. technically a sink node, but not a taint path from request data. tightened the rule to require tainted args before elevating confidence; pure constant sinks now emit low-confidence observations instead of confirmed findings.</p>
-            <p>good reminder that static hits are evidence, not verdicts. differential diagnosis was already discarding them when nothing else supported exploitability.</p>
-            <p class="journal-note">related: ai cybersecurity research laboratory</p>
+            <h4>orderflow continuum lab — lock-free lob single-thread correctness</h4>
+            <p>price–time priority, cancel, partial fill, and level deletion verified against a slow reference book on synthetic streams. multi-thread comes after this stays green. continuum stubs not hooked yet — discrete truth first.</p>
+            <p class="journal-note">related: orderflow continuum lab</p>
           </article>
 
           <article class="journal-entry" data-tags="broke">
@@ -1124,10 +1183,9 @@
               <time datetime="2026-09-10">2026-09-10</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
-            <h4>climate resilience sim — intervention: efficiency vs transformer upgrade</h4>
-            <p>same extreme_heat seed. case a: improved building cop (less electrical demand per unit cooling). case b: higher transformer thermal rating / slower aging. cop improvement reduced peak loading globally; transformer upgrade mainly protected the weakbank corridor and shortened recovery when cascades still started.</p>
-            <p>neither intervention zeroed auc loss. combined case was best but still showed a residual dip — honest result for a stressed synthetic feeder.</p>
-            <p class="journal-note">related: climate infrastructure resilience simulator</p>
+            <h4>orderflow continuum lab — event schema + synthetic tick generator</h4>
+            <p>defined order event records (ns timestamp, side, price, size, type) and a seeded generator for limit/cancel/market streams. replay path reads the same schema so live synthetic and file replay share one ingress.</p>
+            <p class="journal-note">related: orderflow continuum lab</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1138,6 +1196,26 @@
             <h4>computational mechanics engine — dof numbering and essential bc reduction</h4>
             <p>equation numbering skips fixed dofs; reduced K and f build cleanly for a clamped cantilever root. free-free mesh without bc correctly stays singular — caught by a deliberate test that expects solver failure without supports.</p>
             <p class="journal-note">related: computational mechanics engine</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-08">2026-09-08</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>orderflow continuum lab — project skeleton</h4>
+            <p>cmake layout, ofcl namespaces, yaml config stub, and a trivial single-threaded book that only supports add at best bid/ask. research question written down before continuum metaphors get ahead of the discrete engine.</p>
+            <p class="journal-note">related: orderflow continuum lab</p>
+          </article>
+
+          <article class="journal-entry" data-tags="question">
+            <div class="journal-meta">
+              <time datetime="2026-09-07">2026-09-07</time>
+              <span class="journal-tag tag-question">question</span>
+            </div>
+            <h4>orderflow continuum lab — start: can continuum mechanics model order flow?</h4>
+            <p>opening a hybrid lob + continuum lab. discrete matching stays authoritative; continuum layer is for pressure/stress fields, visualization, and residual fidelity — not a fantasy matching engine. if the analogy cannot be measured, it does not ship.</p>
+            <p class="journal-note">related: orderflow continuum lab</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
