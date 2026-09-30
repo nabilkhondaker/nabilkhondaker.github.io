@@ -152,6 +152,11 @@ class Portfolio {
                 accent: '#910000',
                 secondary: '#ff4d4d',
                 bg: '#0a0000'
+            },
+            noir: {
+                accent: '#c0c0c0',
+                secondary: '#f5f5f5',
+                bg: '#000000'
             }
         };
 
@@ -177,14 +182,27 @@ class Portfolio {
             const b = parseInt(cleanHex.substring(4, 6), 16);
             const brightness = (r * 299 + g * 587 + b * 114) / 1000;
 
-            if (brightness > 165) {
+            // Also evaluate background brightness so pure-black / near-black themes
+            // always keep light text even when the accent itself is a bright silver.
+            const bgClean = (backgroundColor || '#0a0a0b').replace('#', '');
+            let bgBrightness = 0;
+            if (bgClean.length === 6) {
+                const br = parseInt(bgClean.substring(0, 2), 16);
+                const bg = parseInt(bgClean.substring(2, 4), 16);
+                const bb = parseInt(bgClean.substring(4, 6), 16);
+                bgBrightness = (br * 299 + bg * 587 + bb * 114) / 1000;
+            }
+
+            if (bgBrightness < 80 || brightness <= 165) {
+                // Dark background (or dark accent) → light text / light borders
+                root.style.setProperty('--text-primary', '#ffffff');
+                root.style.setProperty('--text-secondary', '#c8c8c8');
+                root.style.setProperty('--border', 'rgba(255, 255, 255, 0.10)');
+            } else {
+                // Light accent on a light-ish bg → dark text
                 root.style.setProperty('--text-primary', '#111112');
                 root.style.setProperty('--text-secondary', '#333336');
                 root.style.setProperty('--border', 'rgba(0, 0, 0, 0.15)');
-            } else {
-                root.style.setProperty('--text-primary', '#ffffff');
-                root.style.setProperty('--text-secondary', '#b3b3b3');
-                root.style.setProperty('--border', 'rgba(255, 255, 255, 0.08)');
             }
 
             isUpdating = false;
