@@ -123,7 +123,7 @@ By translating complex code and digital CAD models into physical reality, I comb
 
 ## Contact
 
-- **Email**: nabilkd@nabilkd.com
+- **Email**: [nabilk@tuta.io](mailto:nabilk@tuta.io)
 - **Codeberg**: [@nabilkd](https://codeberg.org/nabilkd)
 - **GitHub**: [@nabilkhondaker](https://github.com/nabilkhondaker)
 - **Discord**: [@ind7kuh](https://discord.com/users/1056634135961153576)
@@ -132,4 +132,4 @@ By translating complex code and digital CAD models into physical reality, I comb
 ---
 
 **Made with passion in California** 🇺🇸  
-Feel free to explore the live site at [nabilkd.com](https://nabilkd.com/) or fork this repo to build your own! :)
+Feel free to explore the live site at [nabilkhondaker.github.io](https://nabilkhondaker.github.io/) or fork this repo to build your own! :)
