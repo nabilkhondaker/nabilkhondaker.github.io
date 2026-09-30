@@ -1479,7 +1479,7 @@ async function updateDiscordCard() {
         }
     } catch (err) {
         console.error("Lanyard payload syncing optimization abort:", err);
-        if (statusText) statusText.textContent = "unable to sync live transmission";
+        if (statusText) statusText.textContent = "playing with finite element analysis . . .";
         if (statusIndicator) {
             statusIndicator.className = 'discord-status-aesthetic status-offline';
         }
