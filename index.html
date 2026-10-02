@@ -973,11 +973,21 @@
 
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
+              <time datetime="2026-10-01">2026-10-01</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>adaptive mesh mc — publish v0.1.0</h4>
+            <p>packaged the path-dependent monte carlo engine: multi-factor dynamics, residual/goal-oriented refinement hooks, pathwise dual-number greeks with documented discontinuous fallbacks, variance reduction, openmp path parallelism, and reproducibility manifests. release window mar 2 → oct 1, 2026. readme keeps the constitutive-vol analogy honest and refuses trading-edge claims.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
               <time datetime="2026-09-30">2026-09-30</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>orderflow continuum lab — publish v0.1.0</h4>
-            <p>packaged the hybrid discrete lob + continuum pipeline: lock-free book, order-flow pressure/stress projection, sph primary solver, adaptive refinement hooks, latency model, and residual metrics vs pure discrete baseline. release window sep 7 → sep 30, 2026. readme keeps the research question honest — continuum is not assumed superior.</p>
+            <p>packaged the hybrid discrete lob + continuum pipeline: lock-free book, order-flow pressure/stress projection, sph primary solver, adaptive refinement hooks, latency model, and residual metrics vs pure discrete baseline. release window corrected to aug 7, 2025 → sep 30, 2026. continuum is instrumentation, not a matching engine.</p>
             <p class="journal-note">related: orderflow continuum lab</p>
           </article>
 
@@ -986,29 +996,29 @@
               <time datetime="2026-09-29">2026-09-29</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
+            <h4>adaptive mesh mc — error budget on barrier suite</h4>
+            <p>split reported uncertainty into mc standard error vs temporal discretization diagnostics on a discrete barrier. more paths tightened se; finer monitoring near the barrier moved bias more than se. budget table goes in the report so nobody confuses the two.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-28">2026-09-28</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
             <h4>orderflow continuum lab — discrete vs hybrid residual sweep</h4>
-            <p>same event seed, pure lob vs lob+continuum at two coupling intervals. tighter coupling lowered depth residuals but cost throughput; looser coupling drifted during bursty aggression. neither beat discrete matching semantics — as designed. residual curves go in the experiment report, not marketing copy.</p>
+            <p>same event seed, pure lob vs lob+continuum at two coupling intervals. tighter coupling lowered depth residuals but cost throughput; looser coupling drifted during bursty aggression. residual curves go in the experiment report, not marketing copy.</p>
             <p class="journal-note">related: orderflow continuum lab</p>
           </article>
 
           <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
-              <time datetime="2026-09-28">2026-09-28</time>
+              <time datetime="2026-09-27">2026-09-27</time>
               <span class="journal-tag tag-debug">debug</span>
             </div>
-            <h4>orderflow continuum lab — concurrent cancel/replace race</h4>
-            <p>stress test with parallel cancel and replace on the same order id occasionally resurrected a stale level size. fixed ownership of the replace path so cancel wins when timestamps tie under the latency model. determinism check now includes that scenario.</p>
-            <p class="journal-note">related: orderflow continuum lab</p>
-          </article>
-
-          <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-09-27">2026-09-27</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>orderflow continuum lab — adaptive refine on imbalance spike</h4>
-            <p>synthetic one-sided flow near the touch tripped ‖∇p‖ threshold and refined the liquidity mesh locally. coarsening hysteresis prevented flicker. particle count and residual both logged; refinement helps visualization more than matching accuracy — expected, discrete book stays source of truth.</p>
-            <p class="journal-note">related: orderflow continuum lab</p>
+            <h4>adaptive mesh mc — pathwise delta blown at digital</h4>
+            <p>smooth dual-number pathwise delta looked fine on vanillas and geometric asian; digital payoff produced garbage near the strike. switched discontinuous cases to score/likelihood-ratio estimator and finite-difference cross-check. docs now flag where pathwise is valid.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1017,7 +1027,7 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>orderflow continuum lab — latency percentile baselines</h4>
-            <p>injected log-normal network delays with and without co-location profile. matching-engine and queue components held fixed. p50/p95/p99 reported for remote vs co-located agents on the same book seed. useful for later fairness experiments; not a claim about any real venue.</p>
+            <p>injected log-normal network delays with and without co-location profile. p50/p95/p99 reported for remote vs co-located agents on the same book seed. not a claim about any real venue.</p>
             <p class="journal-note">related: orderflow continuum lab</p>
           </article>
 
@@ -1027,8 +1037,7 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>computational mechanics engine — publish v0.1.0</h4>
-            <p>packaged the c++20 fea pipeline: structured quad4 meshes, linear static cantilever, neo-hookean and simplified j2 modules, newton–raphson infrastructure, mesh quality checks, and markdown reports. release window aug 29 → sep 25, 2026. readme states hard limits — not a commercial fea replacement, no fabricated convergence claims.</p>
-            <p>ctest green on shape-function partition of unity, quadrature polynomial tests, and the cantilever integration path.</p>
+            <p>packaged the c++20 fea pipeline: structured quad4 meshes, linear static cantilever, neo-hookean and simplified j2 modules, newton–raphson infrastructure, mesh quality checks, and markdown reports. release window aug 29 → sep 25, 2026.</p>
             <p class="journal-note">related: computational mechanics engine</p>
           </article>
 
@@ -1038,18 +1047,8 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>orderflow continuum lab — pressure field from book + flow stats</h4>
-            <p>first usable p(x,t) = αI + βD + γC map on a price grid. coefficients are knobs, not fitted “physics.” overlay against discrete depth shows pressure spikes where aggression hits thin levels. continuum time step still offline relative to ns event loop.</p>
+            <p>first usable p(x,t) = αI + βD + γC map on a price grid. coefficients are knobs, not fitted “physics.”</p>
             <p class="journal-note">related: orderflow continuum lab</p>
-          </article>
-
-          <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-09-23">2026-09-23</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>computational mechanics engine — cantilever vs beam theory notes</h4>
-            <p>linear static tip deflection on a slender mesh approaches euler–bernoulli within a few percent once aspect ratio is fine enough; coarse meshes are stiffer as expected. stress recovery at the root still shows element-level noise — documented rather than smoothed away in the report template.</p>
-            <p class="journal-note">related: computational mechanics engine</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1058,19 +1057,8 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>cyberlab — publish pass after the long pause</h4>
-            <p>picked the cybersecurity research laboratory back up for a final patch week. re-ran policy unit tests, regenerated synthetic flow fixtures, and confirmed the investigator still abstains when only a single weak static hit is present. mock llm path stays deterministic so offline runs match.</p>
-            <p>release window on the readme is nov 16, 2025 → sep 22, 2026 with the intentional gap noted. no fabricated detection rates in the research readme — metrics only from executed experiment configs.</p>
+            <p>re-ran policy unit tests, regenerated synthetic flow fixtures, confirmed abstention on single weak static hits. release window nov 16, 2025 → sep 22, 2026.</p>
             <p class="journal-note">related: ai cybersecurity research laboratory</p>
-          </article>
-
-          <article class="journal-entry" data-tags="debug">
-            <div class="journal-meta">
-              <time datetime="2026-09-21">2026-09-21</time>
-              <span class="journal-tag tag-debug">debug</span>
-            </div>
-            <h4>computational mechanics engine — shear factor in voigt packing</h4>
-            <p>plane-stress constitutive matrix was under-stiff in shear after a voigt ordering mismatch between b-matrix rows and c-matrix columns. fixed the index map and added a unit pure-shear patch check. tip deflection numbers finally moved in the right direction under transverse load.</p>
-            <p class="journal-note">related: computational mechanics engine</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1079,8 +1067,7 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>machine failure investigator — severity trajectory check</h4>
-            <p>swept synthetic bearing wear from severity 0.1 → 0.9 at fixed rpm. anomaly scores rose earlier than the supervised class probability, which is what we want: detection before confident identification. severity head tracked the planted trajectory with lag under moderate noise.</p>
-            <p>when rpm was randomized per window, order-related features mattered more than raw broadband rms. left a note to keep rpm in the feature set for any cross-condition eval.</p>
+            <p>swept synthetic bearing wear severity 0.1 → 0.9. anomaly scores rose earlier than supervised class probability — detection before identification.</p>
             <p class="journal-note">related: ai machine failure investigator</p>
           </article>
 
@@ -1090,8 +1077,7 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>climate resilience sim — package and scenario compare</h4>
-            <p>finalized cli compare across baseline / heat_wave / extreme_heat on the synthetic feeder. metrics exported: min performance, recovery time, auc loss. extreme_heat produced deeper min performance and longer recovery than heat_wave on the same network seed; intervention run with upgraded transformer thermal limits cut auc loss meaningfully without eliminating the cascade tail entirely.</p>
-            <p>readme release window set to aug 18, 2025 → sep 19, 2026. models stay labeled as simplified research tooling, not certified analysis.</p>
+            <p>cli compare baseline / heat_wave / extreme_heat. metrics: min performance, recovery time, auc loss. release window aug 18, 2025 → sep 19, 2026.</p>
             <p class="journal-note">related: climate infrastructure resilience simulator</p>
           </article>
 
@@ -1101,195 +1087,38 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>neural ik — final baseline run before packaging</h4>
-            <p>ran the baseline experiment at 20k samples / 40 epochs with the medium mlp (128-128-64). analytical position error sits at machine epsilon as expected. neural mae on the held-out test set landed around 0.02–0.04 on the unit-link geometry after proper normalization; early short runs without enough epochs were closer to 1.0 and not worth reporting. latency for a 2k-batch predict was under 2 ms on cpu.</p>
-            <p>wrote out summary.json and the checkpoint. report generator still leaves the results section as a placeholder until the user actually runs the suite — deliberately. no fabricated numbers in the readme.</p>
+            <p>20k samples / 40 epochs medium mlp. analytical at machine epsilon; neural mae ~0.02–0.04 after normalization. no fabricated readme numbers.</p>
             <p class="journal-note">related: neural ik lab</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
-              <time datetime="2026-09-17">2026-09-17</time>
+              <time datetime="2026-09-06">2026-09-06</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
-            <h4>computational mechanics engine — j2 return map smoke test</h4>
-            <p>uniaxial strain cycle on a single gauss point: trial stress leaves the yield surface, return map brings it back, isotropic hardening raises the yield stress on reload. not a full structural demo yet — just constitutive integration with a residual check on f(σ, q) ≈ 0 after corrector.</p>
-            <p class="journal-note">related: computational mechanics engine</p>
-          </article>
-
-          <article class="journal-entry" data-tags="debug">
-            <div class="journal-meta">
-              <time datetime="2026-09-16">2026-09-16</time>
-              <span class="journal-tag tag-debug">debug</span>
-            </div>
-            <h4>climate resilience sim — cascade double-count on simultaneous failures</h4>
-            <p>when two transformers failed in the same timestep, load redistribution ran twice and the second pass used partially updated topology, inflating branch flows. serialized failure handling inside the step: apply all failure flags, then solve power flow once, then update thermals.</p>
-            <p>ensemble variance dropped and event logs became readable again.</p>
-            <p class="journal-note">related: climate infrastructure resilience simulator</p>
+            <h4>adaptive mesh mc — geometric asian control variate check</h4>
+            <p>arithmetic asian with geometric control under bs dynamics: variance drop matched textbook behavior. good regression anchor before adaptive refinement experiments.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-09-15">2026-09-15</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>computational mechanics engine — neo-hookean residual path</h4>
-            <p>wired strain-energy density → stress measure → element internal force for a simple stretch. newton iterations need a usable tangent; continuum modulus is enough for this smoke path. docs stress finite-strain kinematics vs the small-strain linear solver so the two worlds stay separate in the reader’s head.</p>
-            <p class="journal-note">related: computational mechanics engine</p>
-          </article>
-
-          <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-09-14">2026-09-14</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>orderflow continuum lab — lock-free lob single-thread correctness</h4>
-            <p>price–time priority, cancel, partial fill, and level deletion verified against a slow reference book on synthetic streams. multi-thread comes after this stays green. continuum stubs not hooked yet — discrete truth first.</p>
-            <p class="journal-note">related: orderflow continuum lab</p>
-          </article>
-
-          <article class="journal-entry" data-tags="broke">
-            <div class="journal-meta">
-              <time datetime="2026-09-13">2026-09-13</time>
-              <span class="journal-tag tag-broke">broke</span>
-            </div>
-            <h4>computational mechanics engine — inverted mapping det(J) &lt; 0</h4>
-            <p>a deliberately skewed mesh produced negative jacobians at some gauss points and the stiffness assembly wrote garbage. added mesh-quality preflight: reject or warn on min det(J) ≤ 0 and extreme aspect ratios before solve. unit test ships a crushed quad that must fail the quality gate.</p>
-            <p class="journal-note">related: computational mechanics engine</p>
-          </article>
-
-          <article class="journal-entry" data-tags="debug">
-            <div class="journal-meta">
-              <time datetime="2026-09-12">2026-09-12</time>
-              <span class="journal-tag tag-debug">debug</span>
-            </div>
-            <h4>neural ik — error heatmap concentrated near outer workspace ring</h4>
-            <p>plotted position error over the reachable annulus. the worst residuals cluster within a few percent of the outer reach circle and in a thin band near θ2 ≈ 0. matches the singularity analysis: manipulability drops and the inverse becomes sensitive. interior of the workspace is comparatively clean.</p>
-            <p>also checked the radial split (inner 70 % vs outer). outer-region mae was consistently higher. training only on joint-space samples already under-represents the boundary a bit; rejection sampling in the annulus might help later.</p>
-            <p class="journal-note">related: neural ik lab</p>
-          </article>
-
-          <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-09-11">2026-09-11</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>computational mechanics engine — first linear static cantilever solve</h4>
-            <p>structured mesh → quad4 assembly → simplicial ldlt → tip displacement. order of magnitude matches beam theory on a slender case. report writer dumps max |u| and a crude von mises preview from gauss-point recovery.</p>
-            <p class="journal-note">related: computational mechanics engine</p>
-          </article>
-
-          <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-09-10">2026-09-10</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>orderflow continuum lab — event schema + synthetic tick generator</h4>
-            <p>defined order event records (ns timestamp, side, price, size, type) and a seeded generator for limit/cancel/market streams. replay path reads the same schema so live synthetic and file replay share one ingress.</p>
-            <p class="journal-note">related: orderflow continuum lab</p>
-          </article>
-
-          <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-09-09">2026-09-09</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>computational mechanics engine — dof numbering and essential bc reduction</h4>
-            <p>equation numbering skips fixed dofs; reduced K and f build cleanly for a clamped cantilever root. free-free mesh without bc correctly stays singular — caught by a deliberate test that expects solver failure without supports.</p>
-            <p class="journal-note">related: computational mechanics engine</p>
-          </article>
-
-          <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-09-08">2026-09-08</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>orderflow continuum lab — project skeleton</h4>
-            <p>cmake layout, ofcl namespaces, yaml config stub, and a trivial single-threaded book that only supports add at best bid/ask. research question written down before continuum metaphors get ahead of the discrete engine.</p>
-            <p class="journal-note">related: orderflow continuum lab</p>
-          </article>
-
-          <article class="journal-entry" data-tags="question">
-            <div class="journal-meta">
-              <time datetime="2026-09-07">2026-09-07</time>
-              <span class="journal-tag tag-question">question</span>
-            </div>
-            <h4>orderflow continuum lab — start: can continuum mechanics model order flow?</h4>
-            <p>opening a hybrid lob + continuum lab. discrete matching stays authoritative; continuum layer is for pressure/stress fields, visualization, and residual fidelity — not a fantasy matching engine. if the analogy cannot be measured, it does not ship.</p>
-            <p class="journal-note">related: orderflow continuum lab</p>
-          </article>
-
-          <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-09-08">2026-09-08</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>machine failure investigator — unseen fault holdout</h4>
-            <p>trained supervised heads on imbalance and misalignment only; held out bearing-fault windows for test. classifier tried to force one of the known classes; anomaly detector flagged the holdout as out-of-distribution more often than chance. investigation layer now prefers unknown_anomaly when anomaly score is high and class margin is flat.</p>
-            <p>this is the behavior we wanted for operational honesty — don’t invent a bearing label if the model never saw bearings.</p>
-            <p class="journal-note">related: ai machine failure investigator</p>
-          </article>
-
-          <article class="journal-entry" data-tags="debug">
-            <div class="journal-meta">
-              <time datetime="2026-09-07">2026-09-07</time>
-              <span class="journal-tag tag-debug">debug</span>
-            </div>
-            <h4>computational mechanics engine — shape-function derivatives in physical space</h4>
-            <p>parent-domain dN/dξ were fine; multiplying by inverse jacobian had a transpose error that broke constant-strain patch checks. fixed the gradient transform; partition-of-unity and linear-field reproduction tests now pass.</p>
-            <p class="journal-note">related: computational mechanics engine</p>
-          </article>
-
-          <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-09-05">2026-09-05</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>neural ik — noise robustness sweep</h4>
-            <p>added isotropic gaussian noise to test targets at σ = 0, 0.001, 0.005, 0.01, 0.02, 0.05. neural error rises smoothly; analytical stays near zero until the noisy target leaves the reachable set and the solver returns nan. at σ = 0.05 a non-trivial fraction of targets become unreachable and have to be filtered before comparison.</p>
-            <p>no clear “neural is more robust” story at these levels. the network just degrades gracefully instead of failing hard. still useful as a controlled comparison.</p>
-            <p class="journal-note">related: neural ik lab</p>
-          </article>
-
-          <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-09-04">2026-09-04</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>computational mechanics engine — structured mesh + gauss quadrature</h4>
-            <p>rectangle and cantilever generators produce node/element arrays with boundary sets. 2×2 gauss–legendre integrates bilinears as expected; unit test integrates a polynomial on the parent element to machine precision.</p>
-            <p class="journal-note">related: computational mechanics engine</p>
-          </article>
-
-          <article class="journal-entry" data-tags="broke">
-            <div class="journal-meta">
-              <time datetime="2026-09-03">2026-09-03</time>
-              <span class="journal-tag tag-broke">broke</span>
-            </div>
-            <h4>climate resilience sim — euler step too coarse in peak heat</h4>
-            <p>with Δt = 1 h indoor temperature overshot setpoints and hvac power oscillated against the control deadband. halved the thermal step during extreme_heat experiments; electrical solve still hourly. energy totals stabilized and transformer loading traces stopped showing sawtooth artifacts from the control chatter.</p>
-            <p>lesson: coupling two timescales means the faster thermal loop needs the tighter step even if power flow is slow.</p>
-            <p class="journal-note">related: climate infrastructure resilience simulator</p>
-          </article>
-
-          <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-09-02">2026-09-02</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>computational mechanics engine — project skeleton and linear elasticity constitutive</h4>
-            <p>cmake app boots, eigen linked, voigt isotropic C(E, ν) for plane stress/strain. no elements yet — constitutive unit tests only. scope locked: educational pipeline visibility over feature breadth.</p>
-            <p class="journal-note">related: computational mechanics engine</p>
-          </article>
-
-          <article class="journal-entry" data-tags="broke">
             <div class="journal-meta">
               <time datetime="2026-09-01">2026-09-01</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>adaptive mesh mc — strict deterministic manifest</h4>
+            <p>recorded global seed, path-id ranges, openmp schedule, compiler, and reduction mode. rerun matched bitwise on the same linux/gcc profile; cross-machine numerical-equivalence mode documented with tolerances.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
+          </article>
+
+          <article class="journal-entry" data-tags="broke">
+            <div class="journal-meta">
+              <time datetime="2026-08-20">2026-08-20</time>
               <span class="journal-tag tag-broke">broke</span>
             </div>
-            <h4>machine failure investigator — spectral leakage at low rpm</h4>
-            <p>fft features for the gear-mesh band were smearing when shaft speed dropped below the window design point. effective frequency resolution was coarser than the sideband spacing we cared about. lengthened windows and switched to order tracking relative to measured rpm for those features.</p>
-            <p>before the fix, severity estimates for gear faults looked randomly bad at idle-speed scenarios even though time-domain kurtosis still moved.</p>
-            <p class="journal-note">related: ai machine failure investigator</p>
+            <h4>adaptive mesh mc — refinement chased mc noise</h4>
+            <p>goal-oriented indicator on too few paths refined different cells every batch. increased pilot sample size before refinement decisions and smoothed indicators across batches. negative result logged: adaptation without enough statistics is worse than uniform.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
           </article>
 
           <article class="journal-entry" data-tags="question">
@@ -1298,7 +1127,7 @@
               <span class="journal-tag tag-question">question</span>
             </div>
             <h4>computational mechanics engine — start: full chain visible in code</h4>
-            <p>opening a short intensive c++20 fea / continuum-mechanics suite. goal is not to beat commercial codes; goal is assumptions → mesh → constitutive → assembly → solve → recovery → verification in one readable tree. if a module cannot be explained, it should not ship.</p>
+            <p>opening short intensive c++20 fea suite. assumptions → mesh → constitutive → assembly → solve → recovery → verification.</p>
             <p class="journal-note">related: computational mechanics engine</p>
           </article>
 
@@ -1308,31 +1137,8 @@
               <span class="journal-tag tag-question">question</span>
             </div>
             <h4>neural ik — single branch vs multi-head for elbow-up / elbow-down</h4>
-            <p>training on one canonical branch (θ2 &lt; 0) keeps the supervised map a function, but the model has no way to express the other solution. multi-head or mixture outputs would be more honest about the multi-valued inverse. trade-off is evaluation complexity and how to score “correctness” when two answers are valid.</p>
-            <p>for this release sticking with single-branch + explicit documentation of the choice. multi-head is on the roadmap, not half-implemented.</p>
+            <p>single canonical branch for v0; multi-head on roadmap.</p>
             <p class="journal-note">related: neural ik lab</p>
-          </article>
-
-          <article class="journal-entry" data-tags="question">
-            <div class="journal-meta">
-              <time datetime="2026-08-24">2026-08-24</time>
-              <span class="journal-tag tag-question">question</span>
-            </div>
-            <h4>climate resilience sim — what performance signal defines “service”?</h4>
-            <p>early curves used fraction of transformers in service. that ignored customers still served on overloaded paths. switched primary performance to served load fraction (demand met without violating solved branch limits). min performance numbers got less dramatic but more meaningful.</p>
-            <p>docs now state the performance definition next to every metric table so comparisons stay honest.</p>
-            <p class="journal-note">related: climate infrastructure resilience simulator</p>
-          </article>
-
-          <article class="journal-entry" data-tags="question">
-            <div class="journal-meta">
-              <time datetime="2026-08-22">2026-08-22</time>
-              <span class="journal-tag tag-question">question</span>
-            </div>
-            <h4>cyberlab — when should an attack graph edge imply exploitability?</h4>
-            <p>tempting to draw “static taint → http surface → data exposure” as a hard path. that overclaims. current stance: edges mean “relationship asserted by evidence,” never “demonstrated exploit.” reports must say so in plain language.</p>
-            <p>still open whether to add a separate edge type for dynamically confirmed behaviors versus static-only hints.</p>
-            <p class="journal-note">related: ai cybersecurity research laboratory</p>
           </article>
 
           <article class="journal-entry" data-tags="broke">
@@ -1341,8 +1147,7 @@
               <span class="journal-tag tag-broke">broke</span>
             </div>
             <h4>neural ik — training loss looked fine, fk consistency was not</h4>
-            <p>joint-space mse was decreasing steadily but a subset of predictions produced large cartesian residuals after fk. root cause: angle wrapping. predicted θ1 sometimes landed ±2π away from the label; mse treated that as a huge error in joint space even when the configuration was equivalent, and the network was fighting itself.</p>
-            <p>switched evaluation to angular distance with wrap-to-π and kept the training loss in the normalized joint space used by the dataset. also added an optional fk consistency loss term for later experiments. numbers finally lined up between joint metrics and position metrics.</p>
+            <p>angle wrapping fixed evaluation mismatch between joint mse and cartesian error.</p>
             <p class="journal-note">related: neural ik lab</p>
           </article>
 
@@ -1352,20 +1157,8 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>climate resilience sim — transformer aging under multi-day heat</h4>
-            <p>ran five-day heat_wave with arrhenius acceleration on. health index decline was negligible on baseline weather but visible on extreme_heat for the two highest-loaded transformers. stochastic failures still rare at these durations — aging is the slow fuse, overload trips are the fast one.</p>
-            <p>useful split to keep in the narrative: acute cascade risk vs cumulative life consumption.</p>
+            <p>arrhenius acceleration visible on extreme_heat for highest-loaded transformers; aging is the slow fuse.</p>
             <p class="journal-note">related: climate infrastructure resilience simulator</p>
-          </article>
-
-          <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-08-14">2026-08-14</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>topology optimization — volume fraction sweep on cantilever</h4>
-            <p>ran a series of SIMP compliance minimizations on a 2D cantilever (80×40 mesh) with volume fractions from 0.2 to 0.55. filter radius fixed at 1.5 elements. objective improved roughly linearly until ~0.4, then diminishing returns. gray-scale intermediate densities still present at r_min = 1.5; next run will push projection β higher to force 0/1.</p>
-            <p>sensitivity field was computed with the adjoint method; each volume step took 42–48 oc iterations to reach a relative change below 1e-4. the 0.35 volume design produced the cleanest load path (two primary struts meeting at ~38° from the wall), while 0.55 started filling secondary members that contributed less than 4 % to the final stiffness gain.</p>
-            <p class="journal-note">related: fea generative cto engine</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1374,52 +1167,18 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>neural ik — analytical vs numerical vs neural on the same targets</h4>
-            <p>wired the three solvers into one evaluation path. analytical is exact on reachable targets. damped least-squares converges from a zero seed on most interior points but needs a better init near singularities. neural is constant-time and independent of init; accuracy is still the open variable being measured, not assumed.</p>
-            <p>pseudoinverse without damping occasionally spiked near θ2 ≈ 0. λ ≈ 0.1 on dls kept the joint steps reasonable. transpose method needs more iterations and a smaller step size to stay stable.</p>
+            <p>three solvers one evaluation path. analytical exact; dls needs care near singularities; neural constant-time.</p>
             <p class="journal-note">related: neural ik lab</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
-              <time datetime="2026-08-10">2026-08-10</time>
+              <time datetime="2026-08-03">2026-08-03</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
-            <h4>machine failure investigator — multi-sensor ablation</h4>
-            <p>compared vibration-only vs vibration+current vs full set (vibration, temperature, current, torque, rpm). temperature alone was weak for early bearing faults but helped reject false thermal alarms when vibration was clean. current helped imbalance vs electrical issues in the synthetic generator.</p>
-            <p>full set won on f1 for the labeled faults; vibration-only remained a respectable minimum viable sensor package.</p>
-            <p class="journal-note">related: ai machine failure investigator</p>
-          </article>
-
-          <article class="journal-entry" data-tags="broke">
-            <div class="journal-meta">
-              <time datetime="2026-08-09">2026-08-09</time>
-              <span class="journal-tag tag-broke">broke</span>
-            </div>
-            <h4>mesh convergence study aborted — memory spike</h4>
-            <p>tried refining the 2R planar robot link meshes to ~0.4 mm element size for stress concentration checks near the shoulder joint. python process climbed past 6.2 GB and the kernel killed it. need to switch to out-of-core assembly or coarsen the far-field and only refine the fillet regions.</p>
-            <p>the global stiffness matrix for the refined shoulder alone was already ~1.8e6 dofs with a nnz of about 2.4e7 in csr. assembly in pure numpy allocated three dense temporary buffers before the sparse conversion; that was the real leak. rewriting the local-to-global scatter to write directly into a pre-allocated coo triplet cut peak rss by roughly half on a smaller test mesh.</p>
-            <p class="journal-note">related: 2R planar robot paddle</p>
-          </article>
-
-          <article class="journal-entry" data-tags="debug">
-            <div class="journal-meta">
-              <time datetime="2026-07-28">2026-07-28</time>
-              <span class="journal-tag tag-debug">debug</span>
-            </div>
-            <h4>inverse kinematics singularity near workspace boundary</h4>
-            <p>the analytical 2R ik solution flips the elbow configuration when the target approaches the outer reach circle. numerical solver was oscillating between the two configurations because the jacobian determinant passed through zero. added a soft barrier on the configuration variable and a small hysteresis term; still need a proper damped least-squares fallback.</p>
-            <p>det(J) dropped below 1e-4 inside a 3 mm band of the reachable limit. the hysteresis keeps the last valid elbow choice until the target moves back more than 5 mm inside the workspace. damped least-squares with λ = 0.02 still produces a continuous joint trajectory across that band; the residual cartesian error stays under 0.4 mm in the current test set.</p>
-          </article>
-
-          <article class="journal-entry" data-tags="debug">
-            <div class="journal-meta">
-              <time datetime="2026-07-25">2026-07-25</time>
-              <span class="journal-tag tag-debug">debug</span>
-            </div>
-            <h4>machine failure investigator — label leakage in window export</h4>
-            <p>caught a bug where severity and fault-type fields were left inside the feature parquet used for unsupervised anomaly training. isolation forest was partially learning the label channel. stripped metadata columns in the dataset builder and added a unit test that asserts label column names cannot appear in feature matrices.</p>
-            <p>after the fix, anomaly scores on healthy data tightened and the previous “too good” separation disappeared — which is the honest outcome.</p>
-            <p class="journal-note">related: ai machine failure investigator</p>
+            <h4>adaptive mesh mc — heston path generation + correlation</h4>
+            <p>cholesky of correlation matrix, heston variance floor, and pathwise dual seed through the sde step. matched known mean variance trajectory on a long pilot.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1428,19 +1187,8 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>neural ik — first end-to-end train on fk-generated data</h4>
-            <p>dataset from joint-space sampling → fk → (x, y) labels. 5k samples, tiny mlp, 15 epochs. loss dropped but fk-consistency error on the test set was still large. confirmed the pipeline path works: generate → normalize → train → predict → fk → position error. scaling samples and width next.</p>
-            <p>normalization was essential; without it the network spent early epochs just learning the scale of the joint angles. train/val curves tracked each other after that.</p>
+            <p>5k samples tiny mlp; pipeline generate → normalize → train → fk error works.</p>
             <p class="journal-note">related: neural ik lab</p>
-          </article>
-
-          <article class="journal-entry" data-tags="question">
-            <div class="journal-meta">
-              <time datetime="2026-07-21">2026-07-21</time>
-              <span class="journal-tag tag-question">question</span>
-            </div>
-            <h4>does the current density filter preserve volume exactly after projection?</h4>
-            <p>after applying the heaviside projection the actual material volume drifts by 1–3 % relative to the prescribed fraction. literature suggests a volume-preserving projection or a simple post-correction step. not sure yet which approach will stay stable when the design domain has non-design solid regions.</p>
-            <p>the drift is largest on coarse meshes (h ≈ 1.5 r_min) and shrinks as the mesh is refined, which points to the discrete filter kernel rather than the continuous projection formula. a binary search on the projection threshold that re-enforces the volume constraint after each continuation step on β looks promising; still need to check whether that search interacts badly with the oc update rule.</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1449,31 +1197,8 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>machine failure investigator — simulator first healthy baseline</h4>
-            <p>got the synthetic rotating machine to emit synchronized vibration, temperature, current, torque, and rpm streams under healthy conditions. checked that spectral peaks sit where shaft speed and the configured mesh frequency say they should. this becomes the reference distribution for anomaly baselines.</p>
-            <p>next step is injecting imbalance, misalignment, and bearing faults with controllable severity so supervised and unsupervised paths share the same ground truth.</p>
+            <p>synthetic rotating machine healthy streams; spectral peaks at expected shaft/mesh frequencies.</p>
             <p class="journal-note">related: ai machine failure investigator</p>
-          </article>
-
-          <article class="journal-entry" data-tags="debug">
-            <div class="journal-meta">
-              <time datetime="2026-07-15">2026-07-15</time>
-              <span class="journal-tag tag-debug">debug</span>
-            </div>
-            <h4>neural ik — analytical round-trip failed on a few random samples</h4>
-            <p>fk → analytical ik → fk should close to 1e-9. a handful of samples near the inner workspace hole produced nan or flipped branch. cause was cos(θ2) clamped at ±1 combined with a branch choice that didn’t match the original θ2 sign. fixed by generating training data from joints (so branch is known) and only using analytical as the evaluation baseline, not as the label source.</p>
-            <p>also tightened the reachable check with a small tolerance so boundary points don’t get marked unreachable from floating-point noise.</p>
-            <p class="journal-note">related: neural ik lab</p>
-          </article>
-
-          <article class="journal-entry" data-tags="experiment">
-            <div class="journal-meta">
-              <time datetime="2026-07-12">2026-07-12</time>
-              <span class="journal-tag tag-experiment">experiment</span>
-            </div>
-            <h4>pid gains on the physical 2R arm vs simulation</h4>
-            <p>transferred the simulated pid gains to the real hardware. position tracking was acceptable at low speed, but the shoulder joint overshot under a 150 g tip load. increased derivative term on joint 1 by ~30 % and added a simple coulomb friction feed-forward. still seeing a small steady-state error that looks like gravity compensation residual.</p>
-            <p>step response on joint 1 (0 → 45°) settled in 0.38 s with 9 % overshoot after the retune. the residual offset is approximately 0.7° and scales with the cosine of the shoulder angle, which matches the expected gravity torque profile. a static gravity term using the measured link masses removed most of it; the leftover is probably cable stretch and gearbox compliance.</p>
-            <p class="journal-note">related: 2R planar robot paddle</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1482,20 +1207,18 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>climate resilience sim — first coupled heat_wave run</h4>
-            <p>synthetic weather anomaly → building rc thermal → hvac electrical demand → dc power flow → transformer thermal lag. end-to-end numbers looked plausible: peak demand up sharply in afternoon hours, two corridors near continuous rating. no cascade yet until failure probabilities were stressed further.</p>
-            <p>this is the skeleton the rest of the experiment suite hangs on.</p>
+            <p>weather → building rc → hvac demand → dc power flow → transformer thermal lag end-to-end.</p>
             <p class="journal-note">related: climate infrastructure resilience simulator</p>
           </article>
 
-          <article class="journal-entry" data-tags="broke">
+          <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
-              <time datetime="2026-07-08">2026-07-08</time>
-              <span class="journal-tag tag-broke">broke</span>
+              <time datetime="2026-07-05">2026-07-05</time>
+              <span class="journal-tag tag-experiment">experiment</span>
             </div>
-            <h4>cyberlab — dynamic stage hung on non-terminating lab sample</h4>
-            <p>one binary fixture spun until the worker was killed externally. policy allowed the command but no wall-clock timeout was enforced on that path. added hard timeouts and a kill escalation; investigation now records a timed_out observation instead of blocking the pipeline.</p>
-            <p>report marks dynamic evidence incomplete rather than inventing a finding from a partial run.</p>
-            <p class="journal-note">related: ai cybersecurity research laboratory</p>
+            <h4>adaptive mesh mc — black-scholes european regression</h4>
+            <p>european call under bs matched analytical within sampling error; antithetic on. this is the unit-test-level anchor for the whole engine.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1504,8 +1227,7 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>neural ik — analytical ik and workspace checks locked in</h4>
-            <p>planar 2r model: fk matches the textbook equations, both elbow branches recover, unreachable targets return nan + reachable=false. workspace annulus |L1−L2| ≤ r ≤ L1+L2 verified on a grid. this is the baseline everything else gets measured against.</p>
-            <p>started scaffolding the dataset generator and the mlp wrapper. goal is a fair comparison, not a demo that only shows neural succeeding.</p>
+            <p>2r fk/ik round-trip and reachable annulus verified.</p>
             <p class="journal-note">related: neural ik lab</p>
           </article>
 
@@ -1515,20 +1237,8 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>machine failure investigator — project kickoff scope</h4>
-            <p>scoped a research pipeline for rotating-machine faults on synthetic multi-sensor data: simulator → features → anomaly detection → supervised diagnosis → severity → evidence-backed report. explicitly not a certified industrial product.</p>
-            <p>success means controllable ground truth, reproducible ablations, and investigation output that can abstain — not a single softmax bar chart.</p>
+            <p>synthetic multi-sensor fault pipeline scoped; abstention required.</p>
             <p class="journal-note">related: ai machine failure investigator</p>
-          </article>
-
-          <article class="journal-entry" data-tags="broke">
-            <div class="journal-meta">
-              <time datetime="2026-06-30">2026-06-30</time>
-              <span class="journal-tag tag-broke">broke</span>
-            </div>
-            <h4>fea playground — browser tab crashed on 12k element mesh</h4>
-            <p>the pure js assembler + conjugate-gradient solver in the browser ran out of heap when the mesh exceeded roughly 12 000 linear triangles. switched the heavy path to a web-worker and streamed the stiffness matrix in blocks. still slower than the python version, but at least it no longer freezes the ui.</p>
-            <p>chrome’s v8 heap limit was the hard stop; the cg residual vector alone was fine, but the element-wise assembly loop created thousands of temporary typed arrays that never got collected fast enough. moving the entire assembly + solve into one worker and transferring the result buffer with postMessage({…}, [buffer]) kept the main thread responsive even at 18k elements.</p>
-            <p class="journal-note">related: fea playground 2D</p>
           </article>
 
           <article class="journal-entry" data-tags="question">
@@ -1537,62 +1247,48 @@
               <span class="journal-tag tag-question">question</span>
             </div>
             <h4>neural ik — is a 2r planar arm enough to study the real issues?</h4>
-            <p>started the neural ik lab project. 2r is simple enough that analytical ik is exact and singularities are well understood, which makes it a fair baseline. worry is that success on 2r won’t say much about higher-dof arms where the inverse is underdetermined and numerical methods dominate. treating this as a controlled first step, not the final claim.</p>
-            <p>scope for v0: one robot, analytical + numerical + neural, honest metrics, no inflated accuracy numbers.</p>
+            <p>controlled first step, not the final claim.</p>
             <p class="journal-note">related: neural ik lab</p>
-          </article>
-
-          <article class="journal-entry" data-tags="debug">
-            <div class="journal-meta">
-              <time datetime="2026-06-18">2026-06-18</time>
-              <span class="journal-tag tag-debug">debug</span>
-            </div>
-            <h4>spring-coupled disk simulation — energy drift</h4>
-            <p>in the two-disk bouncing plate run the total mechanical energy was climbing ~0.4 % per 10 seconds of simulated time. traced it to the contact impulse resolution using a fixed restitution coefficient without a proper energy-consistent formulation. replaced with a velocity-level constraint that enforces the restitution map and the drift dropped below 0.05 %.</p>
-            <p>the original code applied the impulse after a position-level penetration correction, which injected a small amount of kinetic energy each impact. switching to a velocity-level non-penetration constraint with the same e = 1 map removed the artificial source. energy now oscillates within ±0.03 % over a 30 s window at dt = 1/240.</p>
-            <p class="journal-note">related: dynamics simulations (ds1)</p>
-          </article>
-
-          <article class="journal-entry" data-tags="debug">
-            <div class="journal-meta">
-              <time datetime="2026-06-02">2026-06-02</time>
-              <span class="journal-tag tag-debug">debug</span>
-            </div>
-            <h4>climate resilience sim — singular B matrix on islanded bus</h4>
-            <p>after removing a tie line the remaining island had no angle reference and the dc solve failed. pinned a slack angle in each island and treated islanded load as unserved rather than crashing the step.</p>
-            <p>cascade logs now show intentional service loss instead of linear-algebra exceptions.</p>
-            <p class="journal-note">related: climate infrastructure resilience simulator</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
-              <time datetime="2026-06-05">2026-06-05</time>
+              <time datetime="2026-06-12">2026-06-12</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
-            <h4>topology opt with manufacturing constraint — minimum member size</h4>
-            <p>added a simple length-scale control via the density filter radius and a morphological closing operation. the resulting designs look more printable, but compliance increased ~8 % compared with the unconstrained run at the same volume fraction. acceptable trade-off for the current hardware constraints.</p>
-            <p>closing radius was set to 1.2× the intended minimum member width. on the cantilever benchmark the thin secondary struts disappeared and the primary members thickened by roughly one filter radius. the compliance penalty is consistent with the loss of those secondary paths; for the physical prints the thicker members are worth the stiffness cost.</p>
+            <h4>adaptive mesh mc — constitutive vol memory stub</h4>
+            <p>internal state variable with relaxation update beside spot sde. docs stress mathematical analogy only — not viscoelastic markets. smoke test: state evolves, price still finite.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
           </article>
 
-          <article class="journal-entry" data-tags="debug">
+          <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
-              <time datetime="2026-05-28">2026-05-28</time>
-              <span class="journal-tag tag-debug">debug</span>
+              <time datetime="2026-05-25">2026-05-25</time>
+              <span class="journal-tag tag-experiment">experiment</span>
             </div>
-            <h4>cyberlab — evidence mutation broke reproducibility</h4>
-            <p>hypothesis updates were mutating evidence dicts in place, so re-running diagnosis on the same investigation state drifted. froze evidence as immutable records (id, source, category, observation, location, confidence, provenance) and made hypothesis updates allocate new structures.</p>
-            <p>serialized investigation fixtures now round-trip cleanly under the mock reasoner.</p>
-            <p class="journal-note">related: ai cybersecurity research laboratory</p>
+            <h4>adaptive mesh mc — openmp path parallel + schedule</h4>
+            <p>path-level parallel for over path ids; static schedule in strict mode for determinism. speedup decent on 16 cores for independent payoffs.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
           </article>
 
-          <article class="journal-entry" data-tags="question">
+          <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
-              <time datetime="2026-05-22">2026-05-22</time>
-              <span class="journal-tag tag-question">question</span>
+              <time datetime="2026-05-10">2026-05-10</time>
+              <span class="journal-tag tag-experiment">experiment</span>
             </div>
-            <h4>best way to export a topology-optimized density field into a clean cad solid?</h4>
-            <p>marching cubes on the 0.5 isosurface produces a noisy mesh that needs heavy remeshing. looking at openvdb level-set methods and at simply thresholding then running a constrained laplacian smooth. still open — current pipeline is functional but ugly.</p>
-            <p>the noise is worst where the density gradient is shallow (gray regions that the projection never fully eliminated). a short diffusion of the density field before the isosurface extract reduces the high-frequency roughness, but it also erodes thin members. a constrained smooth that freezes vertices already near 0 or 1 might be the better route.</p>
+            <h4>adaptive mesh mc — dual-number pathwise delta on european</h4>
+            <p>forward-mode dual through gbm step and payoff; delta matched fd within tolerance on smooth european. infrastructure for greeks is real now.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-04-20">2026-04-20</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>adaptive mesh mc — residual indicator prototype</h4>
+            <p>local time-step residual proxy on a coarse uniform grid; plots show elevation near barrier monitoring dates. not a full adjoint yet — labeled simplified goal-oriented indicator in docs.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1601,73 +1297,48 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>cyberlab — first correlated investigation on vulnerable flask lab app</h4>
-            <p>ran the full pipeline on the deliberately vulnerable flask fixture: policy allow → discovery → static taint hits on request → sink → optional dynamic observations → anomaly baseline → hypotheses. single static hit alone stayed below confirmation threshold; combined with a matching dynamic observation it crossed the configured evidence count.</p>
-            <p>this is the behavior we want: correlation, not first-alert-wins.</p>
+            <p>policy → static taint → dynamic → hypotheses; multi-evidence confirmation required.</p>
             <p class="journal-note">related: ai cybersecurity research laboratory</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
-              <time datetime="2026-03-08">2026-03-08</time>
+              <time datetime="2026-04-05">2026-04-05</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
-            <h4>climate resilience sim — synthetic network + weather skeleton</h4>
-            <p>cmake app boots, loads yaml scenario, generates diurnal outdoor temperature with optional anomaly offset, integrates a single-zone building, and prints hvac power. no electrical network yet — just proving the environmental → thermal → demand path.</p>
-            <p>unit tests cover energy balance signs and steady-state ua behavior.</p>
-            <p class="journal-note">related: climate infrastructure resilience simulator</p>
-          </article>
-
-          <article class="journal-entry" data-tags="broke">
-            <div class="journal-meta">
-              <time datetime="2026-05-09">2026-05-09</time>
-              <span class="journal-tag tag-broke">broke</span>
-            </div>
-            <h4>3d-printed link failed under expected load</h4>
-            <p>first pla print of the 2R forearm link cracked at the root fillet after ~40 cycles of a 0.8× design load. fea had predicted a safety factor of 2.1. post-mortem showed layer adhesion was the weak plane; reprinting with 100 % infill and rotated orientation fixed it, but the analytical model still needs a knockdown factor for fdm anisotropy.</p>
-            <p>the crack initiated at the layer interface roughly 0.6 mm above the fillet radius. tensile coupon tests on the same filament and print settings gave an interlayer strength of only ~18 MPa versus ~48 MPa in the filament direction. applying a 0.4 knockdown to the allowable stress brings the predicted and observed failure loads into agreement.</p>
-            <p class="journal-note">related: 2R planar robot paddle</p>
-          </article>
-
-          <article class="journal-entry" data-tags="debug">
-            <div class="journal-meta">
-              <time datetime="2026-04-27">2026-04-27</time>
-              <span class="journal-tag tag-debug">debug</span>
-            </div>
-            <h4>stiffness matrix assembly — indexing off-by-one in sparse format</h4>
-            <p>the custom c++ coo → csr converter was writing the last column index one past the end on meshes whose node count was not a multiple of the block size. valgrind caught it only under a specific mesh. fixed and added a unit test that checks Σ K_ij against the dense reference for a 3-element patch.</p>
-            <p>the bug lived in the exclusive-scan that builds the row pointer array: when n % block != 0 the final partial block wrote past indptr[n]. the unit test now builds a 3-element patch, converts, and asserts that the frobenius norm of (K_sparse − K_dense) is below 1e-12. caught two similar edge cases after the first fix.</p>
+            <h4>adaptive mesh mc — multi-asset correlation structure</h4>
+            <p>cholesky of Σ, diagnostics for near-singular correlation, and basket payoff smoke test. failed pd matrices rejected at config load.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
-              <time datetime="2026-04-11">2026-04-11</time>
+              <time datetime="2026-03-15">2026-03-15</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
-            <h4>control simulation — state-space vs classical pid on the inverted triple pendulum</h4>
-            <p>linearized the three-spring-coupled inverted pendulums about the upright equilibrium and compared an lqr controller against three independent pids. lqr kept the system upright from larger initial angles; the decoupled pids started fighting each other once the coupling springs became active. expected, but useful confirmation before moving to hardware.</p>
-            <p>the open-loop eigenvalues of the linearized system sit at approximately +2.1, +0.8, −1.4 (1/s). lqr with Q = diag(10,10,10,1,1,1) and R = I moved all poles into the left half-plane with a minimum real part of −1.7. the independent pids could stabilize the first mode but left a lightly damped oscillation on the relative angles between the outer pendulums.</p>
-            <p class="journal-note">related: dynamics simulations (ds12)</p>
+            <h4>adaptive mesh mc — path generator + payoff registry</h4>
+            <p>deterministic stream ids per path, european and geometric asian payoffs registered, online mean/var. cmake app runs a tiny bs european end-to-end.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
           </article>
 
           <article class="journal-entry" data-tags="question">
             <div class="journal-meta">
-              <time datetime="2026-03-29">2026-03-29</time>
+              <time datetime="2026-03-08">2026-03-08</time>
               <span class="journal-tag tag-question">question</span>
             </div>
-            <h4>how much mesh distortion is acceptable before the topology result becomes unreliable?</h4>
-            <p>some of the intermediate density fields produce highly skewed elements near the solid-void boundary. the compliance still converges, but the stress recovery looks suspicious. need a clearer criterion (jacobian quality? condition number of local K?) before trusting the stress plots on optimized geometries.</p>
-            <p>elements with min(jacobian) / max(jacobian) below ~0.15 start showing stress peaks that move when the mesh is refined, which is a classic sign of discretization error rather than a real stress concentration. a simple quality filter that flags those elements and excludes them from the stress plot is a temporary fix; a better long-term approach is to remesh the 0.5 isosurface before the final stress pass.</p>
+            <h4>climate resilience sim — synthetic network + weather skeleton</h4>
+            <p>yaml scenario, diurnal temperature, single-zone building, hvac power printout.</p>
+            <p class="journal-note">related: climate infrastructure resilience simulator</p>
           </article>
 
-          <article class="journal-entry" data-tags="broke">
+          <article class="journal-entry" data-tags="question">
             <div class="journal-meta">
-              <time datetime="2026-03-14">2026-03-14</time>
-              <span class="journal-tag tag-broke">broke</span>
+              <time datetime="2026-03-02">2026-03-02</time>
+              <span class="journal-tag tag-question">question</span>
             </div>
-            <h4>webgl shader for live density visualization — precision loss</h4>
-            <p>the fragment shader that color-maps the density field was using mediump floats. on mobile the isosurface looked stepped and the optimizer appeared to stall. forced highp and the visual stabilized; the underlying floating-point densities were fine the whole time.</p>
-            <p>mediump on the tested mali gpu effectively gave about 10 bits of mantissa. density values that differed by less than ~0.002 collapsed to the same color band, which made the continuation on β look frozen even though the cpu-side densities were still changing. highp restored smooth gradients; the performance hit was negligible for a full-screen quad.</p>
-            <p class="journal-note">related: fea playground 2D</p>
+            <h4>adaptive mesh mc — start: path-dependent pricing with adaptive refinement</h4>
+            <p>opening a c++20 monte carlo research engine. goal is not a trading desk pricer — goal is measurable discretization + statistical error on path-dependent payoffs, with adaptation inspired by residual estimation. if refinement cannot be scored against an error budget, it does not ship.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1676,8 +1347,7 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>cyberlab — isolation forest baseline on synthetic flows</h4>
-            <p>fit an isolation forest on “normal” lab flow features and scored held-out injected anomalies. detection moved with contamination and feature choice; too aggressive a contamination setting flooded the report with unknown_anomaly noise.</p>
-            <p>settled on treating anomaly scores as evidence inputs to hypotheses rather than auto-confirmed findings.</p>
+            <p>anomaly scores as evidence inputs, not auto-confirmed findings.</p>
             <p class="journal-note">related: ai cybersecurity research laboratory</p>
           </article>
 
@@ -1687,8 +1357,7 @@
               <span class="journal-tag tag-debug">debug</span>
             </div>
             <h4>cyberlab — policy bypass via symlink path</h4>
-            <p>a test tried to register a lab path through a symlink that resolved outside the allowlisted directory. path canonicalization was missing on one registration path. fixed by resolving real paths before allowlist comparison and added a regression test.</p>
-            <p>threat model already listed operator misconfiguration; this was a concrete instance.</p>
+            <p>canonical path resolution before allowlist compare.</p>
             <p class="journal-note">related: ai cybersecurity research laboratory</p>
           </article>
 
@@ -1698,8 +1367,7 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>cyberlab — static ast taint pass v0</h4>
-            <p>first working pass: parse python, mark request-like sources, propagate through simple assignments, flag dangerous sinks. lots of false positives on safe wrappers, but the source→sink evidence objects are structured enough to plug into a later hypothesis engine.</p>
-            <p>not claiming exploitability — only that untrusted data appears to reach a sensitive call in the ast.</p>
+            <p>source→sink evidence objects; no exploit claims.</p>
             <p class="journal-note">related: ai cybersecurity research laboratory</p>
           </article>
 
@@ -1709,8 +1377,7 @@
               <span class="journal-tag tag-question">question</span>
             </div>
             <h4>cyberlab — scope: lab-only investigations, never unauthorized targets</h4>
-            <p>starting an ai-assisted cybersecurity research laboratory project. hard requirement: policy allowlists, deliberately vulnerable fixtures only, no capability that makes it easy to scan random hosts. if the policy check fails, the pipeline stops.</p>
-            <p>research focus is evidence correlation, abstention, and honest reporting — not a red-team framework.</p>
+            <p>policy allowlists; deliberately vulnerable fixtures only.</p>
             <p class="journal-note">related: ai cybersecurity research laboratory</p>
           </article>
 
@@ -1720,7 +1387,7 @@
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>climate resilience sim — dc power flow on toy feeder</h4>
-            <p>implemented susceptance-based dc power flow with a fixed slack. verified that removing a branch redistributes flows and that overload flags trip on the expected corridors under inflated demand. this is the electrical core before transformer thermals and cascades.</p>
+            <p>susceptance-based dc flow; overload flags on expected corridors.</p>
             <p class="journal-note">related: climate infrastructure resilience simulator</p>
           </article>
 
@@ -1730,9 +1397,18 @@
               <span class="journal-tag tag-question">question</span>
             </div>
             <h4>climate resilience sim — project start: coupled stress, synthetic only</h4>
-            <p>kicking off a c++ infrastructure resilience sandbox. goal is to chain heat → cooling demand → electrical loading → transformer aging/failure → cascade metrics on synthetic networks. explicitly not a climate forecast product and not certified utility software.</p>
-            <p>if the models cannot stay simple enough to explain, the project has failed its teaching/research purpose.</p>
+            <p>heat → demand → loading → aging/failure → cascade metrics on synthetic networks.</p>
             <p class="journal-note">related: climate infrastructure resilience simulator</p>
+          </article>
+
+          <article class="journal-entry" data-tags="question">
+            <div class="journal-meta">
+              <time datetime="2025-08-07">2025-08-07</time>
+              <span class="journal-tag tag-question">question</span>
+            </div>
+            <h4>orderflow continuum lab — project start (corrected timeline)</h4>
+            <p>hybrid lob + continuum research instrument; discrete matching stays authoritative. built to study microstructure in depth while day trading — not a product edge claim.</p>
+            <p class="journal-note">related: orderflow continuum lab</p>
           </article>
 
         </div>
