@@ -104,7 +104,7 @@
   "challenges": "lock-free book correctness under concurrent cancel/replace, choosing pressure/stress constitutive forms that do not invent fake dynamics, and keeping the continuum step cheap enough that the discrete lob stays the bottleneck people expect. residual metrics between discrete and continuum depth were the honest scoreboard."
   },
   {
-  "title": "adaptive mesh monte carlo engine <i class='devicon-cplusplus-plain'></i>",
+  "title": "adaptive monte carlo engine <i class='devicon-cplusplus-plain'></i>",
   "tag": "path-dependent derivative pricing with adaptive refinement - october 1, 2026",
   "description": "a c++20 monte carlo engine for path-dependent exotics that couples adaptive spatial and temporal refinement to constitutive-style volatility evolution, pathwise greeks, and explicit numerical error budgets",
   "techSpecs": "c++20 mc engine: multi-asset paths, heston/jumps, adaptive residual refinement, pathwise dual-number greeks, antithetic/control variates, openmp (optional mpi/cuda), and strict deterministic reproducibility manifests.",
