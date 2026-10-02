@@ -104,6 +104,18 @@
   "challenges": "lock-free book correctness under concurrent cancel/replace, choosing pressure/stress constitutive forms that do not invent fake dynamics, and keeping the continuum step cheap enough that the discrete lob stays the bottleneck people expect. residual metrics between discrete and continuum depth were the honest scoreboard."
   },
   {
+  "title": "adaptive mesh monte carlo engine <i class='devicon-cplusplus-plain'></i>",
+  "tag": "path-dependent derivative pricing with adaptive refinement - october 1, 2026",
+  "description": "a c++20 monte carlo engine for path-dependent exotics that couples adaptive spatial and temporal refinement to constitutive-style volatility evolution, pathwise greeks, and explicit numerical error budgets",
+  "techSpecs": "c++20 mc engine: multi-asset paths, heston/jumps, adaptive residual refinement, pathwise dual-number greeks, antithetic/control variates, openmp (optional mpi/cuda), and strict deterministic reproducibility manifests.",
+  "repo": "https://github.com/nabilkhondaker/AdaptiveMeshMonteCarlo",
+  "link": "",
+  "inProgress": false,
+  "why": "uniform grids waste work on path-dependent payoffs and under-resolve barriers or high-curvature vol regions. i wanted a research platform where refinement is driven by residuals and goal-oriented indicators so i could study pricing error the same way i study discretization error in mechanics — and actually understand the numbers while trading.",
+  "learned": "how quickly greek accuracy and price accuracy diverge under the same mesh, why discontinuous payoffs break naive pathwise differentiation, and how much reproducibility manifests matter once openmp/mpi enter the path loop. also that constitutive vol analogies are useful modeling devices only if you never pretend they are market physics.",
+  "challenges": "keeping adaptive refinement from chasing noise instead of bias, documenting negative results when refinement did not help, and resisting scope creep into full dual-weighted residual adjoints or live calibration. intermittent timeline meant re-validating black-scholes and geometric asian cases after every long pause."
+  },
+  {
     "title": "mechgenpro engine <i class=\"fas fa-cogs\"></i>",
     "tag": "procedural kinematics engine that generates, simulates, and optimizes linkages - july 7, 2026",
     "description": "built a real-time procedural kinematics engine from scratch in lua + löve2d to figure out how planar mechanism synthesis and grashof classification actually work",
