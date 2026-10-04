@@ -116,6 +116,18 @@
   "challenges": "keeping adaptive refinement from chasing noise instead of bias, documenting negative results when refinement did not help, and resisting scope creep into full dual-weighted residual adjoints or live calibration. intermittent timeline meant re-validating black-scholes and geometric asian cases after every long pause."
   },
   {
+  "title": "continuum-lob <i class='devicon-cplusplus-plain'></i>",
+  "tag": "physics-informed neural operators on continuum order-book fields - october 3, 2026",
+  "description": "a c++20 platform that coarse-grains a discrete limit-order-book into continuum density/velocity fields, solves a finite-volume pde, learns fno/deeponet surrogates with physics residuals, and exposes an optimal-execution environment with sac hooks",
+  "techSpecs": "c++20 discrete lob, kernel coarse-graining, rusanov/muscl finite-volume continuum, fno/deeponet prototypes, physics-informed residual losses, twap execution baselines, and sac interface scaffolding.",
+  "repo": "https://github.com/nabilkhondaker/ContinuumLOB",
+  "link": "",
+  "inProgress": false,
+  "why": "orderflow continuum gave me discrete+continuum machinery; continuum-lob is the spin that asks whether operator learning and a simple execution env add anything measurable on top — without pretending the lob is a fluid or that the agent is a trading system.",
+  "learned": "classical conservation and mesh checks have to come before any neural training, sharp queue edges are where fno residuals show up first, and physics residual terms help conservation drift more than pure data loss. also that sac interface code is easy to overclaim — this release only ships plumbing and baselines.",
+  "challenges": "keeping discrete matching authoritative while continuum and surrogate layers evolve, not training operators on garbage when fv baselines were still soft, and resisting a full production rl stack. timeline deliberately put neural/control work after months of classical lob+fv development."
+  },
+  {
     "title": "mechgenpro engine <i class=\"fas fa-cogs\"></i>",
     "tag": "procedural kinematics engine that generates, simulates, and optimizes linkages - july 7, 2026",
     "description": "built a real-time procedural kinematics engine from scratch in lua + löve2d to figure out how planar mechanism synthesis and grashof classification actually work",
