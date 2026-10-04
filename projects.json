@@ -116,7 +116,7 @@
   "challenges": "keeping adaptive refinement from chasing noise instead of bias, documenting negative results when refinement did not help, and resisting scope creep into full dual-weighted residual adjoints or live calibration. intermittent timeline meant re-validating black-scholes and geometric asian cases after every long pause."
   },
   {
-  "title": "continuum-lob <i class='devicon-cplusplus-plain'></i>",
+  "title": "continuum lob <i class='devicon-cplusplus-plain'></i>",
   "tag": "physics-informed neural operators on continuum order-book fields - october 3, 2026",
   "description": "a c++20 platform that coarse-grains a discrete limit-order-book into continuum density/velocity fields, solves a finite-volume pde, learns fno/deeponet surrogates with physics residuals, and exposes an optimal-execution environment with sac hooks",
   "techSpecs": "c++20 discrete lob, kernel coarse-graining, rusanov/muscl finite-volume continuum, fno/deeponet prototypes, physics-informed residual losses, twap execution baselines, and sac interface scaffolding.",
