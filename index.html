@@ -974,6 +974,15 @@
           </div>
         </div>
         <div class="journal-feed" id="journal-feed">
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-10-03">2026-10-03</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>continuum-lob — publish v0.1.0</h4>
+            <p>packaged the physics-informed continuum-lob stack: event-driven discrete book, kernel coarse-graining, finite-volume continuum pde, fno/deeponet surrogates, physics residual losses, optimal-execution env with twap baselines, and sac interface hooks. release window sep 7, 2025 → oct 3, 2026. spun out of orderflow continuum work with the neural-operator and control layers added later. continuum analogy stays a modeling frame — not a claim the lob is a navier–stokes fluid, and not a trading product.</p>
+            <p class="journal-note">related: continuum-lob</p>
+          </article>
 
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
@@ -1015,6 +1024,16 @@
             <p class="journal-note">related: orderflow continuum lab</p>
           </article>
 
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-28">2026-09-28</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>continuum-lob — sim-to-sim fno vs finite-volume</h4>
+            <p>held out continuum trajectories from the fv solver; trained fno on coarse-grained density/velocity fields. surrogate tracked bulk mass reasonably; sharp queue edges near the touch were the first place residual climbed. documented as operator approximation quality, not “beat the discrete book.”</p>
+            <p class="journal-note">related: continuum-lob</p>
+          </article>
+
           <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
               <time datetime="2026-09-28">2026-09-28</time>
@@ -1043,6 +1062,16 @@
             <h4>orderflow continuum lab — adaptive refine on imbalance spike</h4>
             <p>synthetic one-sided flow near the touch tripped ‖∇p‖ threshold and refined the liquidity mesh locally. coarsening hysteresis prevented flicker. particle count and residual both logged; refinement helps visualization more than matching accuracy — expected, discrete book stays source of truth.</p>
             <p class="journal-note">related: orderflow continuum lab</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-26">2026-09-26</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>continuum-lob — sac interface + replay buffer hooks</h4>
+            <p>wired actor-critic scaffolding against the surrogate execution environment. episode rewards use inventory penalty + impact + adverse-selection terms. baselines still twap and naive market; sac not claimed trained to optimality — interface and reward plumbing only for this release.</p>
+            <p class="journal-note">related: continuum-lob</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1166,6 +1195,16 @@
               <time datetime="2026-09-15">2026-09-15</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
+            <h4>continuum-lob — physics-informed residual loss on continuity</h4>
+            <p>added continuity residual term to the operator training loss: ∂ρ/∂t + ∂(ρu)/∂x − S_ρ. pure data loss overfit local transients; residual penalty improved conservation drift on held-out fv rollouts. momentum residual still noisier — left weighted lower for this pass.</p>
+            <p class="journal-note">related: continuum-lob</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-15">2026-09-15</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
             <h4>computational mechanics engine — neo-hookean residual path</h4>
             <p>wired strain-energy density → stress measure → element internal force for a simple stretch. newton iterations need a usable tangent; continuum modulus is enough for this smoke path. docs stress finite-strain kinematics vs the small-strain linear solver so the two worlds stay separate in the reader’s head.</p>
             <p class="journal-note">related: computational mechanics engine</p>
@@ -1230,6 +1269,16 @@
             <h4>computational mechanics engine — dof numbering and essential bc reduction</h4>
             <p>equation numbering skips fixed dofs; reduced K and f build cleanly for a clamped cantilever root. free-free mesh without bc correctly stays singular — caught by a deliberate test that expects solver failure without supports.</p>
             <p class="journal-note">related: computational mechanics engine</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-09-08">2026-09-08</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>continuum-lob — optimal execution env v0</h4>
+            <p>inventory, temporary impact, and adverse-selection cost in a simplified episode. twap baseline executes evenly; market baseline dumps remaining size. reward shaped so naive aggression is punished. this is the control sandbox for later sac experiments — not live trading.</p>
+            <p class="journal-note">related: continuum-lob</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1356,6 +1405,16 @@
             <p class="journal-note">related: computational mechanics engine</p>
           </article>
 
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-08-28">2026-08-28</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>continuum-lob — fno spectral conv prototype in pure c++</h4>
+            <p>minimal fourier neural operator stack: lift → spectral conv blocks → project. untrained forward pass on synthetic density fields for shape/dtype checks. training data will come from fv rollouts, not from discrete ticks directly.</p>
+            <p class="journal-note">related: continuum-lob</p>
+          </article>
+
           <article class="journal-entry" data-tags="question">
             <div class="journal-meta">
               <time datetime="2026-08-27">2026-08-27</time>
@@ -1475,6 +1534,16 @@
             <p class="journal-note">related: adaptive mesh monte carlo engine</p>
           </article>
 
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-07-28">2026-07-28</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>continuum-lob — discrete lob + coarse-graining pipeline</h4>
+            <p>event-driven book emits limits/cancels/markets; gaussian and histogram kernels map depth to ρ_bid/ρ_ask on a price grid. mass conservation under pure cancel/add checked within kernel truncation error. this is the shared dna with orderflow continuum — continuum-lob keeps the discrete truth path explicit.</p>
+            <p class="journal-note">related: continuum-lob</p>
+          </article>
+
           <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
               <time datetime="2026-07-28">2026-07-28</time>
@@ -1526,6 +1595,16 @@
             <p>got the synthetic rotating machine to emit synchronized vibration, temperature, current, torque, and rpm streams under healthy conditions. checked that spectral peaks sit where shaft speed and the configured mesh frequency say they should. this becomes the reference distribution for anomaly baselines.</p>
             <p>next step is injecting imbalance, misalignment, and bearing faults with controllable severity so supervised and unsupervised paths share the same ground truth.</p>
             <p class="journal-note">related: ai machine failure investigator</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-07-15">2026-07-15</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>continuum-lob — finite-volume rusanov continuum step</h4>
+            <p>continuity + momentum-like system on a 1d price mesh with rusanov flux and cfl control. linear pressure p=c²ρ first. conservation of integrated ρ under zero source holds to machine precision on periodic tests. stochastic forcing S_ρ/S_u stubs for later.</p>
+            <p class="journal-note">related: continuum-lob</p>
           </article>
 
           <article class="journal-entry" data-tags="debug">
@@ -1626,6 +1705,16 @@
             <p class="journal-note">related: neural ik lab</p>
           </article>
 
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-06-18">2026-06-18</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>continuum-lob — pressure constitutive options</h4>
+            <p>linear, nonlinear, and saturating p(ρ) switches in the continuum solver. saturating form avoids runaway pressure when coarse-graining piles mass near the touch. still a modeling knob — not calibrated to a venue.</p>
+            <p class="journal-note">related: continuum-lob</p>
+          </article>
+
           <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
               <time datetime="2026-06-18">2026-06-18</time>
@@ -1647,17 +1736,6 @@
             <p class="journal-note">related: adaptive mesh monte carlo engine</p>
           </article>
 
-          <article class="journal-entry" data-tags="debug">
-            <div class="journal-meta">
-              <time datetime="2026-06-02">2026-06-02</time>
-              <span class="journal-tag tag-debug">debug</span>
-            </div>
-            <h4>climate resilience sim — singular B matrix on islanded bus</h4>
-            <p>after removing a tie line the remaining island had no angle reference and the dc solve failed. pinned a slack angle in each island and treated islanded load as unserved rather than crashing the step.</p>
-            <p>cascade logs now show intentional service loss instead of linear-algebra exceptions.</p>
-            <p class="journal-note">related: climate infrastructure resilience simulator</p>
-          </article>
-
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
               <time datetime="2026-06-05">2026-06-05</time>
@@ -1668,14 +1746,15 @@
             <p>closing radius was set to 1.2× the intended minimum member width. on the cantilever benchmark the thin secondary struts disappeared and the primary members thickened by roughly one filter radius. the compliance penalty is consistent with the loss of those secondary paths; for the physical prints the thicker members are worth the stiffness cost.</p>
           </article>
 
-          <article class="journal-entry" data-tags="experiment">
+          <article class="journal-entry" data-tags="debug">
             <div class="journal-meta">
-              <time datetime="2026-05-25">2026-05-25</time>
-              <span class="journal-tag tag-experiment">experiment</span>
+              <time datetime="2026-06-02">2026-06-02</time>
+              <span class="journal-tag tag-debug">debug</span>
             </div>
-            <h4>adaptive mesh mc — openmp path parallel + schedule</h4>
-            <p>path-level parallel for over path ids; static schedule in strict mode for determinism. speedup decent on 16 cores for independent payoffs.</p>
-            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
+            <h4>climate resilience sim — singular B matrix on islanded bus</h4>
+            <p>after removing a tie line the remaining island had no angle reference and the dc solve failed. pinned a slack angle in each island and treated islanded load as unserved rather than crashing the step.</p>
+            <p>cascade logs now show intentional service loss instead of linear-algebra exceptions.</p>
+            <p class="journal-note">related: climate infrastructure resilience simulator</p>
           </article>
 
           <article class="journal-entry" data-tags="debug">
@@ -1689,6 +1768,16 @@
             <p class="journal-note">related: ai cybersecurity research laboratory</p>
           </article>
 
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-05-25">2026-05-25</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>adaptive mesh mc — openmp path parallel + schedule</h4>
+            <p>path-level parallel for over path ids; static schedule in strict mode for determinism. speedup decent on 16 cores for independent payoffs.</p>
+            <p class="journal-note">related: adaptive mesh monte carlo engine</p>
+          </article>
+
           <article class="journal-entry" data-tags="question">
             <div class="journal-meta">
               <time datetime="2026-05-22">2026-05-22</time>
@@ -1697,6 +1786,16 @@
             <h4>best way to export a topology-optimized density field into a clean cad solid?</h4>
             <p>marching cubes on the 0.5 isosurface produces a noisy mesh that needs heavy remeshing. looking at openvdb level-set methods and at simply thresholding then running a constrained laplacian smooth. still open — current pipeline is functional but ugly.</p>
             <p>the noise is worst where the density gradient is shallow (gray regions that the projection never fully eliminated). a short diffusion of the density field before the isosurface extract reduces the high-frequency roughness, but it also erodes thin members. a constrained smooth that freezes vertices already near 0 or 1 might be the better route.</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-05-20">2026-05-20</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>continuum-lob — muscl reconstruction option</h4>
+            <p>optional muscl slope limiting on the continuum density/velocity before rusanov flux. reduces smearing of sharp queue walls vs first-order godunov. cfl tightened slightly; conservation tests still green.</p>
+            <p class="journal-note">related: continuum-lob</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1728,6 +1827,16 @@
             <h4>stiffness matrix assembly — indexing off-by-one in sparse format</h4>
             <p>the custom c++ coo → csr converter was writing the last column index one past the end on meshes whose node count was not a multiple of the block size. valgrind caught it only under a specific mesh. fixed and added a unit test that checks Σ K_ij against the dense reference for a 3-element patch.</p>
             <p>the bug lived in the exclusive-scan that builds the row pointer array: when n % block != 0 the final partial block wrote past indptr[n]. the unit test now builds a 3-element patch, converts, and asserts that the frobenius norm of (K_sparse − K_dense) is below 1e-12. caught two similar edge cases after the first fix.</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-04-22">2026-04-22</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>continuum-lob — bid/ask density separation</h4>
+            <p>kept ρ_bid and ρ_ask as separate fields instead of a single signed density. collapsing sides lost too much queue asymmetry for any later execution story. docs note the information trade-off explicitly.</p>
+            <p class="journal-note">related: continuum-lob</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1780,6 +1889,16 @@
             <h4>how much mesh distortion is acceptable before the topology result becomes unreliable?</h4>
             <p>some of the intermediate density fields produce highly skewed elements near the solid-void boundary. the compliance still converges, but the stress recovery looks suspicious. need a clearer criterion (jacobian quality? condition number of local K?) before trusting the stress plots on optimized geometries.</p>
             <p>elements with min(jacobian) / max(jacobian) below ~0.15 start showing stress peaks that move when the mesh is refined, which is a classic sign of discretization error rather than a real stress concentration. a simple quality filter that flags those elements and excludes them from the stress plot is a temporary fix; a better long-term approach is to remesh the 0.5 isosurface before the final stress pass.</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2026-03-20">2026-03-20</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>continuum-lob — project skeleton shared with orderflow lineage</h4>
+            <p>cmake, discrete lob core, and continuum field containers stand up. research question written: can coarse-grained continuum fields + operator learning help study execution dynamics without replacing discrete matching? early months stay classical (lob + fv); neural operators come later on purpose.</p>
+            <p class="journal-note">related: continuum-lob</p>
           </article>
 
           <article class="journal-entry" data-tags="experiment">
@@ -1848,6 +1967,16 @@
 
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
+              <time datetime="2026-01-15">2026-01-15</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>continuum-lob — conservation and mesh convergence hooks</h4>
+            <p>verification suite: global mass under zero source, timestep refinement on a smooth forced problem, mesh refinement on a stationary profile. failures block the “research ready” checklist. classical numerical work before any neural layer is allowed to train.</p>
+            <p class="journal-note">related: continuum-lob</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
               <time datetime="2025-12-12">2025-12-12</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
@@ -1855,6 +1984,16 @@
             <p>first working pass: parse python, mark request-like sources, propagate through simple assignments, flag dangerous sinks. lots of false positives on safe wrappers, but the source→sink evidence objects are structured enough to plug into a later hypothesis engine.</p>
             <p>not claiming exploitability — only that untrusted data appears to reach a sensitive call in the ast.</p>
             <p class="journal-note">related: ai cybersecurity research laboratory</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
+              <time datetime="2025-11-20">2025-11-20</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>continuum-lob — kernel coarse-graining variants</h4>
+            <p>gaussian, compact, triangular, and histogram kernels on the same discrete depth snapshot. histogram is closest to the lob ladder; gaussian is smoother for pde flux. documented that kernel choice is a modeling decision with measurable mass leakage at domain edges.</p>
+            <p class="journal-note">related: continuum-lob</p>
           </article>
 
           <article class="journal-entry" data-tags="question">
@@ -1870,12 +2009,32 @@
 
           <article class="journal-entry" data-tags="experiment">
             <div class="journal-meta">
+              <time datetime="2025-10-10">2025-10-10</time>
+              <span class="journal-tag tag-experiment">experiment</span>
+            </div>
+            <h4>continuum-lob — event-driven discrete lob core</h4>
+            <p>price–time priority book with limit, cancel, and market. synthetic streams for unit tests. this layer stays authoritative for matching even after continuum and neural layers exist — same design rule as orderflow continuum.</p>
+            <p class="journal-note">related: continuum-lob</p>
+          </article>
+
+          <article class="journal-entry" data-tags="experiment">
+            <div class="journal-meta">
               <time datetime="2025-10-05">2025-10-05</time>
               <span class="journal-tag tag-experiment">experiment</span>
             </div>
             <h4>climate resilience sim — dc power flow on toy feeder</h4>
             <p>implemented susceptance-based dc power flow with a fixed slack. verified that removing a branch redistributes flows and that overload flags trip on the expected corridors under inflated demand. this is the electrical core before transformer thermals and cascades.</p>
             <p class="journal-note">related: climate infrastructure resilience simulator</p>
+          </article>
+
+          <article class="journal-entry" data-tags="question">
+            <div class="journal-meta">
+              <time datetime="2025-09-07">2025-09-07</time>
+              <span class="journal-tag tag-question">question</span>
+            </div>
+            <h4>continuum-lob — start: continuum lob + later operator learning</h4>
+            <p>opening continuum-lob alongside the orderflow continuum line of work. first phase is classical: discrete lob, coarse-graining, finite-volume continuum pde. neural operators (fno/deeponet), physics-informed losses, and execution/sac come only after the discrete and continuum baselines are honest. practical aim is deeper intuition for order-book dynamics and execution while day trading — not a product edge claim.</p>
+            <p class="journal-note">related: continuum-lob</p>
           </article>
 
           <article class="journal-entry" data-tags="question">
@@ -1894,11 +2053,10 @@
               <time datetime="2025-08-07">2025-08-07</time>
               <span class="journal-tag tag-question">question</span>
             </div>
-            <h4>orderflow continuum lab — project start (corrected timeline)</h4>
+            <h4>orderflow continuum lab — project start</h4>
             <p>hybrid lob + continuum research instrument; discrete matching stays authoritative. built to study microstructure in depth while day trading — not a product edge claim. engineering window later corrected to aug 7, 2025 → sep 30, 2026.</p>
             <p class="journal-note">related: orderflow continuum lab</p>
           </article>
-
         </div>
       </div>
     </div>
