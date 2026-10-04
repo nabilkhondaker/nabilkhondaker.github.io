@@ -17,6 +17,7 @@ class Portfolio {
         this.setupSidebarAndRightPages();
         this.setupAchievementsGallery();
         this.setupJournalFilters();
+        this.setupQuestions();
         this.setupNabilaiChatbot();
     }
 
@@ -1067,6 +1068,111 @@ class Portfolio {
         });
     }
 
+
+    setupQuestions() {
+        const filters = document.getElementById('questions-filters');
+        const feed = document.getElementById('questions-feed');
+        const countEl = document.getElementById('questions-result-count');
+        const modal = document.getElementById('questions-answer-modal');
+        const modalTitle = document.getElementById('questions-answer-title');
+        const modalBody = document.getElementById('questions-answer-body');
+        const modalClose = document.getElementById('questions-answer-close');
+        if (!filters || !feed) return;
+
+        const answers = {
+            'q-mesh-conv-2r': {
+                title: 'selective refinement vs uniform h-refinement',
+                body: `uniform refinement of the full 2r domain hit the browser heap limit before stress recovery converged. selective refinement around the elbow joint and base support recovered max von mises within ~2% of the last successful uniform mesh while staying under the memory cap. the trade-off is extra bookkeeping for hanging-node constraints and a less automatic workflow — but it is the only path that finished in pure js without streaming the matrix out of core.`
+            },
+            'q-dls-lambda': {
+                title: 'damped least-squares near the reach circle',
+                body: `λ ≈ 0.02 kept joint-rate trajectories continuous through the outer workspace without visible elbow flips. larger λ (0.05–0.1) felt overdamped and lagged the target; smaller λ still oscillated between configurations. hysteresis on the elbow-up / elbow-down branch plus the soft dls barrier together closed the loop for the physical paddle demo.`
+            },
+            'q-lbm-fsi': {
+                title: 'float32 lbm + flexible beam stability',
+                body: `at moderate reynolds (roughly up to a few hundred on the tested grids) float32 typed arrays held a stable fsi coupling when the structural timestep was sub-cycled and a light numerical viscosity was retained in the collision operator. higher re or large beam deflections still produced density blow-ups; those cases need either a smaller lattice spacing, gpu offload, or a stronger stabilization scheme before they are trustworthy.`
+            },
+            'q-pid-windup': {
+                title: 'anti-windup on the 2r motor plant',
+                body: `conditional integration (freeze the integral while the actuator is saturated and the error has the same sign) reduced overshoot on recovery more cleanly than hard-clamping the integrator state. clamping alone still left a residual kick when the plant came out of saturation. derivative filtering stayed on; the win was almost entirely from how the integral term was gated.`
+            },
+            'q-csr-offbyone': {
+                title: 'patch-test failure root cause',
+                body: `the bug was an off-by-one in the coo→csr row-pointer construction, not the condensation order. a one-element patch test produced wrong nodal forces until the converter was fixed; after that, the same condensation path passed the patch and matched the analytical bar solution. journal entry 2026-04-27 tracks the regression test that now guards the sparse format.`
+            }
+        };
+
+        const entries = () => feed.querySelectorAll('.questions-entry');
+
+        const updateCount = () => {
+            const visible = [...entries()].filter(e => !e.classList.contains('questions-hidden'));
+            if (countEl) {
+                const n = visible.length;
+                countEl.textContent = `${n} question${n === 1 ? '' : 's'}`;
+            }
+        };
+
+        filters.querySelectorAll('.questions-filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                filters.querySelectorAll('.questions-filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const filter = btn.dataset.filter;
+
+                entries().forEach(entry => {
+                    const status = entry.dataset.status || '';
+                    const tags = (entry.dataset.tags || '').trim().split(/\s+/).filter(Boolean);
+                    let show = true;
+                    if (filter === 'all') show = true;
+                    else if (filter === 'open' || filter === 'answered') show = status === filter;
+                    else show = tags.includes(filter);
+                    entry.classList.toggle('questions-hidden', !show);
+                });
+                updateCount();
+            });
+        });
+
+        const openModal = (id) => {
+            const data = answers[id];
+            if (!data || !modal) return;
+            if (modalTitle) modalTitle.textContent = data.title;
+            if (modalBody) modalBody.innerHTML = `<p>${data.body}</p>`;
+            modal.classList.remove('hidden');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeModal = () => {
+            if (!modal) return;
+            modal.classList.add('hidden');
+            modal.setAttribute('aria-hidden', 'true');
+            // restore scroll only if no right-page is open
+            if (!document.querySelector('.page-overlay-right.active')) {
+                document.body.style.overflow = 'auto';
+            }
+        };
+
+        feed.querySelectorAll('.questions-answer-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                openModal(btn.dataset.answerId);
+            });
+        });
+
+        if (modalClose) modalClose.addEventListener('click', closeModal);
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        updateCount();
+    }
+
     setupNabilaiChatbot() {
         const toggle = document.getElementById('nabilai-toggle');
         const panel = document.getElementById('nabilai-panel');
@@ -1093,8 +1199,10 @@ class Portfolio {
             document.getElementById('page-mentoring'),
             document.getElementById('page-workflow'),
             document.getElementById('page-journal'),
+            document.getElementById('page-questions'),
             document.getElementById('page-glossary'),
             document.getElementById('page-trivia'),
+            document.getElementById('page-toolbox'),
             document.getElementById('page-accomplishments'),
             document.getElementById('page-future-goals')
         ].filter(Boolean);
