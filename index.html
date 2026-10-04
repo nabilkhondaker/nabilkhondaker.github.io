@@ -69,6 +69,10 @@
           <i class="fa-solid fa-book"></i>
           <span>journal</span>
         </button>
+        <button class="vs-sidebar-item" data-page="questions">
+          <i class="fa-solid fa-circle-question"></i>
+          <span>questions</span>
+        </button>
         <div class="vs-sidebar-label">ENGINEERING</div>
         <button class="vs-sidebar-item" data-page="glossary">
           <i class="fa-solid fa-book-open"></i>
@@ -1896,6 +1900,240 @@
           </article>
 
         </div>
+      </div>
+    </div>
+
+    <!-- ========== RESEARCH QUESTIONS PAGE ========== -->
+    <div id="page-questions" class="page-overlay-right">
+      <div class="overlay-header">
+        <button class="overlay-nav-btn close-right-page">
+          <i class="fa-solid fa-arrow-right"></i> back
+        </button>
+      </div>
+
+      <div class="overlay-content questions-overlay-content">
+        <div class="questions-top-bar">
+          <h3 class="overlay-section-title" style="margin-bottom:0;">research questions</h3>
+          <p class="questions-intro">open problems and settled notes from the lab — fea, kinematics, fluids, controls, numerics, and the rest.</p>
+        </div>
+
+        <div class="questions-filter-row" id="questions-filters">
+          <button class="questions-filter-btn active" data-filter="all">all</button>
+          <button class="questions-filter-btn" data-filter="open"><span class="q-status-dot open"></span> open</button>
+          <button class="questions-filter-btn" data-filter="answered"><span class="q-status-dot answered"></span> answered</button>
+          <button class="questions-filter-btn" data-filter="fea">fea / topo</button>
+          <button class="questions-filter-btn" data-filter="robotics">robotics</button>
+          <button class="questions-filter-btn" data-filter="cfd">cfd / fluids</button>
+          <button class="questions-filter-btn" data-filter="dynamics">dynamics</button>
+          <button class="questions-filter-btn" data-filter="numerics">numerics</button>
+          <button class="questions-filter-btn" data-filter="controls">controls</button>
+        </div>
+
+        <div class="questions-result-meta">
+          <span id="questions-result-count">0 questions</span>
+        </div>
+
+        <div class="questions-feed" id="questions-feed">
+
+          <article class="questions-entry" data-status="answered" data-tags="fea numerics" data-id="q-mesh-conv-2r">
+            <div class="questions-meta">
+              <time datetime="2026-08-09">2026-08-09</time>
+              <span class="questions-status status-answered">answered</span>
+              <span class="questions-tag">fea</span>
+            </div>
+            <h4>does selective refinement beat uniform h-refinement for the 2r planar robot stress recovery before the browser heap limit?</h4>
+            <p class="questions-context">mesh convergence on the physical 2r geometry kept aborting when the whole domain was refined. selective zones around the elbow and base looked promising on paper.</p>
+            <button type="button" class="questions-answer-btn" data-answer-id="q-mesh-conv-2r">
+              <i class="fa-solid fa-lightbulb"></i> view answer
+            </button>
+          </article>
+
+          <article class="questions-entry" data-status="open" data-tags="fea" data-id="q-heaviside-vol">
+            <div class="questions-meta">
+              <time datetime="2026-08-14">2026-08-14</time>
+              <span class="questions-status status-open">open</span>
+              <span class="questions-tag">topo opt</span>
+            </div>
+            <h4>how much volume drift after heaviside projection is acceptable before re-enforcing the volume constraint each outer iteration?</h4>
+            <p class="questions-context">gray-scale still present at r_min = 1.5. pushing β higher cleans the design but the integrated density drifts off the target fraction.</p>
+          </article>
+
+          <article class="questions-entry" data-status="answered" data-tags="robotics" data-id="q-dls-lambda">
+            <div class="questions-meta">
+              <time datetime="2026-06-12">2026-06-12</time>
+              <span class="questions-status status-answered">answered</span>
+              <span class="questions-tag">robotics</span>
+            </div>
+            <h4>what damping factor λ keeps the 2r inverse-kinematics path continuous near the outer reach circle without killing tracking accuracy?</h4>
+            <p class="questions-context">near the workspace boundary the jacobian determinant collapses and the solver flipped between elbow configurations.</p>
+            <button type="button" class="questions-answer-btn" data-answer-id="q-dls-lambda">
+              <i class="fa-solid fa-lightbulb"></i> view answer
+            </button>
+          </article>
+
+          <article class="questions-entry" data-status="open" data-tags="robotics numerics" data-id="q-neural-ik-sing">
+            <div class="questions-meta">
+              <time datetime="2026-09-21">2026-09-21</time>
+              <span class="questions-status status-open">open</span>
+              <span class="questions-tag">neural ik</span>
+            </div>
+            <h4>can a single mlp trained on forward-kinematics samples approximate both elbow branches without a discrete configuration flag?</h4>
+            <p class="questions-context">dataset design already forces careful branch labeling. error still concentrates near singularities and the workspace boundary.</p>
+          </article>
+
+          <article class="questions-entry" data-status="answered" data-tags="cfd" data-id="q-lbm-fsi">
+            <div class="questions-meta">
+              <time datetime="2026-06-25">2026-06-25</time>
+              <span class="questions-status status-answered">answered</span>
+              <span class="questions-tag">cfd</span>
+            </div>
+            <h4>is float32 typed-array lbm stable enough at moderate reynolds for flexible-beam fsi without artificial damping?</h4>
+            <p class="questions-context">pure js lattice boltzmann on canvas. structure motion fed back into the fluid field; higher re cases blew up or needed extra numerical viscosity.</p>
+            <button type="button" class="questions-answer-btn" data-answer-id="q-lbm-fsi">
+              <i class="fa-solid fa-lightbulb"></i> view answer
+            </button>
+          </article>
+
+          <article class="questions-entry" data-status="open" data-tags="cfd" data-id="q-lbm-gpu">
+            <div class="questions-meta">
+              <time datetime="2026-07-02">2026-07-02</time>
+              <span class="questions-status status-open">open</span>
+              <span class="questions-tag">cfd</span>
+            </div>
+            <h4>how far can webgl / compute-shader offload of collision-streaming push the stable reynolds ceiling before memory bandwidth dominates?</h4>
+            <p class="questions-context">cpu-side float32 is the current bottleneck. glsl path exists for density viz; full lattice update on gpu is the next experiment.</p>
+          </article>
+
+          <article class="questions-entry" data-status="open" data-tags="dynamics" data-id="q-14dof-timestep">
+            <div class="questions-meta">
+              <time datetime="2026-07-15">2026-07-15</time>
+              <span class="questions-status status-open">open</span>
+              <span class="questions-tag">vehicle</span>
+            </div>
+            <h4>what is the practical upper bound on fixed-step rk4 timestep for the 14-dof vehicle model with pacejka tires before lateral force curves go unstable?</h4>
+            <p class="questions-context">1 ms works interactively. larger steps look fine in straight-line but understeer/oversteer metrics drift under hard cornering.</p>
+          </article>
+
+          <article class="questions-entry" data-status="answered" data-tags="controls" data-id="q-pid-windup">
+            <div class="questions-meta">
+              <time datetime="2026-04-14">2026-04-14</time>
+              <span class="questions-status status-answered">answered</span>
+              <span class="questions-tag">controls</span>
+            </div>
+            <h4>does conditional integration anti-windup outperform clamping the integrator state on the 2r arm motor plant?</h4>
+            <p class="questions-context">physical arm saturated during large set-point jumps. derivative filtering was already in place; integral behavior still caused overshoot on recovery.</p>
+            <button type="button" class="questions-answer-btn" data-answer-id="q-pid-windup">
+              <i class="fa-solid fa-lightbulb"></i> view answer
+            </button>
+          </article>
+
+          <article class="questions-entry" data-status="open" data-tags="numerics" data-id="q-ammc-barrier">
+            <div class="questions-meta">
+              <time datetime="2026-10-01">2026-10-01</time>
+              <span class="questions-status status-open">open</span>
+              <span class="questions-tag">monte carlo</span>
+            </div>
+            <h4>does residual-driven temporal refinement near continuous barriers reduce bias faster than uniform path counts at fixed wall-clock?</h4>
+            <p class="questions-context">adaptive mesh monte carlo already tracks an error budget. barrier payoffs are the stress case for timestep bias vs statistical error.</p>
+          </article>
+
+          <article class="questions-entry" data-status="open" data-tags="numerics" data-id="q-pathwise-digital">
+            <div class="questions-meta">
+              <time datetime="2026-09-27">2026-09-27</time>
+              <span class="questions-status status-open">open</span>
+              <span class="questions-tag">greeks</span>
+            </div>
+            <h4>for discontinuous digital payoffs, is a hybrid pathwise + likelihood-ratio estimator lower variance than pure score methods under the same path budget?</h4>
+            <p class="questions-context">pathwise dual numbers failed near the strike; score estimators work but variance is high. finite-difference cross-checks exist.</p>
+          </article>
+
+          <article class="questions-entry" data-status="answered" data-tags="fea numerics" data-id="q-csr-offbyone">
+            <div class="questions-meta">
+              <time datetime="2026-04-27">2026-04-27</time>
+              <span class="questions-status status-answered">answered</span>
+              <span class="questions-tag">fea</span>
+            </div>
+            <h4>was the patch-test failure in the pure-js assembler caused by coo→csr indexing or by boundary-condition condensation order?</h4>
+            <p class="questions-context">unit test on a single-element patch caught wrong nodal forces. sparse format converter and static condensation both looked suspicious.</p>
+            <button type="button" class="questions-answer-btn" data-answer-id="q-csr-offbyone">
+              <i class="fa-solid fa-lightbulb"></i> view answer
+            </button>
+          </article>
+
+          <article class="questions-entry" data-status="open" data-tags="dynamics" data-id="q-orderflow-stress">
+            <div class="questions-meta">
+              <time datetime="2026-09-30">2026-09-30</time>
+              <span class="questions-status status-open">open</span>
+              <span class="questions-tag">orderflow</span>
+            </div>
+            <h4>do continuum stress/strain fields on reconstructed liquidity improve any fidelity metric against the discrete lob, or only visualization?</h4>
+            <p class="questions-context">hybrid lob + continuum layer. residual metrics between discrete and continuum depth are the honest scoreboard; matching stays discrete.</p>
+          </article>
+
+          <article class="questions-entry" data-status="open" data-tags="dynamics" data-id="q-climate-cascade">
+            <div class="questions-meta">
+              <time datetime="2026-09-25">2026-09-25</time>
+              <span class="questions-status status-open">open</span>
+              <span class="questions-tag">climate sim</span>
+            </div>
+            <h4>under extreme heat scenarios, which resilience metric (min performance, recovery time, auc loss) is most sensitive to transformer aging parameters on the synthetic feeder?</h4>
+            <p class="questions-context">coupled thermal → demand → dc power flow → aging → cascade. failure thresholds currently tuned to avoid instant total collapse.</p>
+          </article>
+
+          <article class="questions-entry" data-status="open" data-tags="robotics" data-id="q-mechgen-grashof">
+            <div class="questions-meta">
+              <time datetime="2026-07-07">2026-07-07</time>
+              <span class="questions-status status-open">open</span>
+              <span class="questions-tag">mechanisms</span>
+            </div>
+            <h4>can the genetic path-matching objective be constrained to grashof-valid four-bars without collapsing design diversity too early?</h4>
+            <p class="questions-context">mechgenpro generates linkages on the fly. locking mechanisms and bad transmission angles still slip through the validator under aggressive mutation.</p>
+          </article>
+
+          <article class="questions-entry" data-status="open" data-tags="controls numerics" data-id="q-microgrid-mppt">
+            <div class="questions-meta">
+              <time datetime="2026-05-19">2026-05-19</time>
+              <span class="questions-status status-open">open</span>
+              <span class="questions-tag">power</span>
+            </div>
+            <h4>under rapidly changing irradiance, does adaptive-step mppt reduce tracking lag more than a fixed-step perturb-and-observe with tighter duty limits?</h4>
+            <p class="questions-context">c++ microgrid sim with single-diode pv and converter dynamics. dispatch must not fight the mppt during cloud edges.</p>
+          </article>
+
+          <article class="questions-entry" data-status="open" data-tags="fea" data-id="q-simp-continuation">
+            <div class="questions-meta">
+              <time datetime="2026-08-14">2026-08-14</time>
+              <span class="questions-status status-open">open</span>
+              <span class="questions-tag">topo opt</span>
+            </div>
+            <h4>is a continuation schedule on both p and β more robust than fixing p = 3 and only ramping projection strength?</h4>
+            <p class="questions-context">volume-fraction sweeps on the cantilever produced the cleanest load path near 0.35. gray-scale and checkerboard risk still depend on filter radius.</p>
+          </article>
+
+          <article class="questions-entry" data-status="open" data-tags="numerics" data-id="q-webgl-mediump">
+            <div class="questions-meta">
+              <time datetime="2026-03-14">2026-03-14</time>
+              <span class="questions-status status-open">open</span>
+              <span class="questions-tag">webgl</span>
+            </div>
+            <h4>on mobile mali gpus, is there a safe hybrid precision path (mediump density colors, highp residual) that avoids isosurface stepping without the full highp cost?</h4>
+            <p class="questions-context">fragment shader density viz looked stepped under mediump (~10-bit mantissa). highp fixed it; performance hit was small on a full-screen quad but may matter for denser passes.</p>
+          </article>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- answer popup modal -->
+    <div id="questions-answer-modal" class="questions-answer-modal hidden" aria-hidden="true">
+      <div class="questions-answer-dialog" role="dialog" aria-modal="true">
+        <div class="questions-answer-header">
+          <h3 id="questions-answer-title">answer</h3>
+          <button type="button" class="questions-answer-close" id="questions-answer-close" title="close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="questions-answer-body" id="questions-answer-body"></div>
       </div>
     </div>
 
