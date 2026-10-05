@@ -19,6 +19,7 @@ class Portfolio {
         this.setupJournalFilters();
         this.setupQuestions();
         this.setupNabilaiChatbot();
+        this.setupMentorshipNotif();
     }
 
     setupLoading() {
@@ -1490,6 +1491,100 @@ class Portfolio {
 
         setTimeout(syncOverlayState, 300);
     }
+
+    setupMentorshipNotif() {
+        const btn = document.getElementById('mentorship-notif-btn');
+        const popover = document.getElementById('mentorship-notif-popover');
+        const closeBtn = document.getElementById('mentorship-notif-close');
+        if (!btn || !popover) return;
+
+        const STORAGE_KEY = 'mentorship_notif_clicked';
+        const CLOSE_MS = 280;
+        let isOpen = false;
+        let closeTimer = null;
+
+        const hasClicked = () => {
+            try {
+                return localStorage.getItem(STORAGE_KEY) === 'true';
+            } catch {
+                return false;
+            }
+        };
+
+        const markClicked = () => {
+            try {
+                localStorage.setItem(STORAGE_KEY, 'true');
+            } catch (e) {
+                console.warn('could not persist mentorship notif state', e);
+            }
+            btn.classList.remove('is-idle');
+            btn.classList.add('is-static');
+        };
+
+        // pulse only until first click ever
+        if (hasClicked()) {
+            btn.classList.add('is-static');
+        } else {
+            btn.classList.add('is-idle');
+        }
+
+        const openPopover = () => {
+            if (closeTimer) {
+                clearTimeout(closeTimer);
+                closeTimer = null;
+            }
+            isOpen = true;
+            popover.hidden = false;
+            void popover.offsetWidth;
+            requestAnimationFrame(() => {
+                popover.classList.add('is-open');
+            });
+            btn.setAttribute('aria-expanded', 'true');
+            markClicked();
+        };
+
+        const closePopover = () => {
+            if (!isOpen && !popover.classList.contains('is-open')) return;
+            isOpen = false;
+            popover.classList.remove('is-open');
+            btn.setAttribute('aria-expanded', 'false');
+            if (closeTimer) clearTimeout(closeTimer);
+            closeTimer = setTimeout(() => {
+                if (!isOpen) popover.hidden = true;
+                closeTimer = null;
+            }, CLOSE_MS);
+        };
+
+        const togglePopover = () => {
+            if (isOpen) closePopover();
+            else openPopover();
+        };
+
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            togglePopover();
+        });
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                closePopover();
+            });
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!isOpen) return;
+            if (popover.contains(e.target) || btn.contains(e.target)) return;
+            closePopover();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isOpen) closePopover();
+        });
+    }
+
 
 }
 
