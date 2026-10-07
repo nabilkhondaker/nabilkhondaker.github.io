@@ -73,6 +73,10 @@
           <i class="fa-solid fa-circle-question"></i>
           <span>questions</span>
         </button>
+        <button class="vs-sidebar-item" data-page="markets">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>markets</span>
+        </button>
         <div class="vs-sidebar-label">ENGINEERING</div>
         <button class="vs-sidebar-item" data-page="glossary">
           <i class="fa-solid fa-book-open"></i>
@@ -2506,6 +2510,392 @@
           </button>
         </div>
         <div class="questions-answer-body" id="questions-answer-body"></div>
+      </div>
+    </div>
+
+
+    <!-- ========== MARKETS / EXECUTION LAB ========== -->
+    <div id="page-markets" class="page-overlay-right">
+      <div class="overlay-header">
+        <button class="overlay-nav-btn close-right-page">
+          <i class="fa-solid fa-arrow-right"></i> back
+        </button>
+      </div>
+
+      <div class="overlay-content markets-overlay-content">
+
+        <div class="markets-title-row">
+          <div>
+            <h3 class="overlay-section-title" style="margin-bottom:0;">markets · execution lab</h3>
+            <p class="markets-intro">live account verification layer — risk metrics, microstructure, and the sim-to-real loop that ties daytrading back to the research tools. figures below are live-only over 87 sessions.</p>
+          </div>
+          <div class="markets-live-badge">
+            <span class="markets-live-dot"></span>
+            live account · 87 sessions
+          </div>
+        </div>
+
+<nav class="markets-section-nav" aria-label="markets sections">
+  <a href="#markets-risk" class="markets-nav-link">risk</a>
+  <span class="markets-nav-sep" aria-hidden="true">|</span>
+  <a href="#markets-equity" class="markets-nav-link">equity</a>
+  <span class="markets-nav-sep" aria-hidden="true">|</span>
+  <a href="#markets-execution" class="markets-nav-link">execution</a>
+  <span class="markets-nav-sep" aria-hidden="true">|</span>
+  <a href="#markets-trades" class="markets-nav-link">trades</a>
+  <span class="markets-nav-sep" aria-hidden="true">|</span>
+  <a href="#markets-sim" class="markets-nav-link">sim-to-real</a>
+</nav>
+
+        <!-- CORE NLV STRIP -->
+        <div class="markets-nlv-strip card">
+          <div class="card-content markets-nlv-inner">
+            <div class="markets-nlv-block">
+              <span class="markets-nlv-label">net liquidation</span>
+              <span class="markets-nlv-value">$427,390</span>
+              <span class="markets-nlv-sub">from $360,000 start</span>
+            </div>
+            <div class="markets-nlv-block">
+              <span class="markets-nlv-label">net change</span>
+              <span class="markets-nlv-value positive">+$67,390</span>
+              <span class="markets-nlv-sub">~18.7% live / ytd</span>
+            </div>
+            <div class="markets-nlv-block">
+              <span class="markets-nlv-label">max drawdown</span>
+              <span class="markets-nlv-value drawdown">–4.8%</span>
+              <span class="markets-nlv-sub">peak-to-trough · live only</span>
+            </div>
+            <div class="markets-nlv-block">
+              <span class="markets-nlv-label">sample window</span>
+              <span class="markets-nlv-value">87</span>
+              <span class="markets-nlv-sub">live trading days only</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RISK-ADJUSTED MATRIX -->
+        <div class="markets-section-label" id="markets-risk">
+          <span class="metrics-label-dot"></span>
+          risk-adjusted · rolling 90 sessions
+        </div>
+        <div class="markets-metrics-matrix">
+          <div class="metric-node metric-primary">
+            <div class="metric-node-header">
+              <span class="metric-status-dot active"></span>
+              <span class="metric-label">sharpe ratio</span>
+            </div>
+            <div class="metric-value-row">
+              <span class="metric-big">2.2</span>
+            </div>
+            <div class="metric-sub">annualized · rf = 4.3% (3m ust)</div>
+            <div class="metric-bar-track">
+              <div class="metric-bar-fill" style="width: 78%;"></div>
+            </div>
+          </div>
+          <div class="metric-node">
+            <div class="metric-node-header">
+              <span class="metric-status-dot hours"></span>
+              <span class="metric-label">sortino</span>
+            </div>
+            <div class="metric-value-row">
+              <span class="metric-big">3.1</span>
+            </div>
+            <div class="metric-sub">downside deviation focus</div>
+          </div>
+          <div class="metric-node">
+            <div class="metric-node-header">
+              <span class="metric-status-dot cycles"></span>
+              <span class="metric-label">profit factor</span>
+            </div>
+            <div class="metric-value-row">
+              <span class="metric-big">1.87</span>
+            </div>
+            <div class="metric-sub">gross profit / gross loss</div>
+          </div>
+          <div class="metric-node">
+            <div class="metric-node-header">
+              <span class="metric-status-dot active"></span>
+              <span class="metric-label">win rate</span>
+            </div>
+            <div class="metric-value-row">
+              <span class="metric-big">58.4%</span>
+            </div>
+            <div class="metric-sub">live period only</div>
+          </div>
+          <div class="metric-node">
+            <div class="metric-node-header">
+              <span class="metric-status-dot hours"></span>
+              <span class="metric-label">avg r-multiple</span>
+            </div>
+            <div class="metric-value-row">
+              <span class="metric-big">+0.42R</span>
+            </div>
+            <div class="metric-sub">expectancy per trade</div>
+          </div>
+          <div class="metric-node">
+            <div class="metric-node-header">
+              <span class="metric-status-dot cycles"></span>
+              <span class="metric-label">default charts</span>
+            </div>
+            <div class="metric-value-row">
+              <span class="metric-big metric-big-sm">30 / 60</span>
+            </div>
+            <div class="metric-sub">day rolling · 90d available</div>
+          </div>
+        </div>
+
+        <!-- EQUITY + DRAWDOWN PLACEHOLDERS -->
+        <div class="markets-section-label" id="markets-equity" style="margin-top:2.5rem;">
+          <span class="metrics-label-dot"></span>
+          equity curve &amp; underwater profile
+        </div>
+        <div class="markets-chart-grid">
+          <div class="card markets-chart-card">
+            <div class="card-content">
+              <div class="markets-chart-header">
+                <h4>net liquidation value</h4>
+                <span class="markets-chart-tag">placeholder · replace with ib export</span>
+              </div>
+              <div class="markets-chart-placeholder equity-curve" role="img" aria-label="Equity curve placeholder">
+                <svg viewBox="0 0 400 140" preserveAspectRatio="none" class="markets-spark-svg">
+                  <defs>
+                    <linearGradient id="eqFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="var(--accent-blue)" stop-opacity="0.35"/>
+                      <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0,110 C40,105 60,98 90,92 C130,82 150,70 180,55 C210,42 240,48 270,38 C300,28 330,22 360,18 L400,14 L400,140 L0,140 Z" fill="url(#eqFill)"/>
+                  <path d="M0,110 C40,105 60,98 90,92 C130,82 150,70 180,55 C210,42 240,48 270,38 C300,28 330,22 360,18 L400,14" fill="none" stroke="var(--accent-blue)" stroke-width="2.2"/>
+                </svg>
+                <div class="markets-chart-overlay-labels">
+                  <span>$360k</span>
+                  <span>$427k</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card markets-chart-card">
+            <div class="card-content">
+              <div class="markets-chart-header">
+                <h4>drawdown (underwater)</h4>
+                <span class="markets-chart-tag">max –4.8%</span>
+              </div>
+              <div class="markets-chart-placeholder drawdown-curve" role="img" aria-label="Drawdown profile placeholder">
+                <svg viewBox="0 0 400 140" preserveAspectRatio="none" class="markets-spark-svg">
+                  <defs>
+                    <linearGradient id="ddFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.05"/>
+                      <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.4"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0,20 C50,22 80,35 110,28 C150,18 180,45 220,55 C250,62 280,40 310,48 C340,55 370,70 400,58 L400,20 L0,20 Z" fill="url(#ddFill)"/>
+                  <path d="M0,20 C50,22 80,35 110,28 C150,18 180,45 220,55 C250,62 280,40 310,48 C340,55 370,70 400,58" fill="none" stroke="var(--accent)" stroke-width="2"/>
+                  <line x1="0" y1="20" x2="400" y2="20" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="4 4"/>
+                </svg>
+                <div class="markets-chart-overlay-labels">
+                  <span>0%</span>
+                  <span>–4.8%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RISK FRAMEWORK + INSTRUMENTS -->
+        <div class="markets-two-col">
+          <div class="card">
+            <div class="card-content">
+              <h4 class="markets-card-title"><i class="fa-solid fa-shield-halved"></i> risk framework</h4>
+              <ul class="markets-spec-list">
+                <li><span class="spec-key">max risk / trade</span><span class="spec-val">0.75% of nlv</span></li>
+                <li><span class="spec-key">max daily loss</span><span class="spec-val">2.0% of nlv → auto flatten</span></li>
+                <li><span class="spec-key">aggregate open risk</span><span class="spec-val">≤ 1.5% of nlv</span></li>
+                <li><span class="spec-key">futures session</span><span class="spec-val">flat before 15:55 et</span></li>
+                <li><span class="spec-key">equity overnight</span><span class="spec-val">only if still shariah-compliant</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <h4 class="markets-card-title"><i class="fa-solid fa-layer-group"></i> instruments &amp; compliance</h4>
+              <ul class="markets-spec-list">
+                <li><span class="spec-key">primary futures</span><span class="spec-val">cme mes · mnq micros</span></li>
+                <li><span class="spec-key">equities / etfs</span><span class="spec-val">shariah-screened large-cap</span></li>
+                <li><span class="spec-key">screening</span><span class="spec-val">weekly python pipeline</span></li>
+                <li><span class="spec-key">debt / non-permissible</span><span class="spec-val">&lt;33% · &lt;5% income</span></li>
+                <li><span class="spec-key">excluded</span><span class="spec-val">rates · fx · commodities</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXECUTION / MICROSTRUCTURE -->
+        <div class="markets-section-label" id="markets-execution" style="margin-top:2.5rem;">
+          <span class="metrics-label-dot"></span>
+          execution semantics · slippage vs arrival
+        </div>
+        <div class="markets-slippage-grid">
+          <div class="card markets-slip-card">
+            <div class="card-content">
+              <div class="markets-slip-instrument">mes</div>
+              <div class="markets-slip-value">+0.18 <span>ticks</span></div>
+              <div class="markets-slip-note">avg realized vs mid · 90 sessions</div>
+            </div>
+          </div>
+          <div class="card markets-slip-card">
+            <div class="card-content">
+              <div class="markets-slip-instrument">mnq</div>
+              <div class="markets-slip-value">+0.22 <span>ticks</span></div>
+              <div class="markets-slip-note">avg realized vs mid · 90 sessions</div>
+            </div>
+          </div>
+          <div class="card markets-slip-card">
+            <div class="card-content">
+              <div class="markets-slip-instrument">cash equity</div>
+              <div class="markets-slip-value">–0.4 <span>¢</span></div>
+              <div class="markets-slip-note">vs midpoint · mostly limit</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRADE LOG -->
+        <div class="markets-section-label" id="markets-trades" style="margin-top:2.5rem;">
+          <span class="metrics-label-dot"></span>
+          representative trade log · anonymized
+        </div>
+        <div class="markets-filter-row" id="markets-trade-filters">
+          <button class="markets-filter-btn active" data-filter="all">all</button>
+          <button class="markets-filter-btn" data-filter="mes">mes</button>
+          <button class="markets-filter-btn" data-filter="mnq">mnq</button>
+          <button class="markets-filter-btn" data-filter="equity">equity</button>
+        </div>
+        <div class="card table-card markets-trade-table-wrap">
+          <div class="card-content">
+            <div class="aesthetic-table-wrap">
+              <table class="aesthetic-table markets-trade-table" id="markets-trade-table">
+                <thead>
+                  <tr>
+                    <th>date</th>
+                    <th>instrument</th>
+                    <th>dir</th>
+                    <th>entry liq</th>
+                    <th>exit liq</th>
+                    <th>r</th>
+                    <th>slippage</th>
+                    <th>context</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr data-asset="mnq">
+                    <td>2026-09-12</td>
+                    <td>mnq</td>
+                    <td class="dir-long">long</td>
+                    <td>maker</td>
+                    <td>taker</td>
+                    <td class="r-pos">+1.35R</td>
+                    <td>+0.25 tick</td>
+                    <td>orb 09:35 et</td>
+                  </tr>
+                  <tr data-asset="mes">
+                    <td>2026-09-18</td>
+                    <td>mes</td>
+                    <td class="dir-short">short</td>
+                    <td>taker</td>
+                    <td>maker</td>
+                    <td class="r-pos">+0.80R</td>
+                    <td>0</td>
+                    <td>vwap fade</td>
+                  </tr>
+                  <tr data-asset="equity">
+                    <td>2026-09-24</td>
+                    <td>equity*</td>
+                    <td class="dir-long">long</td>
+                    <td>maker</td>
+                    <td>maker</td>
+                    <td class="r-pos">+2.10R</td>
+                    <td>–0.6 ¢</td>
+                    <td>shariah earnings gap</td>
+                  </tr>
+                  <tr data-asset="mnq">
+                    <td>2026-09-29</td>
+                    <td>mnq</td>
+                    <td class="dir-long">long</td>
+                    <td>taker</td>
+                    <td>taker</td>
+                    <td class="r-neg">–0.75R</td>
+                    <td>+0.50 tick</td>
+                    <td>fomc spike stop</td>
+                  </tr>
+                  <tr data-asset="mes">
+                    <td>2026-10-01</td>
+                    <td>mes</td>
+                    <td class="dir-short">short</td>
+                    <td>maker</td>
+                    <td>taker</td>
+                    <td class="r-pos">+1.05R</td>
+                    <td>–0.25 tick</td>
+                    <td>pm trend continuation</td>
+                  </tr>
+                  <tr data-asset="mnq">
+                    <td>2026-10-03</td>
+                    <td>mnq</td>
+                    <td class="dir-long">long</td>
+                    <td>maker</td>
+                    <td>maker</td>
+                    <td class="r-pos">+0.45R</td>
+                    <td>0</td>
+                    <td>data-release scalp</td>
+                  </tr>
+                  <tr data-asset="equity">
+                    <td>2026-10-06</td>
+                    <td>equity*</td>
+                    <td class="dir-long">long</td>
+                    <td>maker</td>
+                    <td>maker</td>
+                    <td class="r-pos">+1.60R</td>
+                    <td>–0.3 ¢</td>
+                    <td>relative strength</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="markets-table-note">* equity tickers anonymized. figures are observational from the live account only — not advice.</p>
+          </div>
+        </div>
+
+        <!-- SIM-TO-REAL -->
+        <div class="markets-section-label" id="markets-sim" style="margin-top:2.75rem;">
+          <span class="metrics-label-dot"></span>
+          sim-to-real feedback loop
+        </div>
+        <div class="card markets-sim-card">
+          <div class="card-content">
+            <p class="about-text markets-sim-text">
+              live fills and regime spikes (nasdaq open volatility, fomc gaps, opening-range structure) feed back into the same research stack used on the rest of this site.
+              discrete matching stays authoritative; continuum and neural layers are validation instruments, not substitutes for the book.
+            </p>
+            <div class="markets-sim-links">
+              <div class="markets-sim-link-block">
+                <h5>orderflow continuum lab</h5>
+                <p>hybrid lob + continuum layer. residual metrics between discrete depth and continuum fields are the scoreboard for whether stress/strain visualizations add fidelity or only color.</p>
+              </div>
+              <div class="markets-sim-link-block">
+                <h5>adaptive mesh monte carlo</h5>
+                <p>pathwise and hybrid estimators under discontinuous payoffs; residual-driven temporal refinement near barriers is the open research question that mirrors real barrier-like stops in the live book.</p>
+              </div>
+              <div class="markets-sim-link-block">
+                <h5>execution cost checks</h5>
+                <p>observed mes/mnq tick slippage and equity mid-deviation are the ground truth against which any simulated fill model is judged before it is allowed to influence sizing logic.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DISCLAIMER -->
+        <div class="markets-disclaimer">
+          <p>informational and analytical only. not financial advice. not a solicitation to trade any security, futures contract, or strategy. live statistics cover the live account only (87 sessions). past performance is not indicative of future results. interactive brokers is the executing broker; this page is not affiliated with or endorsed by ibkr.</p>
+        </div>
+
       </div>
     </div>
 
