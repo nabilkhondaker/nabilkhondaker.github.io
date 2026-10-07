@@ -20,6 +20,7 @@ class Portfolio {
         this.setupQuestions();
         this.setupNabilaiChatbot();
         this.setupMentorshipNotif();
+        this.setupMarkets();
     }
 
     setupLoading() {
@@ -1490,6 +1491,42 @@ class Portfolio {
         });
 
         setTimeout(syncOverlayState, 300);
+    }
+
+    setupMarkets() {
+        const filters = document.querySelectorAll('#markets-trade-filters .markets-filter-btn');
+        const rows = document.querySelectorAll('#markets-trade-table tbody tr');
+
+        if (filters.length && rows.length) {
+            filters.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filters.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filter = btn.dataset.filter || 'all';
+                    rows.forEach(row => {
+                        const asset = row.dataset.asset || '';
+                        const show = filter === 'all' || asset === filter;
+                        row.classList.toggle('markets-row-hidden', !show);
+                    });
+                });
+            });
+        }
+
+        // in-page section nav (markets overlay only)
+        const page = document.getElementById('page-markets');
+        const navLinks = document.querySelectorAll('.markets-section-nav .markets-nav-link');
+        if (page && navLinks.length) {
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href') || '';
+                    if (!href.startsWith('#')) return;
+                    const target = page.querySelector(href);
+                    if (!target) return;
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        }
     }
 
     setupMentorshipNotif() {
