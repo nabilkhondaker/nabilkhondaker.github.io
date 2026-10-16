@@ -160,6 +160,18 @@
     "challenges": "keeping a 14-dof system numerically stable at 1 ms timesteps while still running fast enough for interactive use was a major challenge. the pacejka model has a lot of parameters and can produce weird force curves if you’re not careful. coordinating the abs and esc logic so they don’t fight each other, and making the genetic algorithm converge on useful suspension setups without getting stuck in local minima, both took significant debugging and tuning."
   },
   {
+    "title": "veritaslab <i class='fab fa-python'></i> <i class='devicon-cplusplus-plain'></i>",
+    "tag": "scientific-computing verification and benchmark framework - october 16, 2026",
+    "description": "a framework that registers competing numerical implementations, feeds them identical workloads, and scores them against independent analytic references instead of trusting pairwise agreement or runtime",
+    "techSpecs": "python orchestration with optional c++ kernels. solver registration, analytic oracles, error norms, observed convergence order, fast-but-wrong fixtures, and reproducibility manifests.",
+    "repo": "https://github.com/nabilkhondaker/VeritasLab",
+    "link": "",
+    "inProgress": false,
+    "why": "i kept running into the case where two codes agreed and both were wrong, or a faster kernel was just skipping a boundary update. i wanted a place that treats an independent reference as stronger evidence than speed or mutual agreement.",
+    "learned": "how easy it is for a shared setup bug to make two implementations look consistent, why observed order under refinement exposes defects that a single-grid comparison hides, and how to split kernel time from binding and allocation so a c++ port is not credited for the wrong reason.",
+    "challenges": "keeping the framework honest about what it does not prove, writing reports that cannot silently pass a missing field, and not turning every numerical disagreement into a framework bug when the real issue is a mismatched initial condition or unit."
+  },
+  {
     "title": "PID control sim <i class='devicon-cplusplus-plain'></i> <i class=\"fab fa-python\"></i>",
     "tag": "electrical engineering related interactive sim - april 14, 2026",
     "description": "interactive PID controller simulator for robotic and motor control systems with real-time response visualization, written in c++",
