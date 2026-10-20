@@ -1213,145 +1213,145 @@ class Portfolio {
         overlays.forEach(el => obs.observe(el, { attributes: true, attributeFilter: ['class', 'style'] }));
         document.addEventListener('click', () => setTimeout(syncOverlayState, 80), { passive: true });
 
-        // ----- conversation data (all lowercase) -----
-        const stages = [
+// ----- conversation data -----
+const stages = [
+    {
+        label: 'the basics',
+        options: [
             {
-                label: 'the basics',
-                options: [
-                    {
-                        q: 'why did you choose mechanical engineering?',
-                        a: 'i like the mix of real physics and tangible hardware. software is powerful, but i wanted a field where the numbers actually have to survive contact with the physical world — loads, tolerances, heat, friction. mechanical engineering felt like the most direct way to keep one foot in theory and one foot in making things that move.'
-                    },
-                    {
-                        q: 'what originally got you interested in engineering?',
-                        a: 'taking stuff apart as a kid and wanting to know why it worked. later it was watching how software could drive physical systems — robots, simulations, control loops. once i saw that you could close the loop from math → code → hardware, i was hooked.'
-                    },
-                    {
-                        q: 'why mechanical engineering instead of computer science?',
-                        a: 'i still write a lot of code, but pure cs felt a little too detached from the physical side for me. mech e lets me keep the software and the structures in the same problem. i get to build solvers and then also print the part or tune the motor. that combination is what keeps me going.'
-                    }
-                ]
+                q: 'why did you choose computational engineering?',
+                a: 'i like the mix of real physics, numerics, and code that actually has to stay honest with the physical world. pure software felt a little too detached, pure mechanical work sometimes treated the solvers as black boxes. computational engineering / quantitative scientific computing lets me keep one foot in continuum mechanics and one foot in writing the solvers, filters, and sciml-style models myself.'
             },
             {
-                label: 'how it started',
-                options: [
-                    {
-                        q: 'when did you start programming?',
-                        a: 'seriously around early high school. started with simple scripts and web stuff, then moved into python for numerics and c++ when i needed speed for the dynamics and fea tools. the programming side grew naturally out of wanting better tools for the engineering problems i was already interested in.'
-                    },
-                    {
-                        q: 'when did you start working with cad?',
-                        a: 'mid high school, once i needed real geometry for the robot links and fixtures. parametric cad became the bridge between the kinematics numbers and the parts i could actually print or machine. now it is just part of the normal loop — model, analyze, revise.'
-                    },
-                    {
-                        q: 'when did you start building physical projects?',
-                        a: 'the 2r planar robot paddle was the first real mechatronics build that closed the full loop: camera → kinematics → pid → motors. before that it was smaller electronics and prints, but that project is when software and hardware stopped being separate hobbies.'
-                    }
-                ]
+                q: 'what originally got you interested in engineering?',
+                a: 'taking stuff apart as a kid and wanting to know why it worked. later it was watching how software could drive physical systems — robots, simulations, control loops. once i saw that you could close the loop from math → code → hardware (or even stay purely computational and still stay faithful to the physics), i was hooked.'
             },
             {
-                label: 'how you work',
-                options: [
-                    {
-                        q: 'what made you start writing your own engineering software?',
-                        a: 'commercial tools are great until you want to change the algorithm or just understand what is happening under the hood. for topology optimization and the browser fea playground i wanted the math to be mine — so i could swap filters, change the objective, or run it in a browser without a license. building the solvers forced me to actually learn the methods instead of treating them as black boxes.'
-                    },
-                    {
-                        q: 'why are you so interested in computational engineering?',
-                        a: 'because most of the interesting problems sit at the intersection of continuum mechanics, numerics, and code. once you can assemble a stiffness matrix, filter a density field, or integrate a multibody system yourself, the commercial packages stop feeling magical and start feeling like tools you can improve. that is the part i enjoy most.'
-                    },
-                    {
-                        q: 'why do you combine software with mechanical engineering?',
-                        a: 'a lot of modern mechanical work is already computational — fea, optimization, controls, digital twins. if you only know the theory or only know the code, you miss half the design loop. writing the tools lets me test ideas faster and understand the assumptions that commercial software quietly makes.'
-                    }
-                ]
-            },
-            {
-                label: 'what you care about',
-                options: [
-                    {
-                        q: 'what area of engineering interests you the most?',
-                        a: 'computational mechanics and generative design right now — topology optimization, custom fea pipelines, and the robotics / kinematics side that turns those designs into things that move. i also keep coming back to dynamics simulations because they force you to be honest about energy and contact.'
-                    },
-                    {
-                        q: 'what area are you currently trying to learn more about?',
-                        a: 'deeper numerical methods for large sparse systems, better manufacturing constraints inside topology optimization, and more robust contact / impact formulations for the dynamics work. also starting to look harder at cyber-physical security for industrial control systems — still early, but it sits at a cool intersection.'
-                    },
-                    {
-                        q: 'do you consider yourself more of a mechanical engineer, software developer, or mechatronics engineer?',
-                        a: 'mechatronics is probably the honest label. the projects that feel most like “me” are the ones that need kinematics, controls, and a physical plant at the same time. the pure software and pure structures work are both in service of that middle ground.'
-                    }
-                ]
-            },
-            {
-                label: 'where you are headed',
-                options: [
-                    {
-                        q: 'what engineering field do you want to specialize in?',
-                        a: 'computational mechanics and design automation — topology optimization, custom simulation pipelines, and the robotics / control layer that turns optimized structures into working systems. i want the software and the hardware to stay tightly coupled.'
-                    },
-                    {
-                        q: 'do you want to pursue research or industry?',
-                        a: 'both, ideally. research for the deep methods and open questions, industry for the constraint of real hardware, schedules, and manufacturing. the best work i have done so far has always had a foot in each.'
-                    },
-                    {
-                        q: 'do you want to eventually work on your own projects/company?',
-                        a: 'yes. long term i want the freedom to pick the problems and ship tools or products that actually get used. a company is one path; strong independent projects and open tools are another. either way the goal is the same — keep building things that close the loop between simulation and the physical world.'
-                    }
-                ]
-            },
-            {
-                label: 'school & learning',
-                options: [
-                    {
-                        q: 'why did you take such a heavy stem course load?',
-                        a: 'because the independent projects were already asking for the math and physics. ap physics, calc, dual enrollment, and the engineering associate work were not just resume padding — they were the language i needed to make the fea, controls, and dynamics code trustworthy.'
-                    },
-                    {
-                        q: 'which class influenced your engineering interests the most?',
-                        a: 'ap physics and the college-level statics / dynamics style courses. once forces, energy, and free-body diagrams stopped being homework and started being the language of the robot arm and the topology runs, everything clicked into place.'
-                    },
-                    {
-                        q: 'how did ap physics affect the way you approach engineering?',
-                        a: 'it trained me to start from conservation laws and free-body diagrams instead of jumping straight to software. even when i am writing a solver, i still ask “where does the energy go?” and “what are the boundary conditions really doing?” that habit came from physics.'
-                    }
-                ]
-            },
-            {
-                label: 'projects & self-teaching',
-                options: [
-                    {
-                        q: 'how do you balance coursework with independent engineering projects?',
-                        a: 'the projects usually become the reason the coursework matters. when a class covers something i need for the robot or the optimizer, the homework stops feeling abstract. time management is still real — i protect deep-work blocks for coding and hardware and treat the class deadlines as hard constraints.'
-                    },
-                    {
-                        q: 'do your independent projects usually go beyond what you are learning in class?',
-                        a: 'almost always. class gives the foundations; the projects force the next layer — sparse solvers, contact models, real motor dynamics, manufacturing constraints. that gap is intentional. it is how i figure out what i still need to learn.'
-                    },
-                    {
-                        q: 'what engineering concepts have you taught yourself outside school?',
-                        a: 'simp topology optimization, density filtering and heaviside projection, custom stiffness-matrix assembly, damped least-squares inverse kinematics, basic multibody contact, and a lot of the practical numerical linear algebra that keeps the browser and c++ solvers stable.'
-                    }
-                ]
-            },
-            {
-                label: 'looking ahead',
-                options: [
-                    {
-                        q: 'what kind of engineering research would you want to participate in?',
-                        a: 'computational design methods that respect manufacturing and dynamics constraints from the start, or robotics / mechatronics work where the structural design and the control policy are co-optimized. anything that keeps the simulation honest about the physical plant.'
-                    },
-                    {
-                        q: 'do you want to pursue graduate school?',
-                        a: 'likely yes, especially if it lets me go deeper on computational mechanics or design automation while still staying close to hardware validation. the exact timing depends on finding the right group and problem, not just collecting another degree.'
-                    },
-                    {
-                        q: 'what kind of engineer do you want to be by the end of university?',
-                        a: 'someone who can take a structural or dynamic problem, write or adapt the numerical tools, produce a design that respects real constraints, and then stand next to the physical prototype and explain why the numbers matched (or why they did not). fluent in both the continuous math and the discrete code, and still willing to pick up a screwdriver.'
-                    }
-                ]
+                q: 'why computational mechanics / sciml instead of pure computer science?',
+                a: 'i still write a lot of code, but pure cs felt a little too detached from the physics for me. computational mechanics and quantitative scientific computing let me keep the numerics, the continuum models, and the machine-learning layer in the same problem. i get to assemble stiffness matrices, build topology pipelines, and experiment with physics-informed methods — then still print the part or tune the motor if i want. that combination is what keeps me going.'
             }
-        ];
+        ]
+    },
+    {
+        label: 'how it started',
+        options: [
+            {
+                q: 'when did you start programming?',
+                a: 'seriously around early high school. started with simple scripts and web stuff, then moved into python for numerics and c++ when i needed speed for the dynamics and fea tools. the programming side grew naturally out of wanting better tools for the engineering and scientific computing problems i was already interested in.'
+            },
+            {
+                q: 'when did you start working with cad?',
+                a: 'mid high school, once i needed real geometry for the robot links and fixtures. parametric cad became the bridge between the kinematics numbers and the parts i could actually print or machine. now it is just part of the normal loop — model, analyze, revise — whether the end goal is a physical prototype or a pure simulation study.'
+            },
+            {
+                q: 'when did you start building physical projects?',
+                a: 'the 2r planar robot paddle was the first real mechatronics build that closed the full loop: camera → kinematics → pid → motors. before that it was smaller electronics and prints, but that project is when software, numerics, and hardware stopped being separate hobbies.'
+            }
+        ]
+    },
+    {
+        label: 'how you work',
+        options: [
+            {
+                q: 'what made you start writing your own engineering software?',
+                a: 'commercial tools are great until you want to change the algorithm or just understand what is happening under the hood. for topology optimization, the browser fea playground, and the generative cto engine i wanted the math to be mine — so i could swap filters, change the objective, experiment with physics-informed layers, or run it in a browser without a license. building the solvers forced me to actually learn the methods instead of treating them as black boxes.'
+            },
+            {
+                q: 'why are you so interested in computational mechanics and sciml?',
+                a: 'because most of the interesting problems sit at the intersection of continuum mechanics, numerics, scientific computing, and machine learning. once you can assemble a stiffness matrix, filter a density field, integrate a multibody system, or train a physics-informed model yourself, the commercial packages stop feeling magical and start feeling like tools you can improve. that is the part i enjoy most.'
+            },
+            {
+                q: 'why do you combine software, numerics, and mechanical systems?',
+                a: 'a lot of modern engineering work is already computational — fea, optimization, controls, digital twins, sciml. if you only know the theory or only know the code, you miss half the design loop. writing the tools lets me test ideas faster, inject learning-based components where they make sense, and understand the assumptions that commercial software quietly makes.'
+            }
+        ]
+    },
+    {
+        label: 'what you care about',
+        options: [
+            {
+                q: 'what area of engineering interests you the most?',
+                a: 'computational mechanics, quantitative scientific computing, and sciml right now — topology optimization, custom fea / cfd pipelines, physics-informed methods, and the robotics / kinematics side that turns those designs into things that move. i also keep coming back to dynamics simulations and digital twins because they force you to be honest about energy, contact, and model fidelity.'
+            },
+            {
+                q: 'what area are you currently trying to learn more about?',
+                a: 'deeper numerical methods for large sparse systems, better manufacturing constraints inside topology optimization, more robust contact / impact formulations, and physics-informed / scientific machine learning techniques for system identification, surrogate modeling, and design. also starting to look harder at cyber-physical security for industrial control systems and quantitative modeling of markets — still early, but both sit at cool intersections.'
+            },
+            {
+                q: 'do you consider yourself more of a computational engineer, software developer, or mechatronics engineer?',
+                a: 'computational engineer with a strong mechatronics streak is probably the honest label. the projects that feel most like “me” are the ones that need continuum models, numerics or sciml methods, and sometimes a physical plant at the same time. pure software and pure structures work are both in service of that middle ground.'
+            }
+        ]
+    },
+    {
+        label: 'where you are headed',
+        options: [
+            {
+                q: 'what field do you want to specialize in?',
+                a: 'computational mechanics, quantitative scientific computing, and design automation / sciml — topology optimization, custom simulation pipelines, physics-informed modeling, and the robotics / control layer that turns optimized structures into working systems. i want the software, the numerics, and the hardware (when it exists) to stay tightly coupled.'
+            },
+            {
+                q: 'do you want to pursue research or industry?',
+                a: 'both, ideally. research for the deep methods, open questions, and sciml techniques; industry for the constraint of real hardware, schedules, and manufacturing. the best work i have done so far has always had a foot in each.'
+            },
+            {
+                q: 'do you want to eventually work on your own projects/company?',
+                a: 'yes. long term i want the freedom to pick the problems and ship tools or products that actually get used. a company is one path; strong independent projects and open scientific computing tools are another. either way the goal is the same — keep building things that close the loop between simulation, learning, and the physical world.'
+            }
+        ]
+    },
+    {
+        label: 'school & learning',
+        options: [
+            {
+                q: 'why did you take such a heavy stem course load?',
+                a: 'because the independent projects were already asking for the math, physics, and numerical methods. ap physics, calc, dual enrollment, and the engineering associate work were not just resume padding — they were the language i needed to make the fea, controls, dynamics, and early sciml-style code trustworthy.'
+            },
+            {
+                q: 'which class influenced your interests the most?',
+                a: 'ap physics and the college-level statics / dynamics style courses, plus the numerical linear algebra and programming work that grew out of them. once forces, energy, free-body diagrams, and discrete solvers stopped being homework and started being the language of the robot arm, the topology runs, and the custom assemblers, everything clicked into place.'
+            },
+            {
+                q: 'how did ap physics affect the way you approach computational work?',
+                a: 'it trained me to start from conservation laws and free-body diagrams instead of jumping straight to software or a black-box model. even when i am writing a solver or a physics-informed network, i still ask “where does the energy go?” and “what are the boundary conditions really doing?” that habit came from physics.'
+            }
+        ]
+    },
+    {
+        label: 'projects & self-teaching',
+        options: [
+            {
+                q: 'how do you balance coursework with independent engineering projects?',
+                a: 'the projects usually become the reason the coursework matters. when a class covers something i need for the robot, the optimizer, or a numerical method, the homework stops feeling abstract. time management is still real — i protect deep-work blocks for coding, numerics, and hardware and treat the class deadlines as hard constraints.'
+            },
+            {
+                q: 'do your independent projects usually go beyond what you are learning in class?',
+                a: 'almost always. class gives the foundations; the projects force the next layer — sparse solvers, contact models, real motor dynamics, manufacturing constraints, density filtering, and early sciml experiments. that gap is intentional. it is how i figure out what i still need to learn.'
+            },
+            {
+                q: 'what concepts have you taught yourself outside school?',
+                a: 'simp topology optimization, density filtering and heaviside projection, custom stiffness-matrix assembly, damped least-squares inverse kinematics, basic multibody contact, sparse numerical linear algebra that keeps the browser and c++ solvers stable, and the beginnings of physics-informed / scientific machine learning approaches for engineering problems.'
+            }
+        ]
+    },
+    {
+        label: 'looking ahead',
+        options: [
+            {
+                q: 'what kind of research would you want to participate in?',
+                a: 'computational design methods that respect manufacturing and dynamics constraints from the start, physics-informed / sciml techniques for modeling and optimization, or robotics / mechatronics work where the structural design and the control policy are co-optimized. anything that keeps the simulation and the learning honest about the physical plant.'
+            },
+            {
+                q: 'do you want to pursue graduate school?',
+                a: 'likely yes, especially if it lets me go deeper on computational mechanics, quantitative scientific computing, or sciml while still staying close to hardware validation or real systems when it makes sense. the exact timing depends on finding the right group and problem, not just collecting another degree.'
+            },
+            {
+                q: 'what kind of engineer / computational scientist do you want to be by the end of university?',
+                a: 'someone who can take a structural, dynamic, or multiphysics problem, write or adapt the numerical and learning-based tools, produce a design or model that respects real constraints, and then stand next to the physical prototype (or the high-fidelity simulation) and explain why the numbers matched (or why they did not). fluent in both the continuous math and the discrete code, comfortable with sciml methods, and still willing to pick up a screwdriver.'
+            }
+        ]
+    }
+];
 
         let stageIndex = 0;
         let isBusy = false;
