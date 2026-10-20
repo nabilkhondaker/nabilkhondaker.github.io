@@ -6185,7 +6185,7 @@ definition: "webgl provides a context for compiling shaders, uploading buffers, 
     why: "a low loss with structured leftovers is a warning.",
     inWork: "equationfoundry reports residual structure on noisy and misspecified cases instead of only a scalar error.",
     related: ["library-misspecification", "equation-discovery"]
-  },
+  }
 ];
 
 /* =========================================================
