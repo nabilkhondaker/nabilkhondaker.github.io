@@ -128,6 +128,30 @@
   "challenges": "keeping discrete matching authoritative while continuum and surrogate layers evolve, not training operators on garbage when fv baselines were still soft, and resisting a full production rl stack. timeline deliberately put neural/control work after months of classical lob+fv development."
   },
   {
+    "title": "exchangelab <i class='devicon-cplusplus-plain'></i> <i class='fab fa-python'></i>",
+    "tag": "event-driven market microstructure simulator - october 19, 2026",
+    "description": "a synthetic exchange with a c++ price-time order book and deterministic event kernel, plus python analysis for pnl, markouts, and agent experiments",
+    "techSpecs": "c++ integer-tick price-time book and event queue; python orchestration. noise traders, fixed-spread market maker, optional latency, markouts, and pnl attribution.",
+    "repo": "https://github.com/nabilkhondaker/ExchangeLab",
+    "link": "",
+    "inProgress": false,
+    "why": "historical backtests hide queue priority, partial fills, and cancellation races. i wanted a controlled exchange i could use to see how those mechanisms move pnl while day trading — not a product that claims an edge.",
+    "learned": "how much a single idealized market maker’s positive cash is just spread capture when there is no informed flow, why markouts are the right place to look for adverse selection, and how a deterministic (timestamp, sequence) kernel makes agent experiments comparable.",
+    "challenges": "keeping book invariants (no crossed book, queue totals, unique ids) under cancel-during-match, not letting the python layer invent fills the c++ engine did not produce, and writing results that stay mechanism findings instead of strategy recommendations."
+  },
+  {
+    "title": "equationfoundry <i class='fab fa-python'></i>",
+    "tag": "equation discovery for dynamical systems - october 19, 2026",
+    "description": "a framework that tries to recover governing equations from noisy state measurements using sparse regression, weak forms, and held-out trajectory tests",
+    "techSpecs": "python discovery pipeline: synthetic generators, finite-difference and local-polynomial derivatives, polynomial libraries, sindy-style sparse regression, weak-form prototype, and identifiability diagnostics.",
+    "repo": "https://github.com/nabilkhondaker/EquationFoundry",
+    "link": "",
+    "inProgress": false,
+    "why": "i wanted to see how far you can get from measurements to an actual governing equation — and where that story breaks — instead of treating a curve fit as a model. useful while thinking about dynamics in markets and mechanics, not as an automatic equation printer.",
+    "learned": "how fast finite differences invent terms under noise, why a model that fits derivatives can still diverge when integrated, and how library misspecification produces a dense surrogate that looks fine on short windows and fails on longer ones.",
+    "challenges": "collinear polynomial columns flipping which term survives across seeds, separating structural recovery from predictive horizon on chaotic systems, and refusing to report a confident equation when the library simply does not contain the truth."
+  },
+  {
     "title": "mechgenpro engine <i class=\"fas fa-cogs\"></i>",
     "tag": "procedural kinematics engine that generates, simulates, and optimizes linkages - july 7, 2026",
     "description": "built a real-time procedural kinematics engine from scratch in lua + löve2d to figure out how planar mechanism synthesis and grashof classification actually work",
