@@ -127,6 +127,18 @@
   "learned": "classical conservation and mesh checks have to come before any neural training, sharp queue edges are where fno residuals show up first, and physics residual terms help conservation drift more than pure data loss. also that sac interface code is easy to overclaim — this release only ships plumbing and baselines.",
   "challenges": "keeping discrete matching authoritative while continuum and surrogate layers evolve, not training operators on garbage when fv baselines were still soft, and resisting a full production rl stack. timeline deliberately put neural/control work after months of classical lob+fv development."
   },
+    {
+    "title": "continuumx <i class='fab fa-python'></i> <i class='devicon-cplusplus-plain'></i>",
+    "tag": "partitioned fluid–structure interaction engine - october 21, 2026",
+    "description": "a research fsi loop coupling lattice-boltzmann channel flow to a geometrically nonlinear cantilever through an immersed-boundary interface, with conservation diagnostics",
+    "techSpecs": "python + c++ d2q9 bgk lattice boltzmann, reduced-order nonlinear beam, immersed-boundary coupling, coupling residuals, and mass/momentum/energy diagnostics.",
+    "repo": "https://github.com/nabilkhondaker/ContinuumX",
+    "link": "",
+    "inProgress": false,
+    "why": "after the browser lbm work i wanted a coupled solid–fluid loop where the interface is explicit. independently correct fluid and structure solvers can still produce a wrong coupled result, and i wanted diagnostics that catch that.",
+    "learned": "how added-mass instability shows up when the structure is light relative to the fluid, why interpolation and spreading have to approximately conserve interface power, and how tip response moves under grid and node refinement before you can talk about a converged coupled case.",
+    "challenges": "explicit staggered coupling blowing up at low density ratio, keeping energy diagnostics sensitive to a bad force-transfer operator, and staying inside a research demonstration instead of pretending this is a production multiphysics package."
+  },
   {
     "title": "exchangelab <i class='devicon-cplusplus-plain'></i> <i class='fab fa-python'></i>",
     "tag": "event-driven market microstructure simulator - october 19, 2026",
