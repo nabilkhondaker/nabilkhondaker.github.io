@@ -531,7 +531,7 @@ class Portfolio {
     }
 
     setupSimulations() {
-        const simulationsData = [{
+        const simulationsData = window.__simulationsData = [{
                 id: 1,
                 title: "two disks bouncing on flat plate spring-coupled between opposed pin supports",
                 desc: "two disks bounce on a frictionless flat plate that is spring-supported at both ends between opposed pin supports, with perfectly elastic collisions (e = 1)",
@@ -898,26 +898,28 @@ class Portfolio {
         if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
         if (backdrop) backdrop.addEventListener('click', closeSidebar);
 
+        // Shared opener for right-slide overlays (used by sidebar + Lab Spotlight tech notes → journal)
+        window.openRightPage = function openRightPage(pageId) {
+            const page = document.getElementById(`page-${pageId}`);
+            if (!page) return;
+            closeSidebar();
+            document.querySelectorAll('.page-overlay-right').forEach(p => p.classList.remove('active'));
+            page.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            page.scrollTo(0, 0);
+            if (pageId === 'glossary' && typeof window.initGlossary === 'function') {
+                window.initGlossary();
+            }
+            if (pageId === 'trivia' && typeof window.initTrivia === 'function') {
+                window.initTrivia();
+            }
+        };
+
         items.forEach(item => {
             item.addEventListener('click', () => {
                 const pageId = item.dataset.page;
-                const page = document.getElementById(`page-${pageId}`);
-                if (page) {
-                    closeSidebar();
-                    // close any other right pages first
-                    document.querySelectorAll('.page-overlay-right').forEach(p => p.classList.remove('active'));
-                    page.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                    page.scrollTo(0, 0);
-
-                    // bootstrap glossary the first time it is opened
-                    if (pageId === 'glossary' && typeof window.initGlossary === 'function') {
-                        window.initGlossary();
-                    }
-                    // bootstrap trivia the first time it is opened
-                    if (pageId === 'trivia' && typeof window.initTrivia === 'function') {
-                        window.initTrivia();
-                    }
+                if (typeof window.openRightPage === 'function') {
+                    window.openRightPage(pageId);
                 }
             });
         });
@@ -1635,6 +1637,172 @@ window.openOverviewModal = (title, summary, why, learned, challenges) => {
     const modal = document.getElementById('overview-modal');
     if (modal) {
         modal.classList.remove('hidden');
+    }
+};
+
+/* =========================================================
+   LAB SPOTLIGHT — one project + one dynamics sim per calendar day
+   Resets at local midnight (stable across refreshes until next day)
+   ========================================================= */
+window.initLabSpotlight = function initLabSpotlight() {
+    const projectSlot = document.getElementById('lab-project-slot');
+    const simSlot = document.getElementById('lab-sim-slot');
+    if (!projectSlot || !simSlot) return;
+
+    const projects = window.__projectsData;
+    const sims = window.__simulationsData;
+
+    if (!projects || !projects.length || !sims || !sims.length) {
+        setTimeout(() => {
+            if (window.__projectsData && window.__simulationsData) {
+                window.initLabSpotlight();
+            }
+        }, 120);
+        return;
+    }
+
+    // Deterministic daily seed from local YYYY-MM-DD (changes at midnight)
+    const now = new Date();
+    const dayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+
+    // Simple seeded RNG (mulberry32) so the same day always yields the same pair
+    const hashDay = (str) => {
+        let h = 1779033703 ^ str.length;
+        for (let i = 0; i < str.length; i++) {
+            h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+            h = (h << 13) | (h >>> 19);
+        }
+        return (h >>> 0);
+    };
+    const mulberry32 = (a) => () => {
+        let t = (a += 0x6D2B79F5);
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+    const rand = mulberry32(hashDay(dayKey));
+
+    const project = projects[Math.floor(rand() * projects.length)];
+    const sim = sims[Math.floor(rand() * sims.length)];
+
+    // --- Project side ---
+    const titleEl = document.getElementById('lab-project-title');
+    const tagEl = document.getElementById('lab-project-tag');
+    const descEl = document.getElementById('lab-project-desc');
+    const techEl = document.getElementById('lab-project-tech');
+    const linksEl = document.getElementById('lab-project-links');
+    const overviewBtn = document.getElementById('lab-project-overview-btn');
+
+    if (titleEl) titleEl.innerHTML = project.title || 'untitled project';
+    if (tagEl) tagEl.textContent = project.tag || '';
+
+    // Spotlight-only slightly deeper blurb (still fits the card).
+    // Regular project cards elsewhere keep the original short description.
+    if (descEl) {
+        const base = (project.description || '').trim();
+        let extra = '';
+        if (project.why) {
+            // one short sentence from why — soft cap so the card stays balanced
+            const why = project.why.trim().replace(/\s+/g, ' ');
+            const firstSentence = (why.match(/^[^.!?]+[.!?]?/) || [why])[0];
+            extra = firstSentence.length > 190
+                ? firstSentence.slice(0, 187).replace(/\s+\S*$/, '') + '…'
+                : firstSentence;
+        }
+        descEl.textContent = extra ? `${base} ${extra}` : base;
+    }
+
+    if (techEl) {
+        if (project.techSpecs) {
+            techEl.innerHTML = `
+                <button type="button" class="lab-tech-notes-link" id="lab-tech-notes-btn" title="open lab journal">
+                    <em>tech notes</em>
+                </button>
+                <span class="lab-tech-sep">·</span>
+                <span class="lab-tech-body">${project.techSpecs}</span>
+            `;
+            techEl.style.display = '';
+            const techBtn = document.getElementById('lab-tech-notes-btn');
+            if (techBtn) {
+                techBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (typeof window.openRightPage === 'function') {
+                        window.openRightPage('journal');
+                    }
+                });
+            }
+        } else {
+            techEl.innerHTML = '';
+            techEl.style.display = 'none';
+        }
+    }
+
+    if (linksEl) {
+        let html = '';
+        if (project.repo) {
+            html += `<a href="${project.repo}" class="highlight-link" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> repo</a>`;
+        }
+        if (project.link) {
+            html += `<a href="${project.link}" class="highlight-link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> live site</a>`;
+        }
+        linksEl.innerHTML = html;
+    }
+
+    if (overviewBtn) {
+        overviewBtn.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (window.openOverviewModal) {
+                window.openOverviewModal(
+                    project.title,
+                    project.description,
+                    project.why || '',
+                    project.learned || '',
+                    project.challenges || ''
+                );
+            }
+        };
+    }
+
+    // --- Simulation side ---
+    const videoEl = document.getElementById('lab-sim-video');
+    const simTitleEl = document.getElementById('lab-sim-title');
+    const simDescEl = document.getElementById('lab-sim-desc');
+    const simOverviewBtn = document.getElementById('lab-sim-overview-btn');
+
+    if (simTitleEl) simTitleEl.textContent = sim.title || 'dynamics simulation';
+    if (simDescEl) simDescEl.textContent = sim.desc || '';
+
+    if (videoEl && sim.videoSrc) {
+        videoEl.src = sim.videoSrc;
+        videoEl.load();
+        const tryPlay = () => {
+            videoEl.play().catch(() => {});
+        };
+        videoEl.addEventListener('loadeddata', tryPlay, { once: true });
+        if (videoEl.readyState >= 2) tryPlay();
+
+        const card = document.getElementById('lab-sim-slot');
+        if (card) {
+            card.addEventListener('mouseenter', () => videoEl.play().catch(() => {}));
+        }
+    }
+
+    if (simOverviewBtn) {
+        simOverviewBtn.onclick = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (window.openOverviewModal) {
+                window.openOverviewModal(
+                    sim.title,
+                    sim.desc,
+                    sim.whyText || '',
+                    sim.learnedText || '',
+                    sim.challengesText || ''
+                );
+            }
+        };
     }
 };
 
