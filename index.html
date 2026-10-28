@@ -164,19 +164,52 @@
         </div>
       </header>
 
-      <section id="status" class="section fade-in">
-        <div class="card status-card" style="cursor: default;">
-          <div class="card-content" style="display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; width: 100%;">
-            <div class="status-left" style="display: flex; align-items: center; gap: 1.5rem;">
-              <div class="status-avatar-wrapper">
-                <img src="favicon/nabilkd_fullsize.png" alt="Nabil" class="status-avatar">
-              </div>
-              <div class="status-info">
-                <h3>@nabilkd</h3>
-                <p>turning machinery into simulations . . .</p>
+      <!-- ========== LAB SPOTLIGHT (work of the day) ========== -->
+      <section id="lab-spotlight" class="section fade-in lab-spotlight-section">
+        <div class="lab-spotlight-header">
+          <h2 class="section-title lab-spotlight-title">
+            <i class="fa-solid fa-flask"></i> lab spotlight
+          </h2>
+        </div>
+
+        <div class="lab-spotlight-grid" id="lab-spotlight-grid">
+          <!-- Left: Project spotlight -->
+          <div class="lab-spotlight-card lab-project-card" id="lab-project-slot">
+            <div class="lab-card-badge">
+              <i class="fa-solid fa-code"></i> project of the day
+            </div>
+            <div class="lab-project-inner">
+              <h3 class="lab-project-title" id="lab-project-title">loading…</h3>
+              <div class="lab-project-tag" id="lab-project-tag"></div>
+              <p class="lab-project-desc" id="lab-project-desc"></p>
+              <div class="lab-project-tech" id="lab-project-tech"></div>
+              <div class="lab-project-footer">
+                <div class="lab-project-links" id="lab-project-links"></div>
+                <div class="lab-project-actions">
+                  <button class="mini-btn overview-btn" id="lab-project-overview-btn">
+                    <i class="fa-solid fa-circle-info"></i> deep overview
+                  </button>
+                </div>
               </div>
             </div>
-            <div class="discord-status-aesthetic" id="discord-status-indicator"></div>
+          </div>
+
+          <!-- Right: Dynamics simulation spotlight -->
+          <div class="lab-spotlight-card lab-sim-card" id="lab-sim-slot">
+            <div class="lab-card-badge lab-sim-badge">
+              <i class="fa-solid fa-wave-square"></i> dynamics of the day
+            </div>
+            <div class="lab-sim-video-wrap">
+              <video id="lab-sim-video" muted loop playsinline preload="metadata"></video>
+              <div class="lab-sim-play-hint"><i class="fa-solid fa-play"></i></div>
+            </div>
+            <div class="lab-sim-info">
+              <h4 class="lab-sim-title" id="lab-sim-title">loading…</h4>
+              <p class="lab-sim-desc" id="lab-sim-desc"></p>
+              <button class="mini-btn overview-btn" id="lab-sim-overview-btn">
+                <i class="fa-solid fa-circle-info"></i> simulation notes
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -388,6 +421,23 @@
                 </form>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+            <section id="status" class="section fade-in">
+        <div class="card status-card" style="cursor: default;">
+          <div class="card-content" style="display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; width: 100%;">
+            <div class="status-left" style="display: flex; align-items: center; gap: 1.5rem;">
+              <div class="status-avatar-wrapper">
+                <img src="favicon/nabilkd_fullsize.png" alt="Nabil" class="status-avatar">
+              </div>
+              <div class="status-info">
+                <h3>@nabilkd</h3>
+                <p>turning machinery into simulations . . .</p>
+              </div>
+            </div>
+            <div class="discord-status-aesthetic" id="discord-status-indicator"></div>
           </div>
         </div>
       </section>
