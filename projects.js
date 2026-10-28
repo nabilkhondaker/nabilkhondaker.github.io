@@ -85,6 +85,10 @@ fetch('projects.json')
         featuredContainer.appendChild(createCard(p));
       }
     });
+
+    // Expose for Lab Spotlight
+    window.__projectsData = projects;
+    if (window.initLabSpotlight) window.initLabSpotlight();
   })
   .catch(err => {
     console.error("Error loading projects.json", err);
