@@ -7389,3 +7389,338 @@ select.form-input option {
     font-size: 0.82rem;
   }
 }
+
+/* =========================================================
+   LAB SPOTLIGHT — work of the day (stable daily pair)
+   ========================================================= */
+
+.lab-spotlight-section {
+  margin-bottom: 3.5rem;
+}
+
+.lab-spotlight-header {
+  text-align: center;
+  margin-bottom: 1.6rem;
+}
+
+.lab-spotlight-title {
+  font-size: 2.05rem;
+  margin-bottom: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.lab-spotlight-title i {
+  font-size: 1.3rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.lab-spotlight-sub {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.lab-spotlight-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+  align-items: stretch;
+}
+
+.lab-spotlight-card {
+  position: relative;
+  background: rgba(14, 14, 16, 0.94);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
+}
+
+.lab-spotlight-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-blue));
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.lab-spotlight-card:hover {
+  border-color: color-mix(in srgb, var(--accent-blue) 48%, transparent);
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.42),
+    0 0 24px color-mix(in srgb, var(--accent) 18%, transparent);
+  transform: translateY(-3px);
+}
+
+/* shared badge */
+.lab-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-blue) 32%, transparent);
+  padding: 0.32rem 0.7rem;
+  border-radius: 999px;
+  margin: 1.05rem 1.2rem 0;
+  width: fit-content;
+  flex-shrink: 0;
+}
+
+.lab-sim-badge {
+  background: color-mix(in srgb, var(--accent-blue) 12%, transparent);
+}
+
+/* ---------- PROJECT CARD (left) — denser, less awkward ---------- */
+.lab-project-card {
+  min-height: 100%;
+}
+
+.lab-project-inner {
+  padding: 0.95rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0;
+  min-height: 0;
+}
+
+.lab-project-title {
+  font-size: 1.22rem;
+  font-weight: 650;
+  color: var(--text-primary);
+  line-height: 1.28;
+  margin: 0.7rem 0 0.35rem;
+  letter-spacing: -0.02em;
+}
+
+.lab-project-title i {
+  font-size: 0.92em;
+  vertical-align: -0.06em;
+  opacity: 0.95;
+}
+
+.lab-project-tag {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0 0 0.65rem;
+}
+
+.lab-project-desc {
+  font-size: 0.93rem;
+  color: var(--text-secondary);
+  line-height: 1.52;
+  margin: 0 0 0.85rem;
+  flex: 1;
+}
+
+/* tech notes as a tight inset panel */
+.lab-project-tech {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.48;
+  padding: 0.7rem 0.85rem;
+  background: rgba(255, 255, 255, 0.028);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 11px;
+  border-left: 3px solid var(--accent);
+  margin: 0 0 0.9rem;
+}
+
+.lab-tech-notes-link {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-style: italic;
+  font-weight: 650;
+  color: var(--accent-blue);
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent-blue) 45%, transparent);
+  transition: color 0.2s ease, border-color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.lab-tech-notes-link:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--accent-blue);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--accent-blue) 35%, transparent);
+}
+
+.lab-tech-notes-link em {
+  font-style: italic;
+  font-weight: 650;
+}
+
+.lab-tech-sep {
+  margin: 0 0.35rem 0 0.25rem;
+  color: var(--text-muted);
+}
+
+.lab-tech-body {
+  color: var(--text-secondary);
+}
+
+/* spotlight description can breathe a bit more */
+.lab-project-desc {
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+/* footer row: links + button aligned */
+.lab-project-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 0.15rem;
+}
+
+.lab-project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.lab-project-links a {
+  font-size: 0.86rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.lab-project-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.lab-project-actions .mini-btn,
+.lab-sim-info .mini-btn {
+  font-size: 0.78rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.lab-project-actions .mini-btn:hover,
+.lab-sim-info .mini-btn:hover {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-color: color-mix(in srgb, var(--accent-blue) 45%, transparent);
+  color: var(--text-primary);
+}
+
+/* ---------- SIM CARD (right) — keep the good look ---------- */
+.lab-sim-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #080809;
+  overflow: hidden;
+  margin-top: 0.8rem;
+}
+
+.lab-sim-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.lab-sim-play-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+  pointer-events: none;
+}
+
+.lab-sim-info {
+  padding: 0.95rem 1.2rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.lab-sim-title {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.32;
+  text-transform: lowercase;
+}
+
+.lab-sim-desc {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.48;
+  margin: 0;
+  flex: 1;
+}
+
+.lab-sim-info .mini-btn {
+  align-self: flex-start;
+  margin-top: 0.2rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .lab-spotlight-grid {
+    grid-template-columns: 1fr;
+  }
+  .lab-spotlight-title {
+    font-size: 1.7rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .lab-project-inner,
+  .lab-sim-info {
+    padding-left: 1.05rem;
+    padding-right: 1.05rem;
+  }
+  .lab-project-title {
+    font-size: 1.1rem;
+  }
+  .lab-project-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
