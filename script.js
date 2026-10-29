@@ -776,6 +776,9 @@ class Portfolio {
                 closeModal();
             }
         });
+
+        // Sims are ready — try lab spotlight in case projects already loaded
+        if (window.initLabSpotlight) window.initLabSpotlight();
     }
 
     setupPortfolioOverlay() {
@@ -870,43 +873,131 @@ class Portfolio {
         const items = document.querySelectorAll('.vs-sidebar-item');
         const closeRightBtns = document.querySelectorAll('.close-right-page');
         const mentoringContactBtn = document.getElementById('mentoring-contact-btn');
+        const homeBtn = document.getElementById('nav-home-btn');
+        const SIDEBAR_KEY = 'nabil-sidebar-open';
 
-        const openSidebar = () => {
-            sidebar.classList.add('open');
-            backdrop.classList.add('visible');
-            document.body.style.overflow = 'hidden';
-        };
-
-        const closeSidebar = () => {
-            sidebar.classList.remove('open');
-            backdrop.classList.remove('visible');
-            // only restore scroll if no right page is open
-            if (!document.querySelector('.page-overlay-right.active')) {
-                document.body.style.overflow = 'auto';
-            }
-        };
-
-        if (trigger) trigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (sidebar.classList.contains('open')) {
-                closeSidebar();
+        const setSidebarOpen = (open) => {
+            if (!sidebar) return;
+            if (open) {
+                sidebar.classList.add('open');
+                document.body.classList.add('sidebar-open');
+                if (backdrop) backdrop.classList.remove('visible');
             } else {
-                openSidebar();
+                sidebar.classList.remove('open');
+                document.body.classList.remove('sidebar-open');
+                if (backdrop) backdrop.classList.remove('visible');
             }
-        });
+            try {
+                localStorage.setItem(SIDEBAR_KEY, open ? '1' : '0');
+            } catch (_) {}
+        };
+
+        const openSidebar = () => setSidebarOpen(true);
+        const closeSidebar = () => setSidebarOpen(false);
+
+        // Restore persisted open state
+        try {
+            if (localStorage.getItem(SIDEBAR_KEY) === '1') {
+                setSidebarOpen(true);
+            }
+        } catch (_) {}
+
+        if (trigger) {
+            trigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (sidebar && sidebar.classList.contains('open')) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
+            });
+        }
 
         if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
-        if (backdrop) backdrop.addEventListener('click', closeSidebar);
+        if (backdrop) {
+            backdrop.addEventListener('click', (e) => e.preventDefault());
+        }
 
-        // Shared opener for right-slide overlays (used by sidebar + Lab Spotlight tech notes → journal)
+        const clearActiveSidebarItems = () => {
+            items.forEach(i => i.classList.remove('active'));
+        };
+
+        const closeAllRightPages = (animated = true) => {
+            const active = document.querySelectorAll('.page-overlay-right.active');
+            if (!active.length) {
+                document.body.classList.remove('page-open');
+                document.body.style.overflow = 'auto';
+                clearActiveSidebarItems();
+                return;
+            }
+
+            active.forEach(p => {
+                p.classList.remove('jelly-in');
+                if (animated) {
+                    p.classList.add('jelly-out');
+                    const finish = () => {
+                        p.classList.remove('active', 'jelly-out');
+                        p.removeEventListener('animationend', finish);
+                    };
+                    p.addEventListener('animationend', finish);
+                    // safety if animationend never fires
+                    setTimeout(() => {
+                        p.classList.remove('active', 'jelly-out');
+                    }, 450);
+                } else {
+                    p.classList.remove('active', 'jelly-out');
+                }
+            });
+            clearActiveSidebarItems();
+            document.body.classList.remove('page-open');
+            document.body.style.overflow = 'auto';
+        };
+
+        // Shared opener for right panels
         window.openRightPage = function openRightPage(pageId) {
             const page = document.getElementById(`page-${pageId}`);
             if (!page) return;
-            closeSidebar();
-            document.querySelectorAll('.page-overlay-right').forEach(p => p.classList.remove('active'));
-            page.classList.add('active');
+
+            const previous = Array.from(document.querySelectorAll('.page-overlay-right.active'))
+                .filter(p => p !== page);
+
+            clearActiveSidebarItems();
+            items.forEach(i => {
+                if (i.dataset.page === pageId) i.classList.add('active');
+            });
+
+            // Body underlay (CSS ::before) covers main content — keep page-open true
+            // so there is never a frame of the portfolio bleeding through.
+            document.body.classList.add('page-open');
             document.body.style.overflow = 'hidden';
+
+            // Activate new page FIRST (on top), then drop previous in the next frame
+            page.classList.remove('jelly-out');
+            if (!page.classList.contains('active')) {
+                page.classList.remove('jelly-in');
+                void page.offsetWidth;
+                page.classList.add('active', 'jelly-in');
+            } else {
+                // re-open same page: soft re-enter
+                page.classList.remove('jelly-in');
+                void page.offsetWidth;
+                page.classList.add('jelly-in');
+            }
             page.scrollTo(0, 0);
+
+            // Remove previous pages after the new one is painted on top
+            requestAnimationFrame(() => {
+                previous.forEach(p => {
+                    p.classList.remove('active', 'jelly-in', 'jelly-out');
+                });
+            });
+
+            const onEnd = () => {
+                page.classList.remove('jelly-in');
+                page.removeEventListener('animationend', onEnd);
+            };
+            page.addEventListener('animationend', onEnd);
+
             if (pageId === 'glossary' && typeof window.initGlossary === 'function') {
                 window.initGlossary();
             }
@@ -915,9 +1006,39 @@ class Portfolio {
             }
         };
 
+        window.closeRightPage = function closeRightPage() {
+            closeAllRightPages(true);
+        };
+
+        // [ home ] in the top bar — always returns to main portfolio
+        if (homeBtn) {
+            homeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                closeAllRightPages(true);
+                // Soft scroll to top of main surface
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // Block section-nav clicks while a page is open (safety net)
+        document.querySelectorAll('.nav-links-main a').forEach(a => {
+            a.addEventListener('click', (e) => {
+                if (document.body.classList.contains('page-open')) {
+                    e.preventDefault();
+                    closeAllRightPages(true);
+                }
+            });
+        });
+
         items.forEach(item => {
             item.addEventListener('click', () => {
                 const pageId = item.dataset.page;
+                const page = document.getElementById(`page-${pageId}`);
+                if (page && page.classList.contains('active')) {
+                    closeAllRightPages(true);
+                    return;
+                }
                 if (typeof window.openRightPage === 'function') {
                     window.openRightPage(pageId);
                 }
@@ -925,25 +1046,12 @@ class Portfolio {
         });
 
         closeRightBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const page = btn.closest('.page-overlay-right');
-                if (page) {
-                    page.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-            });
+            btn.addEventListener('click', () => closeAllRightPages(true));
         });
 
-        // Mentoring → Contact redirect
         if (mentoringContactBtn) {
             mentoringContactBtn.addEventListener('click', () => {
-                const mentoringPage = document.getElementById('page-mentoring');
-                if (mentoringPage) {
-                    mentoringPage.classList.remove('active');
-                }
-                document.body.style.overflow = 'auto';
-
-                // small delay so the overlay finishes closing before scroll
+                closeAllRightPages(true);
                 setTimeout(() => {
                     const contactSection = document.getElementById('contact');
                     if (contactSection) {
@@ -952,18 +1060,16 @@ class Portfolio {
                             block: 'start'
                         });
                     }
-                }, 350);
+                }, 380);
             });
         }
 
-        // Escape closes right page or sidebar
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 const activeRight = document.querySelector('.page-overlay-right.active');
                 if (activeRight) {
-                    activeRight.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                } else if (sidebar.classList.contains('open')) {
+                    closeAllRightPages(true);
+                } else if (sidebar && sidebar.classList.contains('open')) {
                     closeSidebar();
                 }
             }
@@ -1653,13 +1759,23 @@ window.initLabSpotlight = function initLabSpotlight() {
     const sims = window.__simulationsData;
 
     if (!projects || !projects.length || !sims || !sims.length) {
-        setTimeout(() => {
-            if (window.__projectsData && window.__simulationsData) {
-                window.initLabSpotlight();
+        // Retry a few times while projects.json / sims finish loading
+        window.__labSpotlightTries = (window.__labSpotlightTries || 0) + 1;
+        if (window.__labSpotlightTries < 25) {
+            setTimeout(() => window.initLabSpotlight(), 150);
+        } else {
+            const titleEl = document.getElementById('lab-project-title');
+            const simTitle = document.getElementById('lab-sim-title');
+            if (titleEl && (!projects || !projects.length)) {
+                titleEl.textContent = 'could not load projects';
             }
-        }, 120);
+            if (simTitle && (!sims || !sims.length)) {
+                simTitle.textContent = 'could not load simulations';
+            }
+        }
         return;
     }
+    window.__labSpotlightTries = 0;
 
     // Deterministic daily seed from local YYYY-MM-DD (changes at midnight)
     const now = new Date();
