@@ -19,6 +19,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
+    <script>
+      // Sync sidebar state before paint so loading spinner sits in the main pane
+      try {
+        if (localStorage.getItem('nabil-sidebar-open') === '1') {
+          document.body.classList.add('sidebar-open');
+        }
+      } catch (e) {}
+    </script>
     <div id="loading" class="loading-screen">
       <div class="spinner"></div>
     </div>
@@ -36,10 +44,16 @@
       </div>
 
       <div class="nav-links">
-        <a href="#about">about me</a>
-        <a href="#featured">featured work</a>
-        <a href="#expertise">interests</a>
-        <a href="#contact">contact</a>
+        <div class="nav-links-main">
+          <a href="#about">about me</a>
+          <a href="#featured">featured work</a>
+          <a href="#expertise">interests</a>
+          <a href="#contact">contact</a>
+        </div>
+        <button type="button" class="nav-home-btn" id="nav-home-btn" title="" aria-label="Back to home">
+          <i class="fa-solid fa-house nav-home-icon" aria-hidden="true"></i>
+          <span class="nav-home-label">home</span>
+        </button>
       </div>
     </nav>
 
@@ -47,9 +61,6 @@
     <aside id="vs-sidebar" class="vs-sidebar">
       <div class="vs-sidebar-header">
         <span class="vs-sidebar-title">explorer</span>
-        <button class="vs-sidebar-close" id="vs-sidebar-close" title="Close">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
       </div>
       <div class="vs-sidebar-section">
         <div class="vs-sidebar-label">NABIL</div>
