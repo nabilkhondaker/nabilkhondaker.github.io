@@ -26,15 +26,8 @@ function initToolbox() {
     const introCard = document.getElementById("toolbox-intro");
     const sidebarToolboxBtn = document.querySelector('.vs-sidebar-item[data-page="toolbox"]');
     
-    // Ensure Sidebar click binds to the custom toolbox page logic 
-    // (fallback if script.js setupSidebarAndRightPages misses it)
-    if (sidebarToolboxBtn) {
-        sidebarToolboxBtn.addEventListener("click", () => {
-            document.getElementById("page-toolbox").classList.add("open");
-            document.getElementById("vs-sidebar").classList.remove("open");
-            document.getElementById("vs-sidebar-backdrop").classList.remove("open");
-        });
-    }
+    // Sidebar item is handled by setupSidebarAndRightPages via data-page="toolbox".
+    // No extra binding needed — keeps push-layout sidebar open.
 
     // Build the Main Grid
     toolsData.forEach(tool => {
